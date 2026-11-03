@@ -337,7 +337,7 @@ class PointPlaneShadow(ThreeDScene):
         self.add_fixed_orientation_mobjects(p_lab, o_lab, nl_lab)
 
         h = ValueTracker(1.4)                 # point height above plane
-        sx = ValueTracker(-1.8)               # point sideways position (screen right)
+        sx = ValueTracker(2.2)                # point sideways position (stays right of normal line)
         Q = lambda: np.array([sx.get_value(), 0.6, Z0 + h.get_value()])
         off = np.array([0.14, 0, 0])          # draw the two shadows side by side
         plane_sh = Line(O - off, np.array([0, 0, Z0]) - off, color=PEN, stroke_width=9)
@@ -364,9 +364,9 @@ class PointPlaneShadow(ThreeDScene):
         self.add_fixed_orientation_mobjects(lq); self.play(FadeIn(lq))
         self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]), Create(diff), Create(gap)); self.add(diff, gap)
         self.play(FadeOut(lq))
-        self.play(sx.animate.set_value(-0.6), run_time=1.6)      # slide sideways: same distance
+        self.play(sx.animate.set_value(1.0), run_time=1.6)       # slide sideways: same distance
         self.play(h.animate.set_value(2.3), run_time=1.4)        # lift: bigger distance
-        self.play(h.animate.set_value(1.4), sx.animate.set_value(-1.8), run_time=1.4)
+        self.play(h.animate.set_value(1.4), sx.animate.set_value(2.2), run_time=1.4)
         self.add_fixed_in_frame_mobjects(s[3]); self.play(Write(s[3]), run_time=1.3)
         box = SurroundingRectangle(s[2], color=HL, buff=0.1)
         self.add_fixed_in_frame_mobjects(box); self.play(Create(box))
@@ -519,7 +519,7 @@ class VolumeShadow(ThreeDScene):
         tet = always_redraw(lambda: VGroup(
             Line(A, A + e1, color=FG), Line(A, A + e2, color=FG), Line(A + e1, A + e2, color=FG),
             Line(A, A + e3(), color=FG, stroke_width=5), Line(A + e1, A + e3(), color=FG), Line(A + e2, A + e3(), color=FG)))
-        cb = A + 0.85 * e1 + 0.15 * e2
+        cb = A + 0.9 * e1 + 0.85 * e2
         cross = Arrow3D(cb, cb + np.array([0, 0, 1.1]), color=PEN)
         c_lab = word("cross", PEN).move_to(cb + np.array([0.0, 0, 1.45]))
         shadow = always_redraw(lambda: Line(A + np.array([e3()[0], e3()[1], 0]), A + e3(), color=HL, stroke_width=9))
