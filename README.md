@@ -7,6 +7,7 @@ Style and terms: see [AGENTS.md](AGENTS.md).
 scripts/setup.sh        # fresh machine: deps, manim venv, KaTeX, papers, build
 npm run build           # rebuild dist/ after editing guide/
 npm run dev             # local preview at http://localhost:8080, rebuilds + reloads on save
+npm run preview -- fp1/1-6-vectors.html   # one self-contained file in preview/ (for single-file viewers)
 ```
 
 Open `dist/index.html`, or the live site: https://michaelihc.github.io/caie-9231-guide/
