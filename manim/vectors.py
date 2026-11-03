@@ -395,7 +395,7 @@ class PointLineArea(Scene):
         d_lab = always_redraw(lambda: word("line direction", PEN).next_to(A() + 0.75 * b, DOWN, buff=0.2))
         foot = A0 + np.dot(Q - A0, u) * u
         height = DashedLine(Q, foot, color=HL, stroke_width=5)
-        h_lab = word("distance", HL).next_to(height, LEFT, buff=0.12)
+        h_lab = word("distance", HL).next_to(height, RIGHT, buff=0.15)
         q_dot = Dot(Q, color=FG)
         q_lab = word("point").next_to(Q, UP, buff=0.15)
 
@@ -485,7 +485,7 @@ class LinePlaneAngle(Scene):
         to_plane = always_redraw(lambda: Angle(Line(P, P + RIGHT), Line(P, tip()), radius=1.0, color=HL, stroke_width=5))
         to_normal = always_redraw(lambda: Angle(Line(P, tip()), Line(P, P + UP), radius=1.45, color=FG, stroke_width=3))
         tp_lab = always_redraw(lambda: word("angle to plane", HL).next_to(P + 1.05 * RIGHT, UP, buff=0.05).shift(0.95 * RIGHT))
-        tn_lab = always_redraw(lambda: word("angle to normal").move_to(P + 1.95 * np.array([np.cos((th.get_value() + PI / 2) / 2), np.sin((th.get_value() + PI / 2) / 2), 0])).shift(0.3 * UP + 0.2 * LEFT))
+        tn_lab = word("angle to normal").next_to(P + 1.7 * UP, LEFT, buff=0.25)
 
         s = steps(
             r"dot with plane normal gives angle to normal",
