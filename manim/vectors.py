@@ -80,8 +80,8 @@ class PointLine(Scene):
         a_lab = word("line point", PEN).next_to(A, DOWN, buff=0.2)
         q_dot = Dot(Q, color=FG)
         q_lab = word("point").next_to(Q, UP, buff=0.15)
-        b_arr = Arrow(A, A + 0.75 * b, buff=0, color=PEN, stroke_width=5)
-        b_lab = word("direction", PEN).next_to(A + 0.95 * b, DOWN, buff=0.2)
+        b_arr = Arrow(A, A + 0.4 * b, buff=0, color=PEN, stroke_width=5)
+        b_lab = word("direction", PEN).next_to(A + 0.2 * b, UP, buff=0.25)
 
         s = steps(
             r"foot $=$ line point $+\ t\times$direction",
@@ -155,7 +155,7 @@ class SkewLines(ThreeDScene):
         self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]))
         self.play(lam.animate.set_value(3.2), mu.animate.set_value(2.0), run_time=1.4)
         best = DashedLine(P(), Qp(), color=HL, stroke_width=6)
-        k_lab = word(r"$k\times$normal", HL).move_to((P() + Qp()) / 2 + np.array([-0.9, 0, 0]))
+        k_lab = word(r"$k\times$normal", HL).move_to((P() + Qp()) / 2 + np.array([-1.7, 0, 0]))
         self.add_fixed_orientation_mobjects(k_lab)
         self.remove(seg); self.add(best)
         self.play(Indicate(best, color=HL), FadeIn(k_lab))
