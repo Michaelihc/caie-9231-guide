@@ -1,0 +1,32 @@
+{
+  "course": "CAIE 9231 Further Mathematics",
+  "parts": [
+    {
+      "id": "fp1",
+      "title": "Further Pure 1",
+      "paper": "Paper 1",
+      "units": [
+        { "num": "1.1", "slug": "roots", "title": "Roots of polynomial equations" },
+        { "num": "1.2", "slug": "rational-functions", "title": "Rational functions and graphs" },
+        { "num": "1.3", "slug": "series", "title": "Summation of series" },
+        { "num": "1.4", "slug": "matrices", "title": "Matrices" },
+        { "num": "1.5", "slug": "polar", "title": "Polar coordinates" },
+        { "num": "1.6", "slug": "vectors", "title": "Vectors" },
+        { "num": "1.7", "slug": "induction", "title": "Proof by induction" }
+      ]
+    },
+    {
+      "id": "fp2",
+      "title": "Further Pure 2",
+      "paper": "Paper 2",
+      "units": [
+        { "num": "2.1", "slug": "hyperbolic", "title": "Hyperbolic functions" },
+        { "num": "2.2", "slug": "matrices", "title": "Matrices" },
+        { "num": "2.3", "slug": "differentiation", "title": "Differentiation" },
+        { "num": "2.4", "slug": "integration", "title": "Integration" },
+        { "num": "2.5", "slug": "complex", "title": "Complex numbers" },
+        { "num": "2.6", "slug": "differential-equations", "title": "Differential equations" }
+      ]
+    }
+  ]
+}

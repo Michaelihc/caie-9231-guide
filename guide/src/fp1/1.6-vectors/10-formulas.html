@@ -1,0 +1,92 @@
+<section id="formulas">
+  <h2>Formulas <small>line $\V r=\V a+\lambda\V b$, plane $\V r\cdot\V n=p$</small></h2>
+
+  <div class="item" id="F1">
+    <span class="id">F1</span>
+    <div>
+      <span class="name">Scalar product</span><span class="tag">MF19</span>
+      $$\V a\cdot\V b=a_1b_1+a_2b_2+a_3b_3=|\V a||\V b|\cos\theta$$
+      <p class="note">$\V a\cdot\V b=0$ ⇔ ⊥.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F2">
+    <span class="id">F2</span>
+    <div>
+      <span class="name">Vector product</span>
+      <div class="hl">$$\V a\times\V b=\cvec{a_2b_3-a_3b_2}{a_3b_1-a_1b_3}{a_1b_2-a_2b_1},\qquad |\V a\times\V b|=|\V a||\V b|\sin\theta$$</div>
+      <p class="note">Answer ⊥ both. $\V b\times\V a=-\V a\times\V b$. $=\V 0$ ⇔ ∥. Index pattern: 23−32, 31−13, 12−21.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F3">
+    <span class="id">F3</span>
+    <div>
+      <span class="name">Line, cartesian</span>
+      <div class="hl">$$\V r=\V a+\lambda\V b\iff\frac{x-a_1}{b_1}=\frac{y-a_2}{b_2}=\frac{z-a_3}{b_3}\;(=\lambda)$$</div>
+      <p class="note">Some $b_i=0$ ⇒ drop that fraction, write that coord fixed, e.g. $z=a_3$.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F4">
+    <span class="id">F4</span>
+    <div>
+      <span class="name">Plane, 3 forms</span>
+      <div class="hl">$$n_1x+n_2y+n_3z=p\iff\V r\cdot\V n=p,\quad p=\V a\cdot\V n\qquad\V r=\V a+\lambda\V b+\mu\V c\;\Rightarrow\;\V n=\V b\times\V c$$</div>
+      <p class="note">$\V a$ = any point in plane. $\V n$ = normal.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F5">
+    <span class="id">F5</span>
+    <div>
+      <span class="name">Distance point $(x_0,y_0,z_0)$ to plane</span>
+      <div class="hl">$$d=\frac{|n_1x_0+n_2y_0+n_3z_0-p|}{\sqrt{n_1^2+n_2^2+n_3^2}}$$</div>
+      <p class="note">From O: $|p|/|\V n|$. Same sign inside $|\,|$ for two points ⇒ same side.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F6">
+    <span class="id">F6</span>
+    <div>
+      <span class="name">Distance point $Q$ to line</span>
+      <div class="hl">$$d=\frac{|(\V q-\V a)\times\V b|}{|\V b|}$$</div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F7">
+    <span class="id">F7</span>
+    <div>
+      <span class="name">Shortest distance, skew lines</span>
+      <div class="hl">$$\V r=\V a+\lambda\V b,\ \V r=\V c+\mu\V d:\qquad d=\frac{|(\V c-\V a)\cdot(\V b\times\V d)|}{|\V b\times\V d|}$$</div>
+      <p class="note">$d=0$ ⇒ lines meet.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F8">
+    <span class="id">F8</span>
+    <div>
+      <span class="name">Angles (acute)</span>
+      <div class="hl">$$\text{line,line: }\cos\theta=\frac{|\V b\cdot\V d|}{|\V b||\V d|}\quad\text{plane,plane: }\cos\theta=\frac{|\V n_1\cdot\V n_2|}{|\V n_1||\V n_2|}\quad\text{line,plane: }\sin\theta=\frac{|\V b\cdot\V n|}{|\V b||\V n|}$$</div>
+      <p class="note">Line, plane uses <b>sin</b>: $\V n$ is ⊥ plane. Abs value ⇒ acute.</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F9">
+    <span class="id">F9</span>
+    <div>
+      <span class="name">Area, volume</span>
+      <div class="hl">$$\triangle ABC=\tfrac12|\AB{AB}\times\AB{AC}|\qquad V_{ABCD}=\tfrac16\left|\AB{AB}\cdot(\AB{AC}\times\AB{AD})\right|$$</div>
+      <p class="note">Parallelogram: $|\AB{AB}\times\AB{AC}|$. Tetrahedron also $\tfrac13\times\text{base}\times\text{height}$ (Q usually gives this).</p>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F10">
+    <span class="id">F10</span>
+    <div>
+      <span class="name">Point dividing $AB$ in ratio $\lambda:\mu$</span>
+      <div class="hl">$$\V p=\frac{\mu\V a+\lambda\V b}{\lambda+\mu}$$</div>
+      <p class="note">Was in old MF10. Gone from MF19.</p>
+    </div>
+  </div>
+</section>

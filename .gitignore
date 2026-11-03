@@ -1,0 +1,7 @@
+node_modules/
+.venv
+media/
+__pycache__/
+# third-party copyrighted PDFs: re-fetch with scripts/fetch_resources.sh
+resources/papers/
+dist/

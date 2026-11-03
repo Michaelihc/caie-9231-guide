@@ -1,0 +1,7 @@
+{
+  "name": "caie-9231-guide",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node scripts/build.mjs" },
+  "dependencies": { "katex": "0.16.11" }
+}

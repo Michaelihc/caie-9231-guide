@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="{{root}}assets/katex/katex.min.css">
+<link rel="stylesheet" href="{{root}}assets/style.css">
+</head>
+<body>
+<div class="shell">
+  <nav class="side" aria-label="Units">
+    <details class="side-fold" open>
+      <summary>All units</summary>
+      {{nav}}
+    </details>
+  </nav>
+  <main>
+    <nav class="crumbs" aria-label="Breadcrumb">{{crumbs}}</nav>
+{{content}}
+    {{pager}}
+  </main>
+</div>
+<script>
+  // sidebar starts folded on narrow screens
+  if (matchMedia("(max-width: 900px)").matches) document.querySelector(".side-fold")?.removeAttribute("open");
+</script>
+</body>
+</html>

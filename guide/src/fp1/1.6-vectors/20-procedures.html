@@ -1,0 +1,247 @@
+<section id="procedures">
+  <h2>Procedures</h2>
+
+  <div class="item" id="P1">
+    <span class="id">P1</span>
+    <div>
+      <span class="name">Plane equation</span><span class="uses">uses <a href="#F2">F2</a> <a href="#F4">F4</a></span>
+      <ol class="steps">
+        <li>Get 1 point $A$ in plane + 2 non-∥ dirs $\V u,\V v$ in plane.</li>
+        <li>$\V n=\V u\times\V v$. Cancel common factor.</li>
+        <li>$p=\V n\cdot\V a$.</li>
+        <li>Write $n_1x+n_2y+n_3z=p$.</li>
+        <li>Check: 2nd known point fits.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Where $\V u,\V v$ come from</summary>
+          <ul>
+            <li>3 points $A,B,C$: $\V u=\AB{AB}$, $\V v=\AB{AC}$.</li>
+            <li>Line $\V a+\lambda\V b$ + point $Q$: $\V u=\V b$, $\V v=\V q-\V a$.</li>
+            <li>2 lines that meet: $\V u=\V b_1$, $\V v=\V b_2$.</li>
+            <li>2 ∥ lines: $\V u=\V b$, $\V v=\V a_2-\V a_1$.</li>
+            <li>Line + ∥ to vector $\V w$: $\V u=\V b$, $\V v=\V w$.</li>
+            <li>Line + ⊥ to plane with normal $\V m$: $\V u=\V b$, $\V v=\V m$.</li>
+          </ul>
+        </details>
+        <details><summary>Skip the cross product</summary>
+          <ul>
+            <li>∥ to plane $\Pi$: same $\V n$ as $\Pi$.</li>
+            <li>⊥ to line with dir $\V b$: $\V n=\V b$.</li>
+            <li>⊥ to planes $\Pi_1,\Pi_2$: $\V n=\V n_1\times\V n_2$.</li>
+          </ul>
+        </details>
+        <details><summary>Contains line of intersection of $\Pi_1,\Pi_2$ + point $Q$</summary>
+          <p>Plane $=(\V n_1\cdot\V r-p_1)+k(\V n_2\cdot\V r-p_2)=0$. Sub $Q$ ⇒ $k$. Or: <a href="#P7">P7</a> for line, then line + point.</p>
+        </details>
+        <details><summary>Want parametric form</summary>
+          <p>$\V r=\V a+\lambda\V u+\mu\V v$ directly. No $\V n$ needed.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P2">
+    <span class="id">P2</span>
+    <div>
+      <span class="name">Convert plane form</span><span class="uses">uses <a href="#F2">F2</a> <a href="#F4">F4</a></span>
+      <ol class="steps">
+        <li>Parametric → cartesian: $\V n=\V b\times\V c$, $p=\V a\cdot\V n$.</li>
+        <li>Cartesian → $\V r\cdot\V n=p$: $\V n$ = coefficients, $p$ = RHS.</li>
+        <li>Cartesian → parametric: find 3 points $A,B,C$ (set 2 coords, solve 3rd). $\V r=\V a+\lambda\AB{AB}+\mu\AB{AC}$.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Coefficient is 0, e.g. $x+2y=4$</summary>
+          <p>Missing var free ⇒ $\V k$ lies in plane. Use $\V k$ as one dir. Plane ∥ $z$-axis.</p>
+        </details>
+        <details><summary>Parametric answer looks different from mark scheme</summary>
+          <p>Fine if same plane: check its $\V b\times\V c$ ∥ your $\V n$ and its $\V a$ fits.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P3">
+    <span class="id">P3</span>
+    <div>
+      <span class="name">Line vs plane: meet, ∥, or in</span><span class="uses">uses <a href="#F1">F1</a> <a href="#F5">F5</a></span>
+      <ol class="steps">
+        <li>Line $\V a+\lambda\V b$, plane $\V r\cdot\V n=p$. Find $\V b\cdot\V n$.</li>
+        <li>$\V b\cdot\V n\ne0$ ⇒ meet once. Sub line into plane: $\lambda=\dfrac{p-\V a\cdot\V n}{\V b\cdot\V n}$. Put $\lambda$ back ⇒ point.</li>
+        <li>$\V b\cdot\V n=0$ ⇒ line ∥ plane. Test $\V a\cdot\V n$:
+          $=p$ ⇒ line lies in plane. $\ne p$ ⇒ never meet, gap = <a href="#F5">F5</a> at $A$.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Line given cartesian</summary>
+          <p>Read $\V a$ (numerators) and $\V b$ (denominators) via <a href="#F3">F3</a>. Watch $(3-x)/2$ ⇒ $b_1=-2$.</p>
+        </details>
+        <details><summary>Plane given parametric</summary>
+          <p><a href="#P2">P2</a> to cartesian first. Or set $\V a+t\V b=\V c+\lambda\V d+\mu\V e$, 3 eqns, 3 unknowns.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P4">
+    <span class="id">P4</span>
+    <div>
+      <span class="name">Foot of ⊥ from point $Q$ to plane</span><span class="uses">uses <a href="#F5">F5</a></span>
+      <ol class="steps">
+        <li>Line from $Q$ along normal: $\V r=\V q+t\V n$.</li>
+        <li>Sub into plane: $t=\dfrac{p-\V q\cdot\V n}{|\V n|^2}$.</li>
+        <li>Foot $N$: $\V q+t\V n$.</li>
+        <li>Distance $QN=|t||\V n|$ (same as <a href="#F5">F5</a>).</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Reflection of $Q$ in plane</summary>
+          <p>$\V q'=\V q+2t\V n$ (same $t$).</p>
+        </details>
+        <details><summary>Foot from origin</summary>
+          <p>$\V q=\V 0$ ⇒ $t=p/|\V n|^2$, $N=t\V n$.</p>
+        </details>
+        <details><summary>Plane given by 3 points</summary>
+          <p><a href="#P1">P1</a> first for $\V n,p$.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P5">
+    <span class="id">P5</span>
+    <div>
+      <span class="name">Foot of ⊥ from point $Q$ to line</span><span class="uses">uses <a href="#F1">F1</a> <a href="#F6">F6</a></span>
+      <ol class="steps">
+        <li>General point on line $P=\V a+\lambda\V b$.</li>
+        <li>$\AB{QP}=\V a+\lambda\V b-\V q$.</li>
+        <li>Solve $\AB{QP}\cdot\V b=0$ ⇒ $\lambda$.</li>
+        <li>Foot = $P$ at that $\lambda$. Distance = $|\AB{QP}|$.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Distance only</summary>
+          <p><a href="#F6">F6</a>, faster.</p>
+        </details>
+        <details><summary>Reflection of $Q$ in line</summary>
+          <p>$\V q'=2\V p-\V q$ ($P$ = foot, midpoint of $QQ'$).</p>
+        </details>
+        <details><summary>Line through $A$ and $C$</summary>
+          <p>$\V a=\AB{OA}$, $\V b=\AB{AC}$.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P6">
+    <span class="id">P6</span>
+    <div>
+      <span class="name">Angle</span><span class="uses">uses <a href="#F1">F1</a> <a href="#F8">F8</a></span>
+      <ol class="steps">
+        <li>Pick vectors: line ⇒ dir $\V b$. Plane ⇒ normal $\V n$.</li>
+        <li>Line, line or plane, plane ⇒ cos rule of <a href="#F8">F8</a>. Line, plane ⇒ sin rule.</li>
+        <li>Keep $|\,\cdot\,|$ on top ⇒ acute.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Planes given by points (e.g. $ABC$, $ABD$)</summary>
+          <p><a href="#P1">P1</a> step 2 for each normal. No need for $p$.</p>
+        </details>
+        <details><summary>Line, plane done with cos by mistake</summary>
+          <p>cos gives angle $\varphi$ to normal. Answer $\theta=90^\circ-\varphi$.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P7">
+    <span class="id">P7</span>
+    <div>
+      <span class="name">Line of intersection of 2 planes</span><span class="uses">uses <a href="#F2">F2</a></span>
+      <ol class="steps">
+        <li>Dir $\V d=\V n_1\times\V n_2$.</li>
+        <li>Point: pick coord where $\V d$ entry ≠ 0. Set that coord $=0$. Solve 2 plane eqns for other 2.</li>
+        <li>$\V r=\V a+t\V d$.</li>
+        <li>Check: point fits both planes.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Why pick coord with $d_i\ne0$</summary>
+          <p>$d_3=0$ ⇒ $z$ fixed on whole line. Setting $z=0$ ⇒ no solution (unless that fixed value is 0).</p>
+        </details>
+        <details><summary>No cross product</summary>
+          <p>Set $z=t$. Solve both eqns for $x,y$ in $t$. Read $\V a,\V d$ off.</p>
+        </details>
+        <details><summary>$\V n_1\times\V n_2=\V 0$</summary>
+          <p>Planes ∥. No line. Same eqn up to scale ⇒ same plane.</p>
+        </details>
+        <details><summary>Plane given parametric</summary>
+          <p><a href="#P2">P2</a> to cartesian first.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P8">
+    <span class="id">P8</span>
+    <div>
+      <span class="name">Two lines: meet, ∥, or skew</span><span class="uses">uses <a href="#F7">F7</a></span>
+      <ol class="steps">
+        <li>$\V b=k\V d$? ⇒ ∥. ($\V a$ on other line ⇒ same line.) Stop.</li>
+        <li>Else set $\V a+\lambda\V b=\V c+\mu\V d$ ⇒ 3 eqns.</li>
+        <li>Solve 2 eqns ⇒ $\lambda,\mu$. Test 3rd.</li>
+        <li>3rd fits ⇒ meet, point $=\V a+\lambda\V b$. Fails ⇒ skew.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Quick test</summary>
+          <p>$(\V c-\V a)\cdot(\V b\times\V d)=0$ ⇔ coplanar ⇒ meet (if not ∥).</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P9">
+    <span class="id">P9</span>
+    <div>
+      <span class="name">Skew lines: shortest distance + common ⊥</span><span class="uses">uses <a href="#F2">F2</a> <a href="#F7">F7</a></span>
+      <ol class="steps">
+        <li>$P=\V a+\lambda\V b$ on $l_1$, $Q=\V c+\mu\V d$ on $l_2$.</li>
+        <li>$\AB{PQ}=\V c+\mu\V d-\V a-\lambda\V b$.</li>
+        <li>$\AB{PQ}\cdot\V b=0$ and $\AB{PQ}\cdot\V d=0$ ⇒ solve for $\lambda,\mu$.</li>
+        <li>Get $P,Q$. Distance $=|\AB{PQ}|$.</li>
+        <li>Common ⊥: $\V r=\V p+t(\V b\times\V d)$.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Distance only</summary>
+          <p><a href="#F7">F7</a>. Use it to check $|\AB{PQ}|$ too.</p>
+        </details>
+        <details><summary>Other way to step 3</summary>
+          <p>$\AB{PQ}=k(\V b\times\V d)$ ⇒ 3 linear eqns in $\lambda,\mu,k$.</p>
+        </details>
+        <details><summary>Plane containing $l_1$ + common ⊥</summary>
+          <p><a href="#P1">P1</a> with point $\V a$, $\V u=\V b$, $\V v=\V b\times\V d$.</p>
+        </details>
+        <details><summary>Lines ∥, not skew</summary>
+          <p>No single common ⊥. Distance = <a href="#F6">F6</a> with $Q=C$.</p>
+        </details>
+        <details><summary>Lines given as $AB$ and $CD$</summary>
+          <p>$\V a=\AB{OA}$, $\V b=\AB{AB}$, $\V c=\AB{OC}$, $\V d=\AB{CD}$.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P10">
+    <span class="id">P10</span>
+    <div>
+      <span class="name">Area and volume</span><span class="uses">uses <a href="#F9">F9</a> <a href="#F5">F5</a></span>
+      <ol class="steps">
+        <li>Make edge vectors from 1 vertex: $\AB{AB},\AB{AC}(,\AB{AD})$.</li>
+        <li>Triangle: $\tfrac12|\AB{AB}\times\AB{AC}|$.</li>
+        <li>Tetrahedron: $\tfrac16|\AB{AB}\cdot(\AB{AC}\times\AB{AD})|$.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Q gives $V=\tfrac13\times$ base $\times$ height</summary>
+          <p>Base = triangle $ABC$. Height = <a href="#F5">F5</a> from $D$ to plane $ABC$ (<a href="#P1">P1</a>).</p>
+        </details>
+        <details><summary>Triple product = 0</summary>
+          <p>$A,B,C,D$ coplanar. Volume 0.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
