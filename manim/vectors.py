@@ -1,7 +1,7 @@
 """FP1 vectors derivation clips. Steps are word strategies ("set up X + k*normal = Y, solve"),
 named in words (point, foot, normal, line direction), not single letters.
 
-    scripts/manim_export.sh fp1 manim/vectors.py PointPlane PointLine SkewLines
+    scripts/manim_export.sh fp1 manim/vectors.py PlaneShadow PointPlane PointLine SkewLines
 """
 from manim import *
 
@@ -9,6 +9,7 @@ INK = "#1b2331"   # board background (= guide ink colour)
 HL = "#ffe14d"    # highlighter: the thing that answers the question
 PEN = "#8fb0ff"   # lines, planes
 FG = "#e4e8ee"
+MUTED_DROP = "#9aa5b4"  # shadow drop lines
 config.background_color = INK
 
 
@@ -163,3 +164,61 @@ class SkewLines(ThreeDScene):
         box = SurroundingRectangle(s[3], color=HL, buff=0.1)
         self.add_fixed_in_frame_mobjects(box); self.play(Create(box))
         self.wait(1.5)
+
+
+class PlaneShadow(ThreeDScene):
+    """Plane r.n = p: every point in plane casts same-length shadow on normal line; off plane => different."""
+
+    def construct(self):
+        self.set_camera_orientation(phi=78 * DEGREES, theta=-60 * DEGREES, zoom=0.8)
+        Z0 = -0.8                                  # plane height
+        O = np.array([0.0, 0.0, -3.0])             # origin well below the plane
+        plane = Square(side_length=5.2, fill_color=PEN, fill_opacity=0.2, stroke_color=PEN,
+                       stroke_width=1.5).shift(Z0 * OUT)
+        p_lab = word("plane", PEN).move_to(np.array([2.9, 2.4, Z0 + 0.3]))
+        o_dot = Dot3D(O, color=FG, radius=0.07)
+        o_lab = word("origin").move_to(O + np.array([0.0, 0.0, -0.45]))
+        n_line = DashedLine(O + np.array([0, 0, -0.5]), np.array([0, 0, Z0 + 2.1]), color=PEN, stroke_width=2)
+        nl_lab = word("normal line", PEN).move_to(np.array([-1.35, 0, Z0 + 1.95]))
+        nb = np.array([-1.9, -1.9, Z0])
+        n_arr = Arrow3D(nb, nb + np.array([0, 0, 1.2]), color=PEN)
+        n_lab = word("normal", PEN).move_to(nb + np.array([0, 0, 1.55]))
+        self.add_fixed_orientation_mobjects(p_lab, o_lab, nl_lab, n_lab)
+
+        s = steps(
+            r"arrow from origin to a point in plane",
+            r"its shadow on the normal line",
+            r"slide point around plane: shadow stays same",
+            r"point $\cdot$ normal $=$ same number every time $=p$",
+            r"point off plane $\Rightarrow$ different number",
+        ).to_corner(UL, buff=0.4)
+
+        ang, lift = ValueTracker(0.0), ValueTracker(0.0)
+        P = lambda: np.array([0.9 + 1.5 * np.cos(ang.get_value()), 0.5 + 1.5 * np.sin(ang.get_value()), Z0 + lift.get_value()])
+        S = lambda: np.array([0.0, 0.0, Z0 + lift.get_value()])   # top of shadow: same height as point
+        pos = always_redraw(lambda: Line(O, P(), color=FG, stroke_width=4))
+        pdot = always_redraw(lambda: Dot3D(P(), color=FG, radius=0.08))
+        drop = always_redraw(lambda: DashedLine(P(), S(), color=MUTED_DROP, stroke_width=3))
+        shadow = always_redraw(lambda: Line(O, S(), color=HL, stroke_width=9))
+
+        self.play(Create(plane), FadeIn(p_lab), FadeIn(o_dot, o_lab), run_time=1.2)
+        self.play(Create(n_line), FadeIn(nl_lab), GrowFromPoint(n_arr, nb), FadeIn(n_lab))
+        self.add_fixed_in_frame_mobjects(s[0]); self.play(Write(s[0]))
+        self.play(Create(pos), FadeIn(pdot))
+        self.add(pos, pdot)
+        self.add_fixed_in_frame_mobjects(s[1]); self.play(Write(s[1]))
+        self.play(Create(drop), Create(shadow))
+        self.add(drop, shadow)
+        sh_lab = word("shadow", HL).move_to(O + np.array([-1.0, 0, 1.0]))
+        self.add_fixed_orientation_mobjects(sh_lab)
+        self.play(FadeIn(sh_lab))
+        self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]))
+        self.play(ang.animate.set_value(2 * PI), run_time=4, rate_func=linear)
+        self.add_fixed_in_frame_mobjects(s[3]); self.play(Write(s[3]), run_time=1.2)
+        box = SurroundingRectangle(s[3], color=HL, buff=0.1)
+        self.add_fixed_in_frame_mobjects(box); self.play(Create(box))
+        self.add_fixed_in_frame_mobjects(s[4]); self.play(Write(s[4]))
+        self.play(lift.animate.set_value(1.3), run_time=1.4)
+        self.wait(0.6)
+        self.play(lift.animate.set_value(0.0), run_time=1.2)
+        self.wait(1.2)
