@@ -4,6 +4,14 @@ Goal: most compact revision guide for CAIE A Level Further Maths 9231.
 Do FP1 (Paper 1) first, then FP2 (Paper 2). Syllabus: 2020–22 (`resources/syllabus/9231_y20-22_sy.pdf`).
 Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 
+## Standing rule: no syllabus, no paper ⇒ no add
+
+- Before adding anything (formula, form, procedure, branch): check syllabus + past papers.
+  - Syllabus: 9231 2020–22 and 2023–25, plus 9709 (assumed knowledge), in `resources/syllabus/`.
+  - Papers: grep all qp + ms 2002–2025 (`pdftotext -layout`, `resources/papers/`).
+- Not in syllabus **and** never in a paper ⇒ do not add. Remove it if already there.
+- Example: cartesian line form $\frac{x-a_1}{b_1}=\dots$ — 0 uses in 558 papers, syllabus only says r = a + tb ⇒ removed.
+
 ## Writing style
 
 - Compact phrasing, grug speak. Few words. Drop "the", "a", "you should".
@@ -33,8 +41,6 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
   - Steps = what to do. Not why.
 - **Branch**: expandable (`<details>`) sub-case of a procedure. Edge cases and variants only. Few per procedure.
 - Leave out problem-solving parts (e.g. "find k so that…", choosing a strategy). Only steps.
-- Before adding a formula/form, grep all papers (qp + ms, 2002–2025) for it. Never examined + not in syllabus
-  ⇒ leave it out (e.g. cartesian line form: 0 uses, syllabus only says r = a + tb).
 
 ## Units
 
