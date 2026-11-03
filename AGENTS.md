@@ -32,10 +32,10 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
       the word panel instead.
     - Write derivations as a word strategy: "find normal of plane; set up foot + k×normal = point;
       solve". Name things in words that say what they belong to (point, foot, plane normal, line point,
-      line direction, line 1 direction), not single letters
+      line direction, line 1 direction), not single letters ($Q$, $\V n$, $\V b$). Only the unknown you
+      solve for gets a letter ($k$, $t$, $\lambda$).
       - No words ↔ letters key or glossary. That defeats the point. If a word is unclear, make the word
         itself say more. Example: "direction" unclear ⇒ write "line direction", not a key "direction = $\V b$".
-      ($Q$, $\V n$, $\V b$). Only the unknown you solve for gets a letter ($k$, $t$, $\lambda$).
     - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
       `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
       Embed: `<video src="{{root}}assets/media/…mp4" poster="…jpg" controls muted loop playsinline preload="none">`.
