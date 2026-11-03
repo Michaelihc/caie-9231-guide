@@ -36,6 +36,9 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
     - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
       `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
       Embed: `<video src="{{root}}assets/media/…mp4" poster="…jpg" controls muted loop playsinline preload="none">`.
+  - Every formula gets a **Settle** button (auto, `guide.js`): collapses it to one line. Saved in
+    localStorage key `caie9231.settled`, keyed `<part>/<unit>.html#<formula name>` ⇒ renaming a formula
+    unsettles it; renumbering doesn't.
 - **Procedure** (`P#`): compact actionable numbered steps for one standard task.
   - Can call formulas (list them in `uses`). E.g. solve 1st-order DE ⇒ calls integrating-factor formula.
   - Steps = what to do. Not why.

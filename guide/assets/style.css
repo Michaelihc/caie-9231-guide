@@ -178,3 +178,20 @@ code { font-size: 0.9em; }
 .js .more-panel:not(.open) { display: none; }
 .more-panel video { width: 100%; max-width: 40rem; aspect-ratio: 16 / 9; border-radius: 4px; background: #1b2331; display: block; }
 @media print { .more { display: none; } .js .more-panel:not(.open) { display: grid; } }
+
+/* settle (built by guide.js; state in localStorage) */
+.item-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
+.item-title { min-width: 0; }
+.settle-btn, .settle-all {
+  font: inherit; font-size: 0.78rem; cursor: pointer; white-space: nowrap;
+  color: var(--ink-2); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: 0 0.45rem;
+}
+.settle-btn:hover, .settle-all:hover { color: var(--pen); border-color: var(--pen); }
+.settle-btn:focus-visible, .settle-all:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.settle-all { margin-left: auto; font-weight: 400; }
+.item.settled { padding-block: 0.3rem; }
+.item.settled .item-title { color: var(--ink-2); }
+.item.settled .item-title .name::after { content: " (settled)"; font-weight: 400; }
+section:not(.show-settled) .item.settled > div > :not(.item-head) { display: none; }
+.jump li.settled a { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--rule); }
+@media print { .settle-btn, .settle-all { display: none; } }
