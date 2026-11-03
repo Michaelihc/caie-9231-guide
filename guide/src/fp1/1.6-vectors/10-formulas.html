@@ -27,26 +27,6 @@
   <div class="item nomf" id="F3">
     <span class="id">F3</span>
     <div>
-      <span class="name">Line, cartesian</span>
-      <div class="hl">$$\V r=\V a+\lambda\V b\iff\frac{x-a_1}{b_1}=\frac{y-a_2}{b_2}=\frac{z-a_3}{b_3}\;(=\lambda)$$</div>
-      <p class="note">Some $b_i=0$ ⇒ drop that fraction, write that coord fixed, e.g. $z=a_3$.</p>
-      <div class="word">
-        <p>Each coord: (coord − point's coord) ÷ direction's coord. All three equal.</p>
-      </div>
-      <div class="derive">
-        <ol>
-          <li>Write each row: $x$ = point's $x$ + $\lambda\times$ direction's $x$. Same for $y$, $z$.</li>
-          <li>Make $\lambda$ the subject of each row.</li>
-          <li>All three equal $\lambda$ ⇒ set them equal.</li>
-        </ol>
-        <p>Back to vector form: set each fraction $=\lambda$, solve for $x,y,z$.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="item nomf" id="F4">
-    <span class="id">F4</span>
-    <div>
       <span class="name">Plane, 3 forms</span>
       <div class="hl">$$n_1x+n_2y+n_3z=p\iff\V r\cdot\V n=p,\quad p=\V a\cdot\V n\qquad\V r=\V a+\lambda\V b+\mu\V c\;\Rightarrow\;\V n=\V b\times\V c$$</div>
       <p class="note">$\V a$ = any point in plane. $\V n$ = normal.</p>
@@ -65,8 +45,8 @@
     </div>
   </div>
 
-  <div class="item nomf" id="F5">
-    <span class="id">F5</span>
+  <div class="item nomf" id="F4">
+    <span class="id">F4</span>
     <div>
       <span class="name">Distance point $(x_0,y_0,z_0)$ to plane</span>
       <div class="hl">$$d=\frac{|n_1x_0+n_2y_0+n_3z_0-p|}{\sqrt{n_1^2+n_2^2+n_3^2}}$$</div>
@@ -88,8 +68,8 @@
     </div>
   </div>
 
-  <div class="item nomf" id="F6">
-    <span class="id">F6</span>
+  <div class="item nomf" id="F5">
+    <span class="id">F5</span>
     <div>
       <span class="name">Distance point $Q$ to line</span>
       <div class="hl">$$d=\frac{|(\V q-\V a)\times\V b|}{|\V b|}$$</div>
@@ -109,8 +89,8 @@
     </div>
   </div>
 
-  <div class="item nomf" id="F7">
-    <span class="id">F7</span>
+  <div class="item nomf" id="F6">
+    <span class="id">F6</span>
     <div>
       <span class="name">Shortest distance, skew lines</span>
       <div class="hl">$$\V r=\V a+\lambda\V b,\ \V r=\V c+\mu\V d:\qquad d=\frac{|(\V c-\V a)\cdot(\V b\times\V d)|}{|\V b\times\V d|}$$</div>
@@ -131,8 +111,8 @@
     </div>
   </div>
 
-  <div class="item nomf" id="F8">
-    <span class="id">F8</span>
+  <div class="item nomf" id="F7">
+    <span class="id">F7</span>
     <div>
       <span class="name">Angles (acute)</span>
       <div class="hl">$$\text{line,line: }\cos\theta=\frac{|\V b\cdot\V d|}{|\V b||\V d|}\quad\text{plane,plane: }\cos\theta=\frac{|\V n_1\cdot\V n_2|}{|\V n_1||\V n_2|}\quad\text{line,plane: }\sin\theta=\frac{|\V b\cdot\V n|}{|\V b||\V n|}$$</div>
@@ -152,8 +132,8 @@
     </div>
   </div>
 
-  <div class="item nomf" id="F9">
-    <span class="id">F9</span>
+  <div class="item nomf" id="F8">
+    <span class="id">F8</span>
     <div>
       <span class="name">Area, volume</span>
       <div class="hl">$$\triangle ABC=\tfrac12|\AB{AB}\times\AB{AC}|\qquad V_{ABCD}=\tfrac16\left|\AB{AB}\cdot(\AB{AC}\times\AB{AD})\right|$$</div>
@@ -167,14 +147,14 @@
           <li>Triangle: ½ × side × side × sin(angle). |side × side| = side × side × sin(angle) ⇒ ½|side × side|.</li>
           <li>Tetrahedron: ⅓ × base area × height.</li>
           <li>Base area: triangle rule on 2 edges from one corner.</li>
-          <li>Height: distance from 4th corner to base plane (<a href="#F5">F5</a> method).</li>
+          <li>Height: distance from 4th corner to base plane (<a href="#F4">F4</a> method).</li>
         </ol>
       </div>
     </div>
   </div>
 
-  <div class="item nomf" id="F10">
-    <span class="id">F10</span>
+  <div class="item nomf" id="F9">
+    <span class="id">F9</span>
     <div>
       <span class="name">Point dividing $AB$ in ratio $\lambda:\mu$</span>
       <div class="hl">$$\V p=\frac{\mu\V a+\lambda\V b}{\lambda+\mu}$$</div>

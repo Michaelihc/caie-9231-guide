@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Re-download 9231 past papers (2002-2020: qp, ms, er, gt) and syllabi/formula lists into resources/.
+# Re-download 9231 past papers (2002-2025) and syllabi/formula lists into resources/.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 B=https://pastpapers.papacambridge.com/directories/CAIE/CAIE-pastpapers/upload
@@ -11,6 +11,9 @@ done < scripts/paper_list.txt | xargs -P 12 -n 2 sh -c 'curl -sS --retry 4 --max
 
 S=resources/syllabus; mkdir -p $S
 get() { [ -s "$S/$1" ] || curl -sSL --http1.1 --retry 3 --max-time 120 -o "$S/$1" "$2"; }
+get 9231_y23-25_sy.pdf https://www.cambridgeinternational.org/Images/597381-2023-2025-syllabus.pdf
+get 9709_y20-22_sy.pdf https://www.cambridgeinternational.org/Images/415060-2020-2022-syllabus.pdf
+get 9709_y23-25_sy.pdf https://www.cambridgeinternational.org/Images/597421-2023-2025-syllabus.pdf
 get 9231_y20-22_sy.pdf https://www.cambridgeinternational.org/Images/414957-2020-2022-syllabus.pdf
 get 9231_2020_syllabus_change_outline.pdf https://www.cambridgeinternational.org/images/syllabus-outline-further-mathematics-9231-final.pdf
 get MF19_list_of_formulae.pdf https://www.cambridgeinternational.org/Images/417318-list-of-formulae-and-statistical-tables.pdf

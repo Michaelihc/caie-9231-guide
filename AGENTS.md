@@ -33,6 +33,8 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
   - Steps = what to do. Not why.
 - **Branch**: expandable (`<details>`) sub-case of a procedure. Edge cases and variants only. Few per procedure.
 - Leave out problem-solving parts (e.g. "find k so that…", choosing a strategy). Only steps.
+- Before adding a formula/form, grep all papers (qp + ms, 2002–2025) for it. Never examined + not in syllabus
+  ⇒ leave it out (e.g. cartesian line form: 0 uses, syllabus only says r = a + tb).
 
 ## Units
 
@@ -46,7 +48,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 ## Workflow per unit
 
 1. Read unit in syllabus text (`pdftotext -layout`). Read MF19 section for unit.
-2. Scan past papers (`resources/papers/<year>/9231_*_qp_1*.pdf`, ≤2020) for question types ⇒ edge-case branches.
+2. Scan past papers (`resources/papers/<year>/9231_*_qp_1*.pdf`, 2002–2025) for question types ⇒ edge-case branches.
 3. Make `guide/src/<fp1|fp2>/<num>-<slug>/` (slug from `units.json`). Add modules, joined in name order:
    `10-formulas.html`, `20-procedures.html` (copy markup from `fp1/1.6-vectors/`). IDs `F#`/`P#` feed the
    "On this page" index automatically.
@@ -63,7 +65,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 - `scripts/fetch_resources.sh` re-downloads papers/syllabi (PDFs not in git).
 - `scripts/setup.sh` installs system deps, Python venv with manim, npm deps.
 - `manim/` optional figure scenes ⇒ render with `.venv/bin/manim`, put stills in `guide/assets/`.
-- `resources/` syllabi, MF19, past papers 2002–2020 (qp, ms, er, gt).
+- `resources/` syllabi (9231 2016–2025, 9709 2020–2025), MF19, MF10, past papers 2002–2025 (2002–20: qp, ms, er, gt; 2021–25: qp, ms).
 
 ## Math markup
 

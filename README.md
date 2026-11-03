@@ -21,5 +21,5 @@ guide/assets/style.css
 scripts/build.mjs             KaTeX at build time -> dist/
 scripts/fetch_resources.sh    past papers + syllabi -> resources/ (not in git)
 resources/syllabus/           syllabus 2016-2022, MF19, MF10
-resources/papers/<year>/      9231 qp/ms/er/gt 2002-2020
+resources/papers/<year>/      9231 papers 2002-2025
 ```
