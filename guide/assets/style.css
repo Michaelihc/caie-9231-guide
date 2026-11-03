@@ -182,16 +182,19 @@ code { font-size: 0.9em; }
 /* settle (built by guide.js; state in localStorage) */
 .item-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
 .item-title { min-width: 0; }
-.settle-btn, .settle-all {
+.settle-btn {
   font: inherit; font-size: 0.78rem; cursor: pointer; white-space: nowrap;
   color: var(--ink-2); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: 0 0.45rem;
 }
-.settle-btn:hover, .settle-all:hover { color: var(--pen); border-color: var(--pen); }
-.settle-btn:focus-visible, .settle-all:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
-.settle-all { margin-left: auto; font-weight: 400; }
+.settle-btn:hover { color: var(--pen); border-color: var(--pen); }
+.settle-btn:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.settled-box details { border-top: 2px solid var(--ink); padding-top: 0.6rem; }
+.settled-box summary { font-weight: 700; font-size: var(--s-2); }
+.settled-list { display: grid; margin-top: 0.4rem; }
 .item.settled { padding-block: 0.3rem; }
-.item.settled .item-title { color: var(--ink-2); }
-.item.settled .item-title .name::after { content: " (settled)"; font-weight: 400; }
-section:not(.show-settled) .item.settled > div > :not(.item-head) { display: none; }
+.item.settled .item-title { color: var(--ink-2); cursor: pointer; }
+.item.settled:not(.peek) > div > :not(.item-head) { display: none; }
 .jump li.settled a { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--rule); }
-@media print { .settle-btn, .settle-all { display: none; } }
+@media print { .settle-btn { display: none; } }
+.key-words { font-size: var(--s-0); color: var(--ink-2); margin: -0.2rem 0 0.6rem; }
+.key-words b { color: var(--ink); font-weight: 600; }

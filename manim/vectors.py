@@ -84,7 +84,7 @@ class PointLine(Scene):
         b_lab = word("direction", PEN).next_to(A + 0.2 * b, UP, buff=0.25)
 
         s = steps(
-            r"foot $=$ line point $+\ t\times$direction",
+            r"foot on line $\Rightarrow$ foot $=$ line point $+\ t\times$direction",
             r"(point $-$ foot) $\perp$ direction $\Rightarrow$ dot $=0$",
             r"solve for $t$",
             r"distance $=|$point $-$ foot$|$",
