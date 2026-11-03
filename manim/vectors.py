@@ -284,7 +284,7 @@ class CrossArea(ThreeDScene):
 
     def construct(self):
         self.set_camera_orientation(phi=65 * DEGREES, theta=-55 * DEGREES, zoom=0.9)
-        O = np.array([-0.5, -0.8, 0.0])
+        O = np.array([-0.3, -0.6, -1.7])
         L1, L2, K = 3.0, 2.4, 0.33            # K: cross drawn at K x true length to fit frame
         th = ValueTracker(70 * DEGREES)
         u = np.array([1.0, 0, 0])
@@ -306,14 +306,11 @@ class CrossArea(ThreeDScene):
             r"length of cross $=$ area of parallelogram",
             r"arrows parallel $\Rightarrow$ flat $\Rightarrow$ cross $=0$",
         ).to_corner(UL, buff=0.4)
-        ro = readout(r"area $=$ length of cross $=$", area).to_corner(UR, buff=0.5)
-        self.add_fixed_in_frame_mobjects(ro)
-        ro.set_opacity(0)
 
         self.play(FadeIn(a1), FadeIn(l1)); self.add(a2); self.play(FadeIn(l2))
         self.add_fixed_in_frame_mobjects(s[0]); self.play(Write(s[0]), FadeIn(para)); self.add(para)
         self.add_fixed_in_frame_mobjects(s[1]); self.play(Write(s[1])); self.add(cross); self.play(FadeIn(lc))
-        self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]), ro.animate.set_opacity(1))
+        self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]))
         self.play(th.animate.set_value(115 * DEGREES), run_time=1.8)
         self.add_fixed_in_frame_mobjects(s[3]); self.play(Write(s[3]))
         self.play(th.animate.set_value(6 * DEGREES), run_time=2.2)
@@ -340,7 +337,7 @@ class PointPlaneShadow(ThreeDScene):
         self.add_fixed_orientation_mobjects(p_lab, o_lab, nl_lab)
 
         h = ValueTracker(1.4)                 # point height above plane
-        sx = ValueTracker(1.6)                # point sideways position
+        sx = ValueTracker(-1.8)               # point sideways position (screen right)
         Q = lambda: np.array([sx.get_value(), 0.6, Z0 + h.get_value()])
         off = np.array([0.14, 0, 0])          # draw the two shadows side by side
         plane_sh = Line(O - off, np.array([0, 0, Z0]) - off, color=PEN, stroke_width=9)
@@ -359,7 +356,7 @@ class PointPlaneShadow(ThreeDScene):
 
         self.play(Create(plane), FadeIn(p_lab, o_dot, o_lab), Create(n_line), FadeIn(nl_lab), run_time=1.2)
         self.add_fixed_in_frame_mobjects(s[0]); self.play(Write(s[0]), Create(plane_sh))
-        lp = word("plane's shadow", PEN).move_to(O + np.array([-1.5, 0, 1.0]))
+        lp = word("plane's shadow", PEN).move_to(O + np.array([1.7, 0, 0.6]))
         self.add_fixed_orientation_mobjects(lp); self.play(FadeIn(lp))
         self.add(q_dot, q_drop)
         self.add_fixed_in_frame_mobjects(s[1]); self.play(Write(s[1]), FadeIn(q_dot), Create(pt_sh)); self.add(pt_sh)
@@ -367,9 +364,9 @@ class PointPlaneShadow(ThreeDScene):
         self.add_fixed_orientation_mobjects(lq); self.play(FadeIn(lq))
         self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]), Create(diff), Create(gap)); self.add(diff, gap)
         self.play(FadeOut(lq))
-        self.play(sx.animate.set_value(-1.2), run_time=1.6)      # slide sideways: same distance
+        self.play(sx.animate.set_value(-0.6), run_time=1.6)      # slide sideways: same distance
         self.play(h.animate.set_value(2.3), run_time=1.4)        # lift: bigger distance
-        self.play(h.animate.set_value(1.4), sx.animate.set_value(1.6), run_time=1.4)
+        self.play(h.animate.set_value(1.4), sx.animate.set_value(-1.8), run_time=1.4)
         self.add_fixed_in_frame_mobjects(s[3]); self.play(Write(s[3]), run_time=1.3)
         box = SurroundingRectangle(s[2], color=HL, buff=0.1)
         self.add_fixed_in_frame_mobjects(box); self.play(Create(box))
@@ -511,8 +508,8 @@ class VolumeShadow(ThreeDScene):
     """F8: cross of 2 base edges = base area, 3rd edge's shadow on it = height."""
 
     def construct(self):
-        self.set_camera_orientation(phi=70 * DEGREES, theta=-50 * DEGREES, zoom=0.85)
-        A = np.array([-1.0, -1.0, -1.4])
+        self.set_camera_orientation(phi=70 * DEGREES, theta=-50 * DEGREES, zoom=1.15)
+        A = np.array([-1.2, -1.2, -2.1])
         e1 = np.array([2.8, 0.0, 0.0])        # base edge 1
         e2 = np.array([0.9, 2.4, 0.0])        # base edge 2
         H = 2.0
@@ -522,12 +519,13 @@ class VolumeShadow(ThreeDScene):
         tet = always_redraw(lambda: VGroup(
             Line(A, A + e1, color=FG), Line(A, A + e2, color=FG), Line(A + e1, A + e2, color=FG),
             Line(A, A + e3(), color=FG, stroke_width=5), Line(A + e1, A + e3(), color=FG), Line(A + e2, A + e3(), color=FG)))
-        cross = Arrow3D(A + 0.5 * e1 + 0.5 * e2, A + 0.5 * e1 + 0.5 * e2 + np.array([0, 0, 1.1]), color=PEN)
-        c_lab = word("cross of base edges", PEN).move_to(A + 0.5 * e1 + 0.5 * e2 + np.array([0.9, 0, 1.45]))
+        cb = A + 0.85 * e1 + 0.15 * e2
+        cross = Arrow3D(cb, cb + np.array([0, 0, 1.1]), color=PEN)
+        c_lab = word("cross", PEN).move_to(cb + np.array([0.0, 0, 1.45]))
         shadow = always_redraw(lambda: Line(A + np.array([e3()[0], e3()[1], 0]), A + e3(), color=HL, stroke_width=9))
         drop = always_redraw(lambda: DashedLine(A + e3(), A + np.array([e3()[0], e3()[1], 0]), color=HL, stroke_width=1))
         b_lab = word("base", PEN).move_to(A + e1 + np.array([0.4, -0.4, 0]))
-        e_lab = always_redraw(lambda: word("3rd edge").move_to(A + 0.45 * e3() + np.array([-0.75, 0, 0])))
+        e_lab = always_redraw(lambda: word("3rd edge").move_to(A + 0.5 * e3() + np.array([-0.4, -0.4, 0.25])))
         self.add_fixed_orientation_mobjects(c_lab, b_lab)
 
         s = steps(
@@ -541,7 +539,7 @@ class VolumeShadow(ThreeDScene):
         self.add_fixed_in_frame_mobjects(s[0]); self.play(Write(s[0]), FadeIn(cross), FadeIn(c_lab))
         self.add_fixed_orientation_mobjects(e_lab); self.add(e_lab)
         self.add_fixed_in_frame_mobjects(s[1]); self.play(Write(s[1])); self.add(shadow); self.play(Create(shadow))
-        hl = word("height", HL).move_to(A + np.array([e3()[0], e3()[1], 0]) + np.array([0.7, 0, 1.0]))
+        hl = word("height", HL).move_to(A + np.array([e3()[0], e3()[1], 0]) + np.array([0.0, 0.6, 1.0]))
         self.add_fixed_orientation_mobjects(hl); self.play(FadeIn(hl)); self.play(FadeOut(hl))
         self.add_fixed_in_frame_mobjects(s[2]); self.play(Write(s[2]))
         self.play(sx.animate.set_value(1.4), run_time=1.6)    # slide top: same height, same volume
