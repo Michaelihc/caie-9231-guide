@@ -8,7 +8,8 @@ scripts/setup.sh        # fresh machine: deps, manim venv, KaTeX, papers, build
 npm run build           # rebuild dist/ after editing guide/
 ```
 
-Open `dist/index.html`.
+Open `dist/index.html`, or the live site: https://michaelihc.github.io/caie-9231-guide/
+(rebuilt and deployed by `.github/workflows/pages.yml` on every push to `main`).
 
 ```
 guide/units.json              unit list (order, titles); units without source build as "not done"

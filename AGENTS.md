@@ -59,6 +59,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 - `guide/src/<part>/<num>-<slug>/*.html` unit modules (HTML fragments, one `<section>` each).
 - `guide/template.html` page shell; `guide/assets/style.css` shared look.
 - `scripts/build.mjs` renders KaTeX at build time ⇒ `dist/` (gitignored). Open `dist/index.html`.
+- `.github/workflows/pages.yml` builds + deploys to https://michaelihc.github.io/caie-9231-guide/ on push to `main`.
 - `scripts/fetch_resources.sh` re-downloads papers/syllabi (PDFs not in git).
 - `scripts/setup.sh` installs system deps, Python venv with manim, npm deps.
 - `manim/` optional figure scenes ⇒ render with `.venv/bin/manim`, put stills in `guide/assets/`.
