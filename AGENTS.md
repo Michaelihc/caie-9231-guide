@@ -22,6 +22,9 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
       replaces memorising (e.g. point on l1 + k·normal = point on l2, then solve). Be selective: skip it
       when rederiving is slower than recall (cross product components, matrix inverse); say "Learn it" in
       the word panel instead.
+    - Write derivations as a word strategy: "find normal of plane; set up foot + k×normal = point;
+      solve". Name things in words (point, foot, normal, direction, line 1), not single letters
+      ($Q$, $\V n$, $\V b$). Only the unknown you solve for gets a letter ($k$, $t$, $\lambda$).
     - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
       `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
       Embed: `<video src="{{root}}assets/media/…mp4" poster="…jpg" controls muted loop playsinline preload="none">`.

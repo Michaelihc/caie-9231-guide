@@ -35,9 +35,9 @@
       </div>
       <div class="derive">
         <ol>
-          <li>Split into rows: $x=a_1+\lambda b_1$, $y=a_2+\lambda b_2$, $z=a_3+\lambda b_3$.</li>
-          <li>Make $\lambda$ subject of each: $\lambda=\frac{x-a_1}{b_1}$, …</li>
-          <li>All $=\lambda$ ⇒ set equal.</li>
+          <li>Write each row: $x$ = point's $x$ + $\lambda\times$ direction's $x$. Same for $y$, $z$.</li>
+          <li>Make $\lambda$ the subject of each row.</li>
+          <li>All three equal $\lambda$ ⇒ set them equal.</li>
         </ol>
         <p>Back to vector form: set each fraction $=\lambda$, solve for $x,y,z$.</p>
       </div>
@@ -56,10 +56,10 @@
       </div>
       <div class="derive">
         <ol>
-          <li>Known point $A$, any point $R$ in plane. $\AB{AR}=\V r-\V a$ lies in plane.</li>
-          <li>Normal ⊥ everything in plane ⇒ $(\V r-\V a)\cdot\V n=0$ ⇒ $\V r\cdot\V n=\V a\cdot\V n$.</li>
-          <li>Put $\V r=(x,y,z)$, expand dot ⇒ $n_1x+n_2y+n_3z=p$.</li>
-          <li>$\V n$ ⊥ both $\V b,\V c$ ⇒ $\V n=\V b\times\V c$ (<a href="#F2">F2</a>).</li>
+          <li>Pick a known point in plane.</li>
+          <li>(any point in plane − known point) lies flat in plane ⇒ ⊥ normal ⇒ dot with normal $=0$.</li>
+          <li>Rearrange: any point · normal = known point · normal. Expand with $(x,y,z)$ ⇒ cartesian.</li>
+          <li>Normal ⊥ both in-plane directions ⇒ normal = direction₁ × direction₂ (<a href="#F2">F2</a>).</li>
         </ol>
       </div>
     </div>
@@ -77,11 +77,13 @@
       <div class="derive">
         <video src="{{root}}assets/media/fp1/point-plane.mp4" poster="{{root}}assets/media/fp1/point-plane.jpg" controls muted loop playsinline preload="none"></video>
         <ol>
-          <li>Walk from $Q$ along normal: $\V r=\V q+t\V n$.</li>
-          <li>Hit plane: $(\V q+t\V n)\cdot\V n=p$ ⇒ $t=\dfrac{p-\V q\cdot\V n}{|\V n|^2}$.</li>
-          <li>Distance $=|t||\V n|$.</li>
+          <li>Find normal of plane.</li>
+          <li>Set up: foot + $k\times$normal = point.</li>
+          <li>Foot is on plane ⇒ foot = point − $k\times$normal, sub into plane equation.</li>
+          <li>Solve for $k$.</li>
+          <li>Distance = $|k|\times|$normal$|$.</li>
         </ol>
-        <p>Same $t$ gives foot and reflection: <a href="#P4">P4</a>.</p>
+        <p>Foot and reflection: <a href="#P4">P4</a>.</p>
       </div>
     </div>
   </div>
@@ -97,11 +99,12 @@
       <div class="derive">
         <video src="{{root}}assets/media/fp1/point-line.mp4" poster="{{root}}assets/media/fp1/point-line.jpg" controls muted loop playsinline preload="none"></video>
         <ol>
-          <li>Parallelogram on $\AB{AQ}$ and $\V b$.</li>
-          <li>Area = $|\AB{AQ}\times\V b|$. Area = base × height = $|\V b|\,d$.</li>
-          <li>Equal ⇒ $d=|\AB{AQ}\times\V b|/|\V b|$.</li>
+          <li>Set up: foot = line point + $t\times$direction.</li>
+          <li>(point − foot) ⊥ direction ⇒ dot $=0$.</li>
+          <li>Solve for $t$ ⇒ foot.</li>
+          <li>Distance = |point − foot|.</li>
         </ol>
-        <p>No cross product: <a href="#P5">P5</a>. Point $\V a+\lambda\V b$, solve $\AB{QP}\cdot\V b=0$, $d=|\AB{QP}|$.</p>
+        <p>Why the formula works: parallelogram on (point − line point) and direction. Area = |cross| = base × height.</p>
       </div>
     </div>
   </div>
@@ -118,12 +121,12 @@
       <div class="derive">
         <video src="{{root}}assets/media/fp1/skew-lines.mp4" poster="{{root}}assets/media/fp1/skew-lines.jpg" controls muted loop playsinline preload="none"></video>
         <ol>
-          <li>Shortest $PQ$ ⊥ both lines ⇒ ∥ $\V b\times\V d$.</li>
-          <li>Point on $l_1$ + $k$·normal = point on $l_2$: $\V a+\lambda\V b+k(\V b\times\V d)=\V c+\mu\V d$.</li>
-          <li>3 linear eqns ⇒ $\lambda,\mu,k$.</li>
-          <li>Distance $=|k||\V b\times\V d|$.</li>
+          <li>Normal = direction₁ × direction₂ (⊥ both lines).</li>
+          <li>Set up: point on line 1 + $k\times$normal = point on line 2.</li>
+          <li>Each point has its own parameter ⇒ 3 equations, 3 unknowns.</li>
+          <li>Solve. Distance = $|k|\times|$normal$|$.</li>
         </ol>
-        <p>Bonus: $\lambda,\mu$ give $P,Q$ ⇒ common ⊥ (<a href="#P9">P9</a>).</p>
+        <p>Bonus: the two parameters give both ends ⇒ common ⊥ (<a href="#P9">P9</a>).</p>
       </div>
     </div>
   </div>
@@ -140,10 +143,10 @@
       </div>
       <div class="derive">
         <ol>
-          <li>All from <a href="#F1">F1</a> (in MF19): $\cos\theta=\V u\cdot\V v\,/\,(|\V u||\V v|)$.</li>
-          <li>Planes: tilt between planes = tilt between normals ⇒ use $\V n_1,\V n_2$.</li>
-          <li>Line, plane: F1 with $\V b,\V n$ gives $\varphi$ = angle to normal. Plane is 90° off normal ⇒ $\theta=90^\circ-\varphi$ ⇒ $\sin\theta=\cos\varphi$.</li>
-          <li>Abs value on top ⇒ acute.</li>
+          <li>Start from <a href="#F1">F1</a> (in MF19): cos(angle) = dot ÷ (length × length).</li>
+          <li>Two lines ⇒ use the directions. Two planes ⇒ use the normals.</li>
+          <li>Line and plane ⇒ F1 with direction and normal gives angle to normal. Plane is 90° off normal ⇒ answer = 90° − that.</li>
+          <li>Take abs value of dot ⇒ acute.</li>
         </ol>
       </div>
     </div>
@@ -161,10 +164,10 @@
       </div>
       <div class="derive">
         <ol>
-          <li>Triangle: $\tfrac12 uv\sin\theta$ and $|\V u\times\V v|=|\V u||\V v|\sin\theta$ ⇒ $\tfrac12|\AB{AB}\times\AB{AC}|$.</li>
-          <li>Tetrahedron $=\tfrac13\times$ base $\times$ height. Base $ACD=\tfrac12|\AB{AC}\times\AB{AD}|$.</li>
-          <li>Height = distance $B$ to plane $ACD$ = $\dfrac{|\AB{AB}\cdot(\AB{AC}\times\AB{AD})|}{|\AB{AC}\times\AB{AD}|}$ (<a href="#F5">F5</a> idea).</li>
-          <li>Multiply: $\tfrac13\cdot\tfrac12\cdot$ ⇒ $\tfrac16|\AB{AB}\cdot(\AB{AC}\times\AB{AD})|$.</li>
+          <li>Triangle: ½ × side × side × sin(angle). |side × side| = side × side × sin(angle) ⇒ ½|side × side|.</li>
+          <li>Tetrahedron: ⅓ × base area × height.</li>
+          <li>Base area: triangle rule on 2 edges from one corner.</li>
+          <li>Height: distance from 4th corner to base plane (<a href="#F5">F5</a> method).</li>
         </ol>
       </div>
     </div>
@@ -181,8 +184,8 @@
       </div>
       <div class="derive">
         <ol>
-          <li>$\V p=\V a+\frac{\lambda}{\lambda+\mu}(\V b-\V a)$.</li>
-          <li>Collect $\V a$ and $\V b$ ⇒ $\frac{\mu\V a+\lambda\V b}{\lambda+\mu}$.</li>
+          <li>Start at $A$. Add fraction $\frac{\lambda}{\lambda+\mu}$ of $\AB{AB}$.</li>
+          <li>Collect terms ⇒ $\frac{\mu\V a+\lambda\V b}{\lambda+\mu}$.</li>
         </ol>
         <p>Check: $\lambda=\mu$ ⇒ midpoint.</p>
       </div>
