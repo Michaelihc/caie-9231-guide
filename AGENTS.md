@@ -36,6 +36,9 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
       solve for gets a letter ($k$, $t$, $\lambda$).
       - No words ↔ letters key or glossary. That defeats the point. If a word is unclear, make the word
         itself say more. Example: "direction" unclear ⇒ write "line direction", not a key "direction = $\V b$".
+    - Dot/cross formulas ⇒ **picture clip** in the word panel: what the formula means as a shadow
+      (dot = length × shadow) or area (|cross| = parallelogram area), plus one "Picture: …" line.
+      Motif: slide something, the shadow/area stays the same. Setup clips stay in the derive panel.
     - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
       `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
       Embed: `<video src="{{root}}assets/media/…mp4" poster="…jpg" controls muted loop playsinline preload="none">`.
