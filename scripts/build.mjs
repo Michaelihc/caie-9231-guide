@@ -120,7 +120,7 @@ function page({ title, depth, current, trail, content, pagerHtml = "" }) {
     .replaceAll("{{root}}", rel(depth))
     .replace("{{nav}}", () => navHtml(current, depth))
     .replace("{{crumbs}}", () => crumbs(trail, depth))
-    .replace("{{content}}", () => content)
+    .replace("{{content}}", () => content.replaceAll("{{root}}", rel(depth)))
     .replace("{{pager}}", () => pagerHtml);
 }
 
@@ -133,7 +133,7 @@ function write(file, html) {
 // ---- build ------------------------------------------------------------------
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(path.join(dist, "assets/katex/fonts"), { recursive: true });
-fs.copyFileSync(G("assets/style.css"), path.join(dist, "assets/style.css"));
+fs.cpSync(G("assets"), path.join(dist, "assets"), { recursive: true });
 fs.copyFileSync(path.join(katexDir, "katex.min.css"), path.join(dist, "assets/katex/katex.min.css"));
 for (const f of fs.readdirSync(path.join(katexDir, "fonts"))) {
   fs.copyFileSync(path.join(katexDir, "fonts", f), path.join(dist, "assets/katex/fonts", f));

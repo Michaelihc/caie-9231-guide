@@ -157,3 +157,24 @@ code { font-size: 0.9em; }
   body { background: #fff; padding: 0; }
   details > :not(summary) { display: block; }
 }
+
+/* word equation / derivation toggles (built by guide.js) */
+.more { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.45rem; }
+.more-btn {
+  font: inherit; font-size: var(--s-0); cursor: pointer;
+  color: var(--ink); background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.15rem 0.7rem;
+}
+.more-btn:hover { border-color: var(--pen); color: var(--pen); }
+.more-btn:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.more-btn[aria-expanded="true"] { background: var(--pen); border-color: var(--pen); color: var(--paper); }
+.more-panel { font-size: var(--s-0); border-left: 2px solid var(--pen); padding: 0.1rem 0 0.1rem 0.7rem; margin-top: 0.45rem; display: grid; gap: 0.35rem; }
+.more-panel p, .more-panel ol { margin: 0; }
+.more-panel ol { padding-left: 1.2rem; display: grid; gap: 0.15rem; }
+.word::before, .derive::before { font-weight: 600; color: var(--ink-2); }
+.word::before { content: "Word equation"; }
+.derive::before { content: "Derive instead of memorising"; }
+.js .word::before, .js .derive::before { content: none; }
+.js .more-panel:not(.open) { display: none; }
+.more-panel video { width: 100%; max-width: 40rem; aspect-ratio: 16 / 9; border-radius: 4px; background: #1b2331; display: block; }
+@media print { .more { display: none; } .js .more-panel:not(.open) { display: grid; } }

@@ -15,7 +15,12 @@
     <div>
       <span class="name">Vector product</span>
       <div class="hl">$$\V a\times\V b=\cvec{a_2b_3-a_3b_2}{a_3b_1-a_1b_3}{a_1b_2-a_2b_1},\qquad |\V a\times\V b|=|\V a||\V b|\sin\theta$$</div>
-      <p class="note">Answer ⊥ both. $\V b\times\V a=-\V a\times\V b$. $=\V 0$ ⇔ ∥. Index pattern: 23−32, 31−13, 12−21.</p>
+      <p class="note">Answer ⊥ both. $\V b\times\V a=-\V a\times\V b$. $=\V 0$ ⇔ ∥.</p>
+      <div class="word">
+        <p>Top = 2nd·3rd − 3rd·2nd. Next rows: shift indices 1 → 23, 31, 12.</p>
+        <p>Size = size of $\V a$ × size of $\V b$ × sin(angle). Points ⊥ both.</p>
+        <p>No quick derivation. Learn it. Memory aid: $\begin{vmatrix}\V i&\V j&\V k\\a_1&a_2&a_3\\b_1&b_2&b_3\end{vmatrix}$, middle term minus.</p>
+      </div>
     </div>
   </div>
 
@@ -25,6 +30,17 @@
       <span class="name">Line, cartesian</span>
       <div class="hl">$$\V r=\V a+\lambda\V b\iff\frac{x-a_1}{b_1}=\frac{y-a_2}{b_2}=\frac{z-a_3}{b_3}\;(=\lambda)$$</div>
       <p class="note">Some $b_i=0$ ⇒ drop that fraction, write that coord fixed, e.g. $z=a_3$.</p>
+      <div class="word">
+        <p>Each coord: (coord − point's coord) ÷ direction's coord. All three equal.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Split into rows: $x=a_1+\lambda b_1$, $y=a_2+\lambda b_2$, $z=a_3+\lambda b_3$.</li>
+          <li>Make $\lambda$ subject of each: $\lambda=\frac{x-a_1}{b_1}$, …</li>
+          <li>All $=\lambda$ ⇒ set equal.</li>
+        </ol>
+        <p>Back to vector form: set each fraction $=\lambda$, solve for $x,y,z$.</p>
+      </div>
     </div>
   </div>
 
@@ -34,6 +50,18 @@
       <span class="name">Plane, 3 forms</span>
       <div class="hl">$$n_1x+n_2y+n_3z=p\iff\V r\cdot\V n=p,\quad p=\V a\cdot\V n\qquad\V r=\V a+\lambda\V b+\mu\V c\;\Rightarrow\;\V n=\V b\times\V c$$</div>
       <p class="note">$\V a$ = any point in plane. $\V n$ = normal.</p>
+      <div class="word">
+        <p>Normal · (any point in plane) = same number every time.</p>
+        <p>Normal = cross of 2 directions lying in plane.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Known point $A$, any point $R$ in plane. $\AB{AR}=\V r-\V a$ lies in plane.</li>
+          <li>Normal ⊥ everything in plane ⇒ $(\V r-\V a)\cdot\V n=0$ ⇒ $\V r\cdot\V n=\V a\cdot\V n$.</li>
+          <li>Put $\V r=(x,y,z)$, expand dot ⇒ $n_1x+n_2y+n_3z=p$.</li>
+          <li>$\V n$ ⊥ both $\V b,\V c$ ⇒ $\V n=\V b\times\V c$ (<a href="#F2">F2</a>).</li>
+        </ol>
+      </div>
     </div>
   </div>
 
@@ -43,6 +71,18 @@
       <span class="name">Distance point $(x_0,y_0,z_0)$ to plane</span>
       <div class="hl">$$d=\frac{|n_1x_0+n_2y_0+n_3z_0-p|}{\sqrt{n_1^2+n_2^2+n_3^2}}$$</div>
       <p class="note">From O: $|p|/|\V n|$. Same sign inside $|\,|$ for two points ⇒ same side.</p>
+      <div class="word">
+        <p>Plug point into plane's left side. Subtract right side. Make positive. ÷ length of normal.</p>
+      </div>
+      <div class="derive">
+        <video src="{{root}}assets/media/fp1/point-plane.mp4" poster="{{root}}assets/media/fp1/point-plane.jpg" controls muted loop playsinline preload="none"></video>
+        <ol>
+          <li>Walk from $Q$ along normal: $\V r=\V q+t\V n$.</li>
+          <li>Hit plane: $(\V q+t\V n)\cdot\V n=p$ ⇒ $t=\dfrac{p-\V q\cdot\V n}{|\V n|^2}$.</li>
+          <li>Distance $=|t||\V n|$.</li>
+        </ol>
+        <p>Same $t$ gives foot and reflection: <a href="#P4">P4</a>.</p>
+      </div>
     </div>
   </div>
 
@@ -51,6 +91,18 @@
     <div>
       <span class="name">Distance point $Q$ to line</span>
       <div class="hl">$$d=\frac{|(\V q-\V a)\times\V b|}{|\V b|}$$</div>
+      <div class="word">
+        <p>Cross (point-on-line → $Q$) with direction. Take length. ÷ length of direction.</p>
+      </div>
+      <div class="derive">
+        <video src="{{root}}assets/media/fp1/point-line.mp4" poster="{{root}}assets/media/fp1/point-line.jpg" controls muted loop playsinline preload="none"></video>
+        <ol>
+          <li>Parallelogram on $\AB{AQ}$ and $\V b$.</li>
+          <li>Area = $|\AB{AQ}\times\V b|$. Area = base × height = $|\V b|\,d$.</li>
+          <li>Equal ⇒ $d=|\AB{AQ}\times\V b|/|\V b|$.</li>
+        </ol>
+        <p>No cross product: <a href="#P5">P5</a>. Point $\V a+\lambda\V b$, solve $\AB{QP}\cdot\V b=0$, $d=|\AB{QP}|$.</p>
+      </div>
     </div>
   </div>
 
@@ -60,6 +112,19 @@
       <span class="name">Shortest distance, skew lines</span>
       <div class="hl">$$\V r=\V a+\lambda\V b,\ \V r=\V c+\mu\V d:\qquad d=\frac{|(\V c-\V a)\cdot(\V b\times\V d)|}{|\V b\times\V d|}$$</div>
       <p class="note">$d=0$ ⇒ lines meet.</p>
+      <div class="word">
+        <p>Join any point on $l_1$ to any point on $l_2$. Dot with common normal ($\V b\times\V d$). Make positive. ÷ length of normal.</p>
+      </div>
+      <div class="derive">
+        <video src="{{root}}assets/media/fp1/skew-lines.mp4" poster="{{root}}assets/media/fp1/skew-lines.jpg" controls muted loop playsinline preload="none"></video>
+        <ol>
+          <li>Shortest $PQ$ ⊥ both lines ⇒ ∥ $\V b\times\V d$.</li>
+          <li>Point on $l_1$ + $k$·normal = point on $l_2$: $\V a+\lambda\V b+k(\V b\times\V d)=\V c+\mu\V d$.</li>
+          <li>3 linear eqns ⇒ $\lambda,\mu,k$.</li>
+          <li>Distance $=|k||\V b\times\V d|$.</li>
+        </ol>
+        <p>Bonus: $\lambda,\mu$ give $P,Q$ ⇒ common ⊥ (<a href="#P9">P9</a>).</p>
+      </div>
     </div>
   </div>
 
@@ -69,6 +134,18 @@
       <span class="name">Angles (acute)</span>
       <div class="hl">$$\text{line,line: }\cos\theta=\frac{|\V b\cdot\V d|}{|\V b||\V d|}\quad\text{plane,plane: }\cos\theta=\frac{|\V n_1\cdot\V n_2|}{|\V n_1||\V n_2|}\quad\text{line,plane: }\sin\theta=\frac{|\V b\cdot\V n|}{|\V b||\V n|}$$</div>
       <p class="note">Line, plane uses <b>sin</b>: $\V n$ is ⊥ plane. Abs value ⇒ acute.</p>
+      <div class="word">
+        <p>cos(angle) = |dot| ÷ (length × length).</p>
+        <p>Planes: use normals. Line with plane: use sin, because normal sits 90° off plane.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>All from <a href="#F1">F1</a> (in MF19): $\cos\theta=\V u\cdot\V v\,/\,(|\V u||\V v|)$.</li>
+          <li>Planes: tilt between planes = tilt between normals ⇒ use $\V n_1,\V n_2$.</li>
+          <li>Line, plane: F1 with $\V b,\V n$ gives $\varphi$ = angle to normal. Plane is 90° off normal ⇒ $\theta=90^\circ-\varphi$ ⇒ $\sin\theta=\cos\varphi$.</li>
+          <li>Abs value on top ⇒ acute.</li>
+        </ol>
+      </div>
     </div>
   </div>
 
@@ -78,6 +155,18 @@
       <span class="name">Area, volume</span>
       <div class="hl">$$\triangle ABC=\tfrac12|\AB{AB}\times\AB{AC}|\qquad V_{ABCD}=\tfrac16\left|\AB{AB}\cdot(\AB{AC}\times\AB{AD})\right|$$</div>
       <p class="note">Parallelogram: $|\AB{AB}\times\AB{AC}|$. Tetrahedron also $\tfrac13\times\text{base}\times\text{height}$ (Q usually gives this).</p>
+      <div class="word">
+        <p>Triangle = half length of cross of 2 sides from one corner.</p>
+        <p>Tetrahedron = ⅙ × |side · (side × side)|, 3 sides from one corner.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Triangle: $\tfrac12 uv\sin\theta$ and $|\V u\times\V v|=|\V u||\V v|\sin\theta$ ⇒ $\tfrac12|\AB{AB}\times\AB{AC}|$.</li>
+          <li>Tetrahedron $=\tfrac13\times$ base $\times$ height. Base $ACD=\tfrac12|\AB{AC}\times\AB{AD}|$.</li>
+          <li>Height = distance $B$ to plane $ACD$ = $\dfrac{|\AB{AB}\cdot(\AB{AC}\times\AB{AD})|}{|\AB{AC}\times\AB{AD}|}$ (<a href="#F5">F5</a> idea).</li>
+          <li>Multiply: $\tfrac13\cdot\tfrac12\cdot$ ⇒ $\tfrac16|\AB{AB}\cdot(\AB{AC}\times\AB{AD})|$.</li>
+        </ol>
+      </div>
     </div>
   </div>
 
@@ -87,6 +176,16 @@
       <span class="name">Point dividing $AB$ in ratio $\lambda:\mu$</span>
       <div class="hl">$$\V p=\frac{\mu\V a+\lambda\V b}{\lambda+\mu}$$</div>
       <p class="note">Was in old MF10. Gone from MF19.</p>
+      <div class="word">
+        <p>Start at $A$. Go $\frac{\lambda}{\lambda+\mu}$ of the way to $B$.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>$\V p=\V a+\frac{\lambda}{\lambda+\mu}(\V b-\V a)$.</li>
+          <li>Collect $\V a$ and $\V b$ ⇒ $\frac{\mu\V a+\lambda\V b}{\lambda+\mu}$.</li>
+        </ol>
+        <p>Check: $\lambda=\mu$ ⇒ midpoint.</p>
+      </div>
     </div>
   </div>
 </section>

@@ -16,6 +16,15 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 - **Formula** (`F#`): fact or equation.
   - Not in MF19 ⇒ mark ★ (class `nomf`, highlighter). Must memorise.
   - In MF19 ⇒ tag `MF19`. Check the PDF before tagging; MF19 Vectors only has a·b.
+  - Every ★ formula gets 2 buttons (built by `guide.js` from panels inside the item):
+    - `<div class="word">` **Word equation**: formula said in plain words. Always.
+    - `<div class="derive">` **Don't want to memorise**: quick on-the-spot derivation or setup that
+      replaces memorising (e.g. point on l1 + k·normal = point on l2, then solve). Be selective: skip it
+      when rederiving is slower than recall (cross product components, matrix inverse); say "Learn it" in
+      the word panel instead.
+    - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
+      `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
+      Embed: `<video src="{{root}}assets/media/…mp4" poster="…jpg" controls muted loop playsinline preload="none">`.
 - **Procedure** (`P#`): compact actionable numbered steps for one standard task.
   - Can call formulas (list them in `uses`). E.g. solve 1st-order DE ⇒ calls integrating-factor formula.
   - Steps = what to do. Not why.
