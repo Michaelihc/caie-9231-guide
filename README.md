@@ -6,6 +6,7 @@ Style and terms: see [AGENTS.md](AGENTS.md).
 ```bash
 scripts/setup.sh        # fresh machine: deps, manim venv, KaTeX, papers, build
 npm run build           # rebuild dist/ after editing guide/
+npm run dev             # local preview at http://localhost:8080, rebuilds + reloads on save
 ```
 
 Open `dist/index.html`, or the live site: https://michaelihc.github.io/caie-9231-guide/

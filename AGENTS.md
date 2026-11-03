@@ -66,6 +66,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
    `10-formulas.html`, `20-procedures.html` (copy markup from `fp1/1.6-vectors/`). IDs `F#`/`P#` feed the
    "On this page" index automatically.
 4. `npm run build` ⇒ `dist/` site (index, part pages, unit pages, sidebar, prev/next).
+   While editing: `npm run dev` (localhost:8080, rebuild + browser reload on save, ~0.2 s).
 5. Screenshot once with Playwright (light + dark) to check layout.
 
 ## Repo layout
