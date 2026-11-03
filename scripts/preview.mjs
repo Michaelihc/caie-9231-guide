@@ -7,6 +7,19 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
+// --artifact: write preview/artifact-index.html = dist/index.html without its own <html>/<head>/<body>
+// (the Claude artifact wraps its main page in a skeleton); other dist files are published as-is.
+if (process.argv[2] === "--artifact") {
+  const html = fs.readFileSync(path.join(dist, "index.html"), "utf8");
+  const head = html.match(/<head>([\s\S]*?)<\/head>/)[1]
+    .replace(/<meta charset[^>]*>\s*/, "").replace(/<meta name="viewport"[^>]*>\s*/, "");
+  const body = html.match(/<body>([\s\S]*?)<\/body>/)[1];
+  const out = path.join(root, "preview", "artifact-index.html");
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, `<meta name="claude:viewport-fit-sides" content="cover">\n${head.trim()}\n${body.trim()}\n`);
+  console.log(path.relative(root, out));
+  process.exit(0);
+}
 const page = process.argv[2] || "fp1/1-6-vectors.html";
 const src = path.join(dist, page);
 if (!fs.existsSync(src)) { console.error(`missing ${src} (run npm run build first)`); process.exit(1); }

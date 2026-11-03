@@ -67,8 +67,11 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
    "On this page" index automatically.
 4. `npm run build` ⇒ `dist/` site (index, part pages, unit pages, sidebar, prev/next).
    While editing: `npm run dev` (localhost:8080, rebuild + browser reload on save, ~0.2 s).
-   Cloud session (no localhost for user): `npm run preview -- <part>/<page>.html` ⇒ `preview/…html`
-   (one self-contained file, gitignored) ⇒ send with SendUserFile, display render.
+   Cloud session: user watches live preview artifact https://claude.ai/artifact/EUUj4eGGqVdm4Ka87ZpiSg
+   (whole site, private). After every change: `npm run artifact` ⇒ republish with Artifact tool,
+   `url` = that link, `file_path` = `preview/artifact-index.html` (home page minus <html>/<head>/<body>),
+   `root` = `dist`, `files` = every other file in `dist/`. Open viewers update in place.
+   Single page instead: `npm run preview -- <part>/<page>.html` ⇒ one self-contained file in `preview/`.
 5. Screenshot once with Playwright (light + dark) to check layout.
 
 ## Repo layout
