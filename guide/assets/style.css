@@ -196,5 +196,3 @@ code { font-size: 0.9em; }
 .item.settled:not(.peek) > div > :not(.item-head) { display: none; }
 .jump li.settled a { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--rule); }
 @media print { .settle-btn { display: none; } }
-.key-words { font-size: var(--s-0); color: var(--ink-2); margin: -0.2rem 0 0.6rem; }
-.key-words b { color: var(--ink); font-weight: 600; }

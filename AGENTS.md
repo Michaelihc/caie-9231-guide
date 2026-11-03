@@ -31,7 +31,10 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
       when rederiving is slower than recall (cross product components, matrix inverse); say "Learn it" in
       the word panel instead.
     - Write derivations as a word strategy: "find normal of plane; set up foot + k×normal = point;
-      solve". Name things in words (point, foot, normal, direction, line 1), not single letters
+      solve". Name things in words that say what they belong to (point, foot, plane normal, line point,
+      line direction, line 1 direction), not single letters
+      - No words ↔ letters key or glossary. That defeats the point. If a word is unclear, make the word
+        itself say more. Example: "direction" unclear ⇒ write "line direction", not a key "direction = $\V b$".
       ($Q$, $\V n$, $\V b$). Only the unknown you solve for gets a letter ($k$, $t$, $\lambda$).
     - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
       `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
@@ -40,8 +43,6 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
     "Settled formulas (n)" box at page bottom (title click = peek). Saved in localStorage key
     `caie9231.settled`, keyed `<part>/<unit>.html#<formula name>` ⇒ renaming a formula unsettles it;
     renumbering doesn't.
-  - Each unit's formula section starts with a `<p class="key-words">` words ↔ letters key for every word
-    used in derivations (e.g. line point = $\V a$, direction = $\V b$, normal = $\V n$).
 - **Procedure** (`P#`): compact actionable numbered steps for one standard task.
   - Can call formulas (list them in `uses`). E.g. solve 1st-order DE ⇒ calls integrating-factor formula.
   - Steps = what to do. Not why.

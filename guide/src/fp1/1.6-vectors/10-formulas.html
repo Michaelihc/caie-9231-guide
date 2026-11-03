@@ -1,6 +1,5 @@
 <section id="formulas">
   <h2>Formulas</h2>
-  <p class="key-words">Words ↔ letters. Line $\V r=\V a+\lambda\V b$: $\V a$ = <b>line point</b>, $\V b$ = <b>direction</b> (the vector times the parameter). Plane $\V r\cdot\V n=p$: $\V n$ = <b>normal</b>. <b>Point</b> = the given point off the line/plane. <b>Foot</b> = where the ⊥ from it lands.</p>
 
   <div class="item" id="F1">
     <span class="id">F1</span>
@@ -33,7 +32,7 @@
       <p class="note">$\V a$ = any point in plane. $\V n$ = normal. $\V r\cdot\V n\ne0$: $\V r$ starts at O, not in plane. $p=0$ ⇔ plane through O.</p>
       <div class="word">
         <p>Normal · (any point in plane) = same number every time.</p>
-        <p>Normal = cross of 2 directions lying in plane.</p>
+        <p>Normal = cross of 2 plane directions.</p>
       </div>
       <div class="derive">
         <ol>
@@ -41,7 +40,7 @@
           <li>(any point in plane − known point) lies flat in plane ⇒ ⊥ normal ⇒ dot with normal $=0$.</li>
           <li>Expand: (any point)·normal − (known point)·normal $=0$ ⇒ (any point)·normal = (known point)·normal. That number is $p$.</li>
           <li>Expand dot with $(x,y,z)$ ⇒ cartesian.</li>
-          <li>Normal ⊥ both in-plane directions ⇒ normal = direction₁ × direction₂ (<a href="#F2">F2</a>).</li>
+          <li>Normal ⊥ both plane directions ⇒ normal = plane direction 1 × plane direction 2 (<a href="#F2">F2</a>).</li>
         </ol>
       </div>
     </div>
@@ -76,17 +75,17 @@
       <span class="name">Distance point $Q$ to line</span>
       <div class="hl">$$d=\frac{|(\V q-\V a)\times\V b|}{|\V b|}$$</div>
       <div class="word">
-        <p>Cross (point-on-line → $Q$) with direction. Take length. ÷ length of direction.</p>
+        <p>Cross (line point → point) with line direction. Take length. ÷ length of line direction.</p>
       </div>
       <div class="derive">
         <video src="{{root}}assets/media/fp1/point-line.mp4" poster="{{root}}assets/media/fp1/point-line.jpg" controls muted loop playsinline preload="none"></video>
         <ol>
-          <li>Foot is on line ⇒ foot = line point + $t\times$direction.</li>
-          <li>(point − foot) ⊥ direction ⇒ dot $=0$.</li>
+          <li>Foot is on line ⇒ foot = line point + $t\times$line direction.</li>
+          <li>(point − foot) ⊥ line direction ⇒ dot $=0$.</li>
           <li>Solve for $t$ ⇒ foot.</li>
           <li>Distance = |point − foot|.</li>
         </ol>
-        <p>Why the formula works: parallelogram on (point − line point) and direction. Area = |cross| = base × height.</p>
+        <p>Why the formula works: parallelogram on (point − line point) and line direction. Area = |cross| = base × height.</p>
       </div>
     </div>
   </div>
@@ -103,7 +102,7 @@
       <div class="derive">
         <video src="{{root}}assets/media/fp1/skew-lines.mp4" poster="{{root}}assets/media/fp1/skew-lines.jpg" controls muted loop playsinline preload="none"></video>
         <ol>
-          <li>Normal = direction₁ × direction₂ (⊥ both lines).</li>
+          <li>Normal = line 1 direction × line 2 direction (⊥ both lines).</li>
           <li>Set up: point on line 1 + $k\times$normal = point on line 2.</li>
           <li>Each point has its own parameter ⇒ 3 equations, 3 unknowns.</li>
           <li>Solve. Distance = $|k|\times|$normal$|$.</li>
@@ -126,8 +125,8 @@
       <div class="derive">
         <ol>
           <li>Start from <a href="#F1">F1</a> (in MF19): cos(angle) = dot ÷ (length × length).</li>
-          <li>Two lines ⇒ use the directions. Two planes ⇒ use the normals.</li>
-          <li>Line and plane ⇒ F1 with direction and normal gives angle to normal. Plane is 90° off normal ⇒ answer = 90° − that.</li>
+          <li>Two lines ⇒ use line directions. Two planes ⇒ use the normals.</li>
+          <li>Line and plane ⇒ F1 with line direction and plane normal gives angle to normal. Plane is 90° off normal ⇒ answer = 90° − that.</li>
           <li>Take abs value of dot ⇒ acute.</li>
         </ol>
       </div>

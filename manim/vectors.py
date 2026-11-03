@@ -1,5 +1,5 @@
 """FP1 vectors derivation clips. Steps are word strategies ("set up X + k*normal = Y, solve"),
-named in words (point, foot, normal, direction), not single letters.
+named in words (point, foot, normal, line direction), not single letters.
 
     scripts/manim_export.sh fp1 manim/vectors.py PointPlane PointLine SkewLines
 """
@@ -68,7 +68,7 @@ class PointPlane(ThreeDScene):
 
 
 class PointLine(Scene):
-    """Distance point -> line: foot = line point + t*direction, (point - foot).direction = 0, solve t."""
+    """Distance point -> line: foot = line point + t*line direction, (point - foot).line direction = 0, solve t."""
 
     def construct(self):
         A = np.array([-0.6, -2.7, 0])
@@ -81,11 +81,11 @@ class PointLine(Scene):
         q_dot = Dot(Q, color=FG)
         q_lab = word("point").next_to(Q, UP, buff=0.15)
         b_arr = Arrow(A, A + 0.4 * b, buff=0, color=PEN, stroke_width=5)
-        b_lab = word("direction", PEN).next_to(A + 0.2 * b, UP, buff=0.25)
+        b_lab = word("line direction", PEN).next_to(A + 0.2 * b, UP, buff=0.25)
 
         s = steps(
-            r"foot on line $\Rightarrow$ foot $=$ line point $+\ t\times$direction",
-            r"(point $-$ foot) $\perp$ direction $\Rightarrow$ dot $=0$",
+            r"foot on line $\Rightarrow$ foot $=$ line point $+\ t\times$line direction",
+            r"(point $-$ foot) $\perp$ line direction $\Rightarrow$ dot $=0$",
             r"solve for $t$",
             r"distance $=|$point $-$ foot$|$",
             scale=0.66,
@@ -127,7 +127,7 @@ class SkewLines(ThreeDScene):
         self.add_fixed_orientation_mobjects(lab1, lab2)
 
         s = steps(
-            r"normal $=$ direction$_1\times$direction$_2$",
+            r"normal $=$ line 1 direction $\times$ line 2 direction",
             r"point on line 1 $+\ k\times$normal $=$ point on line 2",
             r"each point has own parameter $\Rightarrow$ 3 eqns, 3 unknowns",
             r"solve; distance $=|k|\times|$normal$|$",
