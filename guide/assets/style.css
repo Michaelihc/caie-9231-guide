@@ -225,3 +225,7 @@ code { font-size: 0.9em; }
 }
 .try .widget-note { color: var(--ink-2); margin: 0; }
 .try .JXGtext { font-family: var(--font); }
+
+/* skill trigger: what the question looks like */
+.trigger { margin: 0.25rem 0 0.1rem; font-size: var(--s-0); color: var(--ink-2); }
+.trigger b { color: var(--pen); font-weight: 600; }

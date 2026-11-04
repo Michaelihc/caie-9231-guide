@@ -5,6 +5,7 @@
     <span class="id">S1</span>
     <div>
       <span class="name">Separate variables</span>
+      <p class="trigger"><b>When:</b> Question has $\frac{dy}{dx}=$ (only-$x$ stuff) × (only-$y$ stuff), e.g. $\frac{dy}{dx}=xe^{-y}$. Or a substitution turned it into that.</p>
       <ol class="steps">
         <li>Get all $y$ with $dy$ on left, all $x$ with $dx$ on right.</li>
         <li>Integrate both sides. One $+C$, on the right.</li>
@@ -25,6 +26,7 @@
     <span class="id">S2</span>
     <div>
       <span class="name">1st order linear: integrating factor</span>
+      <p class="trigger"><b>When:</b> 1st order: only $\frac{dy}{dx}$, no $\frac{d^2y}{dx^2}$. $y$ and $\frac{dy}{dx}$ appear on their own, not squared, not multiplied together. Shape: (something)$\frac{dy}{dx}$ + (something)$\,y$ = (something), e.g. $x\frac{dy}{dx}+2y=e^x$.</p>
       <ol class="steps">
         <li>Divide by coefficient of $\frac{dy}{dx}$ ⇒ $\frac{dy}{dx}+P\,y=Q$.</li>
         <li><span class="fx" data-f="Fif">IF $=e^{\int P\,dx}$</span>. Simplify. No $+C$.</li>
@@ -63,6 +65,7 @@
     <span class="id">S3</span>
     <div>
       <span class="name">2nd order constant coefficient: CF + PI</span><span class="uses">uses <a href="#F1">F1</a> <a href="#F2">F2</a> <a href="#F3">F3</a></span>
+      <p class="trigger"><b>When:</b> 2nd order with plain-number coefficients: $a\frac{d^2y}{dx^2}+b\frac{dy}{dx}+cy=$ (function of $x$), e.g. $\frac{d^2y}{dx^2}+4\frac{dy}{dx}+5y=10\sin x$.</p>
       <ol class="steps">
         <li>Auxiliary equation ⇒ roots ⇒ CF.</li>
         <li>Trial PI from right side. Check it is not in CF.</li>
@@ -97,6 +100,7 @@
     <span class="id">S4</span>
     <div>
       <span class="name">Particular solution from initial conditions</span><span class="uses">uses <a href="#F1">F1</a></span>
+      <p class="trigger"><b>When:</b> Question gives values, e.g. "$y=1$ and $\frac{dy}{dx}=0$ when $x=0$", and asks for "the particular solution" or "the solution for which …".</p>
       <ol class="steps">
         <li>Start from full general solution (CF + PI). Keep both $A$, $B$.</li>
         <li>Sub $x=0$, $y=$ given ⇒ equation 1.</li>
@@ -121,6 +125,7 @@
     <span class="id">S5</span>
     <div>
       <span class="name">Given substitution ⇒ "show that equation becomes …"</span><span class="uses">uses <a href="#F4">F4</a> <a href="#F5">F5</a></span>
+      <p class="trigger"><b>When:</b> Question hands you a substitution ($v=y^4$, $x=e^t$, $y=ux$, …) and says "show that the equation becomes …".</p>
       <ol class="steps">
         <li>Write substitution. Differentiate with respect to $x$: chain rule on $y$ terms, product rule on products.</li>
         <li>2nd order target ⇒ differentiate again.</li>
@@ -150,6 +155,7 @@
     <span class="id">S6</span>
     <div>
       <span class="name">Behaviour for large $x$</span><span class="uses">uses <a href="#F1">F1</a> <a href="#F6">F6</a></span>
+      <p class="trigger"><b>When:</b> Question says "for large $x$", "as $x\to\infty$", "approximate solution", or "what happens to $y$".</p>
       <ol class="steps">
         <li>CF terms with $e^{-kx}$ ($k>0$) → 0 as $x\to\infty$. Say so.</li>
         <li>Approximate solution for large $x$: $y\approx$ PI.</li>

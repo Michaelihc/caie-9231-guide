@@ -50,6 +50,8 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
     `caie9231.settled`, keyed `<part>/<unit>.html#<formula name>` ⇒ renaming a formula unsettles it;
     renumbering doesn't.
 - **Skill** (`S#`): compact actionable numbered steps for one standard task.
+  - Starts with a trigger line `<p class="trigger"><b>When:</b> …</p>`: what the question looks like
+    (equation shape + a real example, or the question's wording) so reader can pick the skill.
   - Can call formulas (list them in `uses`). E.g. solve 1st-order DE ⇒ calls integrating-factor formula.
   - Formula only used inside one skill (e.g. integrating factor) ⇒ don't list it. Write it in place in the step
     as a chip: `<span class="fx" data-f="Fif">IF $=e^{\int P\,dx}$</span>`. Formula card stays in
@@ -85,7 +87,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 5. Screenshot once with Playwright (light + dark) to check layout.
 6. **No-calculus check**: could someone good at maths who never learned calculus solve a real CAIE question
    using only this page? Test: `python3 -I scripts/page2text.py dist/<page>.html` ⇒ give text + 2–3 real
-   papers (qp, then ms) to a tester agent playing that persona; it logs GAP / UNCLEAR / MISSING STEP. Fix
+   papers (qp, then ms) to a tester agent on a smaller model (`model: sonnet` or `haiku`) playing that persona; it logs GAP / UNCLEAR / MISSING STEP. Fix
    gaps in the page (skills, chips, branches), re-test once.
 
 ## Repo layout
