@@ -67,6 +67,9 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
   - Starts with a trigger line `<p class="trigger"><b>When:</b> …</p>`: what the question looks like
     (equation shape + a real example, or the question's wording) so reader can pick the skill.
   - Can call formulas (list them in `uses`). E.g. solve 1st-order DE ⇒ calls integrating-factor formula.
+  - Unit where formulas only serve skills (DE: every formula is a step of some skill) ⇒ no Formulas list at
+    all: every formula is a chip; `10-formulas.html` is `<section id="formulas" class="store">` of `inline`
+    cards. Keep a Formulas list only when formulas are shared by many skills / looked up alone (vectors).
   - Formula only used inside one skill (e.g. integrating factor) ⇒ don't list it. Write it in place in the step
     as a chip: `<span class="fx" data-f="Fif">IF $=e^{\int P\,dx}$</span>`. Formula card stays in
     `10-formulas.html` with class `inline` and a non-numbered id (`Fif`): hidden from list and index,

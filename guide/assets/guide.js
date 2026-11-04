@@ -26,7 +26,10 @@ async function startWidget(panel) {
 }
 
 document.querySelectorAll(".item").forEach((item) => {
-  const panels = [...item.querySelectorAll(":scope > div > .word, :scope > div > .derive, :scope > div > .try")];
+  const ORDER = { word: 0, derive: 1, try: 2 };
+  const kindOf = (el) => ["word", "derive", "try"].find((k) => el.classList.contains(k));
+  const panels = [...item.querySelectorAll(":scope > div > .word, :scope > div > .derive, :scope > div > .try")]
+    .sort((a, b) => ORDER[kindOf(a)] - ORDER[kindOf(b)]);
   if (!panels.length) return;
   const bar = document.createElement("div");
   bar.className = "more";
@@ -65,8 +68,7 @@ document.querySelectorAll(".fx[data-f]").forEach((chip) => {
   tip.className = "fx-tip";
   tip.setAttribute("role", "tooltip");
   tip.innerHTML = `<b>${name}</b> <small>tap for more</small>`;
-  const formula = card.querySelector(".hl");
-  if (formula) tip.append(formula.cloneNode(true));
+  card.querySelectorAll(":scope > div > .hl").forEach((f) => tip.append(f.cloneNode(true)));
   chip.append(tip);
   const toggle = () => {
     const host = chip.closest("li") || chip.parentElement;

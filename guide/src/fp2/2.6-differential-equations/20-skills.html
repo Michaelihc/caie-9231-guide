@@ -13,7 +13,7 @@
       </ol>
       <div class="branches">
         <details><summary>Comes after a substitution</summary>
-          <p>$y=ux$ (<a href="#F5">F5</a>) or $z=x+y$ ⇒ separable in new variable. Sub back at end.</p>
+          <p><span class="fx" data-f="Fux">$y=ux$</span> or $z=x+y$ ⇒ separable in new variable. Sub back at end.</p>
         </details>
         <details><summary>Can't make $y$ subject</summary>
           <p>Leave answer implicit (e.g. $a\ln(x+y)+b(x-y)+c=0$) unless Q asks for $y=$.</p>
@@ -72,14 +72,14 @@
   <div class="item" id="S3">
     <span class="id">S3</span>
     <div>
-      <span class="name">2nd order constant coefficient: CF + PI</span><span class="uses">uses <a href="#F1">F1</a> <a href="#F2">F2</a> <a href="#F3">F3</a></span>
+      <span class="name">2nd order constant coefficient: CF + PI</span>
       <p class="trigger"><b>When:</b> 2nd order with plain-number coefficients: $a\frac{d^2y}{dx^2}+b\frac{dy}{dx}+cy=$ (function of $x$), e.g. $\frac{d^2y}{dx^2}+4\frac{dy}{dx}+5y=10\sin x$.</p>
       <ol class="steps">
-        <li>Auxiliary equation ⇒ roots ⇒ CF.</li>
-        <li>Trial PI from right side. Check it is not in CF.</li>
+        <li><span class="fx" data-f="Faux">Auxiliary equation ⇒ roots ⇒ CF</span>.</li>
+        <li><span class="fx" data-f="Fpi">Trial PI</span> from right side. Check it is not in CF.</li>
         <li>Differentiate trial twice. Sub trial and its derivatives into left side.</li>
         <li>Compare coefficients ⇒ unknowns.</li>
-        <li>Write $y=$ CF + PI (in question's variable: $x$ or $t$).</li>
+        <li>Write <span class="fx" data-f="Fgs">$y=$ CF + PI</span> (in question's variable: $x$ or $t$).</li>
       </ol>
       <div class="branches">
         <details><summary>Leading coefficient not 1, e.g. $9y''+6y'+y$</summary>
@@ -110,10 +110,10 @@
   <div class="item" id="S4">
     <span class="id">S4</span>
     <div>
-      <span class="name">Particular solution from initial conditions</span><span class="uses">uses <a href="#F1">F1</a></span>
+      <span class="name">Particular solution from initial conditions</span>
       <p class="trigger"><b>When:</b> Question gives values, e.g. "$y=1$ and $\frac{dy}{dx}=0$ when $x=0$", and asks for "the particular solution" or "the solution for which …".</p>
       <ol class="steps">
-        <li>Start from full general solution (CF + PI). Keep both $A$, $B$.</li>
+        <li>Start from full <span class="fx" data-f="Fgs">general solution (CF + PI)</span>. Keep both $A$, $B$.</li>
         <li>Sub $x=0$, $y=$ given ⇒ equation 1.</li>
         <li>Differentiate general solution. Sub $x=0$, $\frac{dy}{dx}=$ given ⇒ equation 2.</li>
         <li>Solve simultaneously. Write $y=\dots$ with numbers.</li>
@@ -135,7 +135,7 @@
   <div class="item" id="S5">
     <span class="id">S5</span>
     <div>
-      <span class="name">Given substitution ⇒ "show that equation becomes …"</span><span class="uses">uses <a href="#F4">F4</a> <a href="#F5">F5</a></span>
+      <span class="name">Given substitution ⇒ "show that equation becomes …"</span>
       <p class="trigger"><b>When:</b> Question hands you a substitution ($v=y^4$, $x=e^t$, $y=ux$, …) and says "show that the equation becomes …".</p>
       <ol class="steps">
         <li>Write substitution. Differentiate it with respect to $x$: chain rule on $y$ terms, product rule on products.</li>
@@ -153,10 +153,10 @@
           </ul>
         </details>
         <details><summary>New independent variable: $x=e^t$, $x=t^2$, $x=\frac1t$</summary>
-          <p>$\frac{dy}{dx}=\frac{dy/dt}{dx/dt}$. $x=e^t$: use <a href="#F4">F4</a>. Back: $t=\ln x$.</p>
+          <p>$\frac{dy}{dx}=\frac{dy/dt}{dx/dt}$. $x=e^t$: use <span class="fx" data-f="Fet">$x\frac{dy}{dx}=\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>. Back: $t=\ln x$.</p>
         </details>
         <details><summary>$\frac{dy}{dx}=f\!\left(\frac yx\right)$ with $y=ux$</summary>
-          <p><a href="#F5">F5</a> ⇒ $x\frac{du}{dx}=f(u)-u$ ⇒ separable (<a href="#S1">S1</a>). May need $\sinh^{-1}$, then square.</p>
+          <p><span class="fx" data-f="Fux">$\frac{dy}{dx}=u+x\frac{du}{dx}$</span> ⇒ $x\frac{du}{dx}=f(u)-u$ ⇒ separable (<a href="#S1">S1</a>). May need $\sinh^{-1}$, then square.</p>
         </details>
       </div>
     </div>
@@ -165,11 +165,11 @@
   <div class="item" id="S6">
     <span class="id">S6</span>
     <div>
-      <span class="name">Behaviour for large $x$</span><span class="uses">uses <a href="#F1">F1</a></span>
+      <span class="name">Behaviour for large $x$</span>
       <p class="trigger"><b>When:</b> Question says "for large $x$", "as $x\to\infty$", "approximate solution", or "what happens to $y$".</p>
       <ol class="steps">
         <li>CF terms with $e^{-kx}$ ($k>0$) → 0 as $x\to\infty$. Say so.</li>
-        <li>Approximate solution for large $x$: $y\approx$ PI.</li>
+        <li>Approximate solution for large $x$: <span class="fx" data-f="Fgs">$y\approx$ PI</span>.</li>
       </ol>
       <div class="branches">
         <details><summary>PI is $\lambda\sin x+\mu\cos x$: give $R\sin(x\pm\varphi)$</summary>
