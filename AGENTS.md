@@ -31,6 +31,9 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
 - Naming objects in derivations ⇒ words that say what they belong to ("line direction", "plane normal"),
   not single letters. Only the unknown you solve for gets a letter.
 - Unclear word ⇒ make the word say more ("direction" → "line direction"). Never a words ↔ letters key/glossary.
+- Never define a letter ("$P$ = what multiplies $y$", "$\V n$ = normal"). Either the formula's shape makes it
+  self-explanatory ($\frac{dy}{dx}+P\,y=Q$ shows what $P$ and $Q$ are) or write a word equation
+  ("normal · (any point in plane) = $p$", "reflection = 2 × foot − point").
 - Word equation panel = the one place a formula is said in words (user asked for it). Elsewhere, symbols first.
 
 ## Terms

@@ -208,7 +208,7 @@ code { font-size: 0.9em; }
 .fx[aria-expanded="true"] { background: color-mix(in srgb, var(--hl) 35%, transparent); }
 .fx:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
 .fx-tip {
-  display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 20;
+  display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 20; pointer-events: none;
   width: max-content; max-width: min(30rem, 88vw); overflow-x: auto;
   background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px;
   box-shadow: 0 4px 14px color-mix(in srgb, var(--ink) 18%, transparent); padding: 0.4rem 0.6rem; font-size: var(--s-0);
@@ -233,3 +233,5 @@ code { font-size: 0.9em; }
 
 /* unit whose formulas live only as chips: hide the store section */
 section.store { display: contents; }
+.try .jxgbox.short { aspect-ratio: 16 / 7; }
+.try .jxgbox + .jxgbox { margin-top: 0.4rem; }
