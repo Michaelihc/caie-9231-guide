@@ -8,7 +8,7 @@
       <p class="trigger"><b>When:</b> Question has $\frac{dy}{dx}=$ (only-$x$ stuff) × (only-$y$ stuff), e.g. $\frac{dy}{dx}=xe^{-y}$. Or a substitution turned it into that.</p>
       <ol class="steps">
         <li>Get all $y$ with $dy$ on left, all $x$ with $dx$ on right.</li>
-        <li>Integrate both sides. One $+C$, on the right.</li>
+        <li><span class="fx" data-f="Fi">Integrate</span> both sides. One $+C$, on the right.</li>
         <li>Initial condition ⇒ $C$. Rearrange for $y$ if asked.</li>
       </ol>
       <div class="branches">
@@ -28,12 +28,12 @@
       <span class="name">1st order linear: integrating factor</span>
       <p class="trigger"><b>When:</b> 1st order: only $\frac{dy}{dx}$, no $\frac{d^2y}{dx^2}$. $y$ and $\frac{dy}{dx}$ appear on their own, not squared, not multiplied together. Shape: (something)$\frac{dy}{dx}$ + (something)$\,y$ = (something), e.g. $x\frac{dy}{dx}+2y=e^x$.</p>
       <ol class="steps">
-        <li>Divide by coefficient of $\frac{dy}{dx}$ ⇒ $\frac{dy}{dx}+P\,y=Q$.</li>
-        <li><span class="fx" data-f="Fif">IF $=e^{\int P\,dx}$</span>. Simplify. No $+C$.</li>
-        <li>Write <span class="fx" data-f="Fif">$\frac{d}{dx}(\text{IF}\cdot y)=\text{IF}\cdot Q$</span>.</li>
-        <li>Integrate right side. Add $+C$ <b>now</b>.</li>
+        <li>Divide every term by coefficient of $\frac{dy}{dx}$ ⇒ $\frac{dy}{dx}+P\,y=Q$. $P$ = what multiplies $y$ now, $Q$ = right side now.</li>
+        <li><span class="fx" data-f="Fif">IF $=e^{\int P\,dx}$</span>: <span class="fx" data-f="Fi">integrate</span> $P$, then $e$ to that. Simplify. No $+C$.</li>
+        <li>Work out IF × $Q$ (simplify). Write <span class="fx" data-f="Fif">$\frac{d}{dx}(\text{IF}\cdot y)=\text{IF}\cdot Q$</span>.</li>
+        <li><span class="fx" data-f="Fi">Integrate</span> right side ⇒ IF × $y$ = that $+\,C$. Add $+C$ <b>now</b>.</li>
         <li>Initial condition ⇒ $C$.</li>
-        <li>Divide whole thing by IF ⇒ $y=\dots$</li>
+        <li>Divide whole thing by IF. Answer must start $y=\dots$</li>
       </ol>
       <div class="branches">
         <details><summary>Dividing first: $x\frac{dy}{dx}$, $\sin\theta\frac{dy}{dx}$, $(x^2+1)\frac{dy}{dx}$</summary>
@@ -49,7 +49,12 @@
           </ul>
         </details>
         <details><summary>Right side hard to integrate</summary>
-          <p>Use part (a) of the question (identity, substitution, by-parts result). Else by parts, partial fractions, or MF19 standard form ($\sinh^{-1}$, $\cosh^{-1}$).</p>
+          <ul>
+            <li>Part (a) of the question usually hands you this integral (or a derivative that gives it). Reuse it.</li>
+            <li>$x\times e^{x}$ shape: by parts, $u=x$ (<span class="fx" data-f="Fi">integrals</span>).</li>
+            <li>$e^{ax}\sin bx$: by parts twice ⇒ same integral comes back ⇒ move to left, divide.</li>
+            <li>Fraction: partial fractions, or $\frac{f'}{f}\to\ln f$. Root of quadratic: MF19 $\sinh^{-1}$/$\cosh^{-1}$ rows.</li>
+          </ul>
         </details>
         <details><summary>Forgot $+C$ before dividing</summary>
           <p>Wrong: constant must end up as $\frac{C}{\text{IF}}$, not $C$.</p>
@@ -69,7 +74,7 @@
       <ol class="steps">
         <li>Auxiliary equation ⇒ roots ⇒ CF.</li>
         <li>Trial PI from right side. Check it is not in CF.</li>
-        <li>Differentiate trial twice. Sub into left side.</li>
+        <li><span class="fx" data-f="Fd">Differentiate</span> trial twice. Sub trial and its derivatives into left side.</li>
         <li>Compare coefficients ⇒ unknowns.</li>
         <li>Write $y=$ CF + PI (in question's variable: $x$ or $t$).</li>
       </ol>
@@ -104,12 +109,12 @@
       <ol class="steps">
         <li>Start from full general solution (CF + PI). Keep both $A$, $B$.</li>
         <li>Sub $x=0$, $y=$ given ⇒ equation 1.</li>
-        <li>Differentiate general solution. Sub $x=0$, $\frac{dy}{dx}=$ given ⇒ equation 2.</li>
+        <li><span class="fx" data-f="Fd">Differentiate</span> general solution. Sub $x=0$, $\frac{dy}{dx}=$ given ⇒ equation 2.</li>
         <li>Solve simultaneously. Write $y=\dots$ with numbers.</li>
       </ol>
       <div class="branches">
         <details><summary>Repeated or complex root CF</summary>
-          <p>Differentiating needs product rule: $(A+Bx)e^{\alpha x}$, $e^{px}\cos qx$.</p>
+          <p>Differentiating needs product rule (<span class="fx" data-f="Fd">derivatives</span>): $\left((A+Bx)e^{\alpha x}\right)'=Be^{\alpha x}+\alpha(A+Bx)e^{\alpha x}$.</p>
         </details>
         <details><summary>After a substitution</summary>
           <p>Convert conditions to new variable first. E.g. $v=y^4$: $v(0)=y(0)^4$, $v'=4y^3y'$. $y=\cosh u$: $y'=\sinh u\cdot u'$.</p>
@@ -127,16 +132,16 @@
       <span class="name">Given substitution ⇒ "show that equation becomes …"</span><span class="uses">uses <a href="#F4">F4</a> <a href="#F5">F5</a></span>
       <p class="trigger"><b>When:</b> Question hands you a substitution ($v=y^4$, $x=e^t$, $y=ux$, …) and says "show that the equation becomes …".</p>
       <ol class="steps">
-        <li>Write substitution. Differentiate with respect to $x$: chain rule on $y$ terms, product rule on products.</li>
+        <li>Write substitution. <span class="fx" data-f="Fd">Differentiate</span> it with respect to $x$: chain rule on $y$ terms, product rule on products.</li>
         <li>2nd order target ⇒ differentiate again.</li>
-        <li>Sub derivatives into original equation. Simplify until it matches the shown equation.</li>
+        <li>Start from the <b>shown</b> equation's left side. Replace new variable and its derivatives by their old-variable forms. Simplify ⇒ it becomes (a multiple of) the original equation's left side ⇒ swap in original right side ⇒ matches.</li>
         <li>Solve new equation (<a href="#S1">S1</a>, <a href="#S2">S2</a> or <a href="#S3">S3</a>).</li>
-        <li>Sub back ⇒ answer in original variables.</li>
+        <li>Sub back ⇒ answer in original variables, e.g. $v=y^4$ ⇒ $y=v^{\frac14}$, $x=e^t$ ⇒ $t=\ln x$.</li>
       </ol>
       <div class="branches">
         <details><summary>New dependent variable: $v=y^n$, $v=\frac1y$, $y=x^2w$, $y=\cosh u$, $z=xy$</summary>
           <ul>
-            <li>$v=y^n$: $v'=ny^{n-1}y'$. Differentiate again for $v''$ (product rule).</li>
+            <li>$v=y^n$: $v'=ny^{n-1}y'$. Again (product rule): $v''=ny^{n-1}y''+n(n-1)y^{n-2}(y')^2$.</li>
             <li>$y=x^2w$: $y'=2xw+x^2w'$, then product rule again.</li>
             <li>Final answer: $y=\dots$ ($\cosh u=\dots$ also accepted).</li>
           </ul>

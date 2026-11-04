@@ -229,3 +229,4 @@ code { font-size: 0.9em; }
 /* skill trigger: what the question looks like */
 .trigger { margin: 0.25rem 0 0.1rem; font-size: var(--s-0); color: var(--ink-2); }
 .trigger b { color: var(--pen); font-weight: 600; }
+.fx[aria-expanded="true"] > .fx-tip { display: none !important; }

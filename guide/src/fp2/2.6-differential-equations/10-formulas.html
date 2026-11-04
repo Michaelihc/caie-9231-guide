@@ -74,7 +74,7 @@
       <div class="derive">
         <ol>
           <li>Trial must survive differentiating: derivatives of $x^n$ give every lower power ⇒ need them all.</li>
-          <li>Derivative of cos is sin and back ⇒ need both.</li>
+          <li>$(\cos px)'=-p\sin px$, $(\sin px)'=p\cos px$ ⇒ each turns into the other ⇒ need both.</li>
           <li>Trial already in CF ⇒ it gives 0 on left side ⇒ useless ⇒ times $x$.</li>
         </ol>
       </div>
@@ -131,6 +131,33 @@
           <li>Match: sin coefficient $=R\cos\varphi$, cos coefficient $=R\sin\varphi$.</li>
           <li>Square and add ⇒ $R$. Divide ⇒ $\tan\varphi$.</li>
         </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item inline" id="Fd">
+    <span class="id">d/dx</span>
+    <div>
+      <span class="name">Derivatives you need</span><span class="tag">MF19 + ★ rows</span>
+      <div class="hl">$$\begin{array}{lll} \text{function} & \text{derivative} & \\ \hline x^n & nx^{n-1} & \text{MF19}\\ e^{kx} & ke^{kx} & \bigstar\\ \sin kx & k\cos kx & \bigstar\\ \cos kx & -k\sin kx & \bigstar\\ \ln x & \frac1x & \text{MF19}\\ u\cdot v & u'v+uv' & \text{MF19}\\ y^n,\ y\text{ depends on }x & ny^{n-1}\frac{dy}{dx} & \bigstar \end{array}$$</div>
+      <p class="note">★ = chain rule: whatever is inside, its derivative multiplies on. Same rule: derivative of $\left(\frac{dy}{dx}\right)^2$ is $2\frac{dy}{dx}\frac{d^2y}{dx^2}$.</p>
+      <p class="note">Worked shape: $\left(e^{px}\cos qx\right)'=pe^{px}\cos qx-qe^{px}\sin qx$ (product rule + ★ rows).</p>
+      <div class="word">
+        <p>Number in front of $x$ comes out to the front. Something that depends on $x$ inside ⇒ times its own derivative.</p>
+        <p>Learn the ★ rows. The rest is in MF19.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item inline" id="Fi">
+    <span class="id">∫</span>
+    <div>
+      <span class="name">Integrals you need</span><span class="tag">MF19 + ★ rows</span>
+      <div class="hl">$$\begin{array}{lll} \text{function} & \text{integral} & \\ \hline x^n & \frac{x^{n+1}}{n+1}\ (n\ne-1) & \text{MF19}\\ \frac1x & \ln x & \text{MF19}\\ e^{kx} & \frac1k e^{kx} & \bigstar\\ \sin kx & -\frac1k\cos kx & \bigstar\\ \cos kx & \frac1k\sin kx & \bigstar\\ \frac{f'(x)}{f(x)} & \ln f(x) & \text{MF19}\\ u\,v' & uv-\int u'v\,dx\ \ (\text{by parts}) & \text{MF19} \end{array}$$</div>
+      <p class="note">By parts: $u$ = the part that gets simpler when differentiated (the $x$ or $x^2$). $e^{ax}\sin bx$ or $e^{ax}\cos bx$: by parts twice ⇒ same integral comes back ⇒ move it to left side, divide.</p>
+      <div class="word">
+        <p>★ rows: divide by the number in front of $x$. Add $+C$ once, at the end.</p>
+        <p>Learn the ★ rows. The rest is in MF19.</p>
       </div>
     </div>
   </div>
