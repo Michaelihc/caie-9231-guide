@@ -15,26 +15,18 @@
       <div class="branches">
         <details><summary>Where $\V u,\V v$ come from</summary>
           <ul>
-            <li>3 points $A,B,C$: $\V u=\AB{AB}$, $\V v=\AB{AC}$.</li>
-            <li>Line $\V a+\lambda\V b$ + point $Q$: $\V u=\V b$, $\V v=\V q-\V a$.</li>
-            <li>2 lines that meet: $\V u=\V b_1$, $\V v=\V b_2$.</li>
             <li>2 ∥ lines: $\V u=\V b$, $\V v=\V a_2-\V a_1$.</li>
-            <li>Line + ∥ to vector $\V w$: $\V u=\V b$, $\V v=\V w$.</li>
-            <li>Line + ⊥ to plane with normal $\V m$: $\V u=\V b$, $\V v=\V m$.</li>
+            <li>Line + ⊥ to plane: $\V u=\V b$, $\V v=$ that plane's normal.</li>
           </ul>
         </details>
         <details><summary>Skip the cross product</summary>
           <ul>
-            <li>∥ to plane $\Pi$: same $\V n$ as $\Pi$.</li>
-            <li>⊥ to line with dir $\V b$: $\V n=\V b$.</li>
-            <li>⊥ to planes $\Pi_1,\Pi_2$: $\V n=\V n_1\times\V n_2$.</li>
+            <li>⊥ to line: normal = line direction.</li>
+            <li>⊥ to 2 planes: normal = normal 1 × normal 2.</li>
           </ul>
         </details>
         <details><summary>Contains line of intersection of $\Pi_1,\Pi_2$ + point $Q$</summary>
           <p>Plane $=(\V n_1\cdot\V r-p_1)+k(\V n_2\cdot\V r-p_2)=0$. Sub $Q$ ⇒ $k$. Or: <a href="#S7">S7</a> for line, then line + point.</p>
-        </details>
-        <details><summary>Want parametric form</summary>
-          <p>$\V r=\V a+\lambda\V u+\mu\V v$ directly. No $\V n$ needed.</p>
         </details>
       </div>
     </div>
@@ -53,9 +45,6 @@
         <details><summary>Coefficient is 0, e.g. $x+2y=4$</summary>
           <p>Missing var free ⇒ $\V k$ lies in plane. Use $\V k$ as one dir. Plane ∥ $z$-axis.</p>
         </details>
-        <details><summary>Parametric answer looks different from mark scheme</summary>
-          <p>Fine if same plane: check its $\V b\times\V c$ ∥ your $\V n$ and its $\V a$ fits.</p>
-        </details>
       </div>
     </div>
   </div>
@@ -70,11 +59,6 @@
         <li>$\V b\cdot\V n=0$ ⇒ line ∥ plane. Test $\V a\cdot\V n$:
           $=p$ ⇒ line lies in plane. $\ne p$ ⇒ never meet, gap = <a href="#F4">F4</a> at $A$.</li>
       </ol>
-      <div class="branches">
-        <details><summary>Plane given parametric</summary>
-          <p><a href="#S2">S2</a> to cartesian first. Or set $\V a+t\V b=\V c+\lambda\V d+\mu\V e$, 3 eqns, 3 unknowns.</p>
-        </details>
-      </div>
     </div>
   </div>
 
@@ -88,17 +72,6 @@
         <li>Foot $N$: $\V q+t\V n$.</li>
         <li>Distance $QN=|t||\V n|$ (same as <a href="#F4">F4</a>).</li>
       </ol>
-      <div class="branches">
-        <details><summary>Reflection of $Q$ in plane</summary>
-          <p>$\V q'=\V q+2t\V n$ (same $t$).</p>
-        </details>
-        <details><summary>Foot from origin</summary>
-          <p>$\V q=\V 0$ ⇒ $t=p/|\V n|^2$, $N=t\V n$.</p>
-        </details>
-        <details><summary>Plane given by 3 points</summary>
-          <p><a href="#S1">S1</a> first for $\V n,p$.</p>
-        </details>
-      </div>
     </div>
   </div>
 
@@ -112,17 +85,6 @@
         <li>Solve $\AB{QP}\cdot\V b=0$ ⇒ $\lambda$.</li>
         <li>Foot = $P$ at that $\lambda$. Distance = $|\AB{QP}|$.</li>
       </ol>
-      <div class="branches">
-        <details><summary>Distance only</summary>
-          <p><a href="#F5">F5</a>, faster.</p>
-        </details>
-        <details><summary>Reflection of $Q$ in line</summary>
-          <p>Reflection = 2 × foot − point (foot is the midpoint).</p>
-        </details>
-        <details><summary>Line through $A$ and $C$</summary>
-          <p>$\V a=\AB{OA}$, $\V b=\AB{AC}$.</p>
-        </details>
-      </div>
     </div>
   </div>
 
@@ -135,14 +97,6 @@
         <li>Line, line or plane, plane ⇒ cos rule of <a href="#F7">F7</a>. Line, plane ⇒ sin rule.</li>
         <li>Keep $|\,\cdot\,|$ on top ⇒ acute.</li>
       </ol>
-      <div class="branches">
-        <details><summary>Planes given by points (e.g. $ABC$, $ABD$)</summary>
-          <p><a href="#S1">S1</a> step 2 for each normal. No need for $p$.</p>
-        </details>
-        <details><summary>Line, plane done with cos by mistake</summary>
-          <p>cos gives angle $\varphi$ to normal. Answer $\theta=90^\circ-\varphi$.</p>
-        </details>
-      </div>
     </div>
   </div>
 
@@ -159,15 +113,6 @@
       <div class="branches">
         <details><summary>Why pick coord with $d_i\ne0$</summary>
           <p>$d_3=0$ ⇒ $z$ fixed on whole line. Setting $z=0$ ⇒ no solution (unless that fixed value is 0).</p>
-        </details>
-        <details><summary>No cross product</summary>
-          <p>Set $z=t$. Solve both eqns for $x,y$ in $t$. Read $\V a,\V d$ off.</p>
-        </details>
-        <details><summary>$\V n_1\times\V n_2=\V 0$</summary>
-          <p>Planes ∥. No line. Same eqn up to scale ⇒ same plane.</p>
-        </details>
-        <details><summary>Plane given parametric</summary>
-          <p><a href="#S2">S2</a> to cartesian first.</p>
         </details>
       </div>
     </div>
@@ -203,9 +148,6 @@
         <li>Common ⊥: $\V r=\V p+t(\V b\times\V d)$.</li>
       </ol>
       <div class="branches">
-        <details><summary>Distance only</summary>
-          <p><a href="#F6">F6</a>. Use it to check $|\AB{PQ}|$ too.</p>
-        </details>
         <details><summary>Other way to step 3</summary>
           <p>$\AB{PQ}=k(\V b\times\V d)$ ⇒ 3 linear eqns in $\lambda,\mu,k$.</p>
         </details>
@@ -214,9 +156,6 @@
         </details>
         <details><summary>Lines ∥, not skew</summary>
           <p>No single common ⊥. Distance = <a href="#F5">F5</a> with $Q=C$.</p>
-        </details>
-        <details><summary>Lines given as $AB$ and $CD$</summary>
-          <p>$\V a=\AB{OA}$, $\V b=\AB{AB}$, $\V c=\AB{OC}$, $\V d=\AB{CD}$.</p>
         </details>
       </div>
     </div>
@@ -232,9 +171,6 @@
         <li>Tetrahedron: $\tfrac16|\AB{AB}\cdot(\AB{AC}\times\AB{AD})|$.</li>
       </ol>
       <div class="branches">
-        <details><summary>Q gives $V=\tfrac13\times$ base $\times$ height</summary>
-          <p>Base = triangle $ABC$. Height = <a href="#F4">F4</a> from $D$ to plane $ABC$ (<a href="#S1">S1</a>).</p>
-        </details>
         <details><summary>Triple product = 0</summary>
           <p>$A,B,C,D$ coplanar. Volume 0.</p>
         </details>

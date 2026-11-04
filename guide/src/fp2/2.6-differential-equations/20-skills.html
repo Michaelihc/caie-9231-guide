@@ -12,14 +12,6 @@
         <li>Initial condition ⇒ $C$. Rearrange for $y$ if asked.</li>
       </ol>
       <div class="solve"><video src="{{root}}assets/media/fp2/sep-solve.mp4" poster="{{root}}assets/media/fp2/sep-solve.jpg" controls muted playsinline preload="none"></video></div>
-      <div class="branches">
-        <details><summary>Comes after a substitution</summary>
-          <p><span class="fx" data-f="Fux">$y=ux$</span> or $z=x+y$ ⇒ separable in new variable. Sub back at end.</p>
-        </details>
-        <details><summary>Can't make $y$ subject</summary>
-          <p>Leave answer implicit (e.g. $a\ln(x+y)+b(x-y)+c=0$) unless Q asks for $y=$.</p>
-        </details>
-      </div>
     </div>
   </div>
 
@@ -38,34 +30,17 @@
       </ol>
       <div class="solve"><video src="{{root}}assets/media/fp2/if-solve.mp4" poster="{{root}}assets/media/fp2/if-solve.jpg" controls muted playsinline preload="none"></video></div>
       <div class="branches">
-        <details><summary>Dividing first: $x\frac{dy}{dx}$, $\sin\theta\frac{dy}{dx}$, $(x^2+1)\frac{dy}{dx}$</summary>
-          <p>Divide every term, right side too. $P$ is coefficient of $y$ <i>after</i> dividing.</p>
-        </details>
         <details><summary>Simplifying $e^{\int P}$</summary>
           <ul>
-            <li>$e^{k\ln f}=f^k$: $\frac2x\to x^2$, $-\frac1x\to\frac1x$, $\frac{f'}{f}\to f$, $\frac{f'}{2f}\to\sqrt f$.</li>
-            <li>Trig/hyp: $\cot\theta\to\sin\theta$, $\tanh x\to\cosh x$, $2\tanh x\to\cosh^2x$, $\coth x\to\sinh x$.</li>
-            <li>Partial fractions first ⇒ IF is a ratio, e.g. $\frac{x}{x+7}$.</li>
+            <li>Hyperbolic: $\tanh x\to\cosh x$, $2\tanh x\to\cosh^2x$, $\coth x\to\sinh x$.</li>
             <li>$\frac1{\sqrt{x^2+1}}\to e^{\sinh^{-1}x}=x+\sqrt{x^2+1}$ (log form of $\sinh^{-1}$).</li>
-            <li>Any non-zero multiple of IF works.</li>
           </ul>
         </details>
         <details><summary>Right side hard to integrate</summary>
           <ul>
-            <li>Part (a) shows $\frac{d}{dx}F=f$ ⇒ $\int f\,dx=F$. Reuse it, add $+C$.</li>
-            <li>$x\times e^{x}$ shape: by parts, $u=x$.</li>
-            <li>$e^{ax}\sin bx$: by parts twice ⇒ same integral comes back ⇒ move to left, divide.</li>
-            <li>Fraction: partial fractions, or $\frac{f'}{f}\to\ln f$. Root of quadratic: MF19 $\sinh^{-1}$/$\cosh^{-1}$ rows.</li>
+            <li>$e^{ax}\sin bx$: by parts twice, same choice of $u$ ⇒ same integral comes back ⇒ move to left, divide.</li>
+            <li>Root of quadratic: MF19 $\sinh^{-1}$/$\cosh^{-1}$ rows.</li>
           </ul>
-        </details>
-        <details><summary>Part (a): "show that $\frac{d}{dx}(\dots)=\dots$"</summary>
-          <p>Differentiate each term (inverse hyperbolic derivatives: MF19 Further Pure list). Common denominator. Simplify to the shown result.</p>
-        </details>
-        <details><summary>Forgot $+C$ before dividing</summary>
-          <p>Wrong: constant must end up as $\frac{C}{\text{IF}}$, not $C$.</p>
-        </details>
-        <details><summary>Constant coefficient, e.g. $\frac{dy}{dx}+5y=e^{-7x}$</summary>
-          <p>Still IF ($e^{5x}$). Same steps.</p>
         </details>
       </div>
     </div>
@@ -85,9 +60,6 @@
       </ol>
       <div class="solve"><video src="{{root}}assets/media/fp2/cfpi-solve.mp4" poster="{{root}}assets/media/fp2/cfpi-solve.jpg" controls muted playsinline preload="none"></video></div>
       <div class="branches">
-        <details><summary>Leading coefficient not 1, e.g. $9y''+6y'+y$</summary>
-          <p>Keep it: $9m^2+6m+1=0$. Roots often fractions ($-\frac13$ repeated).</p>
-        </details>
         <details><summary>Right side only $\sin$ or only $\cos$</summary>
           <p>Trial needs both: $\lambda\cos px+\mu\sin px$.</p>
         </details>
@@ -96,15 +68,6 @@
         </details>
         <details><summary>Trial in CF: form given, e.g. $kxe^{-x}$ or $kx^2e^{2x}$</summary>
           <p>Differentiate given form with product rule. Sub. Solve for $k$. ($x^2$ when root is repeated.)</p>
-        </details>
-        <details><summary>Disguised exponential on right side</summary>
-          <p>$\cosh x+\sinh x=e^x$ ⇒ $(\cosh x+\sinh x)^{\frac12}=e^{\frac x2}$. Trial $\lambda e^{\frac x2}$.</p>
-        </details>
-        <details><summary>Variable is $t$, e.g. $x(t)$ with $\frac{d^2x}{dt^2}$</summary>
-          <p>Same steps. Read every $y$ as $x$ and every $x$ as $t$ in F1–F3. Answer starts $x=\dots$</p>
-        </details>
-        <details><summary>Complex roots</summary>
-          <p>Answer in real form $e^{px}(A\cos qx+B\sin qx)$. No $i$ in final answer.</p>
         </details>
       </div>
     </div>
@@ -123,14 +86,8 @@
       </ol>
       <div class="solve"><video src="{{root}}assets/media/fp2/ic-solve.mp4" poster="{{root}}assets/media/fp2/ic-solve.jpg" controls muted playsinline preload="none"></video></div>
       <div class="branches">
-        <details><summary>Repeated or complex root CF</summary>
-          <p>Differentiating needs product rule: $\left((A+Bx)e^{\alpha x}\right)'=Be^{\alpha x}+\alpha(A+Bx)e^{\alpha x}$.</p>
-        </details>
         <details><summary>After a substitution</summary>
           <p>Convert conditions to new variable first. E.g. $v=y^4$: $v(0)=y(0)^4$, $v'=4y^3y'$. $y=\cosh u$: $y'=\sinh u\cdot u'$.</p>
-        </details>
-        <details><summary>1st order</summary>
-          <p>One condition, any point (e.g. $x=1$, $\theta=\frac\pi2$). Find $C$ before dividing by IF (<a href="#S2">S2</a>).</p>
         </details>
       </div>
     </div>
@@ -150,18 +107,11 @@
       </ol>
       <div class="solve"><video src="{{root}}assets/media/fp2/sub-solve.mp4" poster="{{root}}assets/media/fp2/sub-solve.jpg" controls muted playsinline preload="none"></video></div>
       <div class="branches">
-        <details><summary>New dependent variable: $v=y^n$, $v=\frac1y$, $y=x^2w$, $y=\cosh u$, $z=xy$</summary>
-          <ul>
-            <li>$v=y^n$: $v'=ny^{n-1}y'$. Again (product rule): $v''=ny^{n-1}y''+n(n-1)y^{n-2}(y')^2$.</li>
-            <li>$y=x^2w$: $y'=2xw+x^2w'$, then product rule again.</li>
-            <li>Final answer: $y=\dots$ ($\cosh u=\dots$ also accepted).</li>
-          </ul>
-        </details>
-        <details><summary>New independent variable: $x=e^t$, $x=t^2$, $x=\frac1t$</summary>
-          <p>$\frac{dy}{dx}=\frac{dy/dt}{dx/dt}$. $x=e^t$: use <span class="fx" data-f="Fet">$x\frac{dy}{dx}=\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>. Back: $t=\ln x$.</p>
+        <details><summary>$x=e^t$</summary>
+          <p>Use <span class="fx" data-f="Fet">$x\frac{dy}{dx}=\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>. Back: $t=\ln x$.</p>
         </details>
         <details><summary>$\frac{dy}{dx}=f\!\left(\frac yx\right)$ with $y=ux$</summary>
-          <p><span class="fx" data-f="Fux">$\frac{dy}{dx}=u+x\frac{du}{dx}$</span> ⇒ $x\frac{du}{dx}=f(u)-u$ ⇒ separable (<a href="#S1">S1</a>). May need $\sinh^{-1}$, then square.</p>
+          <p><span class="fx" data-f="Fux">$\frac{dy}{dx}=u+x\frac{du}{dx}$</span> ⇒ $x\frac{du}{dx}=f(u)-u$ ⇒ separable (<a href="#S1">S1</a>).</p>
         </details>
       </div>
     </div>
@@ -177,17 +127,6 @@
         <li>Approximate solution for large $x$: <span class="fx" data-f="Fgs">$y\approx$ PI</span>.</li>
       </ol>
       <div class="solve"><video src="{{root}}assets/media/fp2/large-x-solve.mp4" poster="{{root}}assets/media/fp2/large-x-solve.jpg" controls muted playsinline preload="none"></video></div>
-      <div class="branches">
-        <details><summary>PI is $\lambda\sin x+\mu\cos x$: give $R\sin(x\pm\varphi)$</summary>
-          <p>A Level $R$-formula: $R=\sqrt{\lambda^2+\mu^2}$; signs of $R\cos\varphi=\lambda$, $R\sin\varphi=\mu$ pick $\varphi$. Method must be shown.</p>
-        </details>
-        <details><summary>Approximate $\frac{d^2y}{dx^2}$ for large $x$</summary>
-          <p>Differentiate the PI.</p>
-        </details>
-        <details><summary>Find $x$ where $y=0$</summary>
-          <p>Set particular solution $=0$. Solve, often in $\ln$ form.</p>
-        </details>
-      </div>
     </div>
   </div>
 </section>

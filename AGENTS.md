@@ -84,6 +84,9 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     first. Only exception to "no worked examples": as an animation, never as static text. Chain related skills on
     one example where natural (DE: S3 → S4 → S6 on one equation).
 - **Branch**: expandable (`<details>`) sub-case of a skill, shown under an "Edge cases" label. Edge cases and variants only. Few per skill.
+  - Keep only what a strong A Level Maths student (no Further Maths) would NOT figure out alone: FM facts,
+    exam traps the mark scheme punishes (e.g. single sin ⇒ trial needs both), non-obvious setups.
+    Cut anything the steps already say, A Level technique, alternative methods, reassurances, shortcuts.
 - Leave out problem-solving parts (e.g. "find k so that…", choosing a strategy). Only steps.
 
 ## Units
