@@ -59,7 +59,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 - FP2 (Paper 2): 2.1 hyperbolic fns, 2.2 matrices, 2.3 differentiation, 2.4 integration,
   2.5 complex numbers, 2.6 differential equations.
 - List lives in `guide/units.json`. Unit with no source folder ⇒ builds as "not done" placeholder.
-- Done: FP1 1.6 vectors.
+- Done: FP1 1.6 vectors, FP2 2.6 differential equations.
 
 ## Workflow per unit
 

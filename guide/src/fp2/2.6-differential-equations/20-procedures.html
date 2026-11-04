@@ -1,0 +1,170 @@
+<section id="procedures">
+  <h2>Procedures</h2>
+
+  <div class="item" id="P1">
+    <span class="id">P1</span>
+    <div>
+      <span class="name">Separate variables</span>
+      <ol class="steps">
+        <li>Get all $y$ with $dy$ on left, all $x$ with $dx$ on right.</li>
+        <li>Integrate both sides. One $+C$, on the right.</li>
+        <li>Initial condition ⇒ $C$. Rearrange for $y$ if asked.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Comes after a substitution</summary>
+          <p>$y=ux$ (<a href="#F6">F6</a>) or $z=x+y$ ⇒ separable in new variable. Sub back at end.</p>
+        </details>
+        <details><summary>Can't make $y$ subject</summary>
+          <p>Leave answer implicit (e.g. $a\ln(x+y)+b(x-y)+c=0$) unless Q asks for $y=$.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P2">
+    <span class="id">P2</span>
+    <div>
+      <span class="name">1st order linear: integrating factor</span><span class="uses">uses <a href="#F1">F1</a></span>
+      <ol class="steps">
+        <li>Divide by coefficient of $\frac{dy}{dx}$ ⇒ $\frac{dy}{dx}+P\,y=Q$.</li>
+        <li>IF $=e^{\int P\,dx}$. Simplify. No $+C$.</li>
+        <li>Write $\frac{d}{dx}(\text{IF}\cdot y)=\text{IF}\cdot Q$.</li>
+        <li>Integrate right side. Add $+C$ <b>now</b>.</li>
+        <li>Initial condition ⇒ $C$.</li>
+        <li>Divide whole thing by IF ⇒ $y=\dots$</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Dividing first: $x\frac{dy}{dx}$, $\sin\theta\frac{dy}{dx}$, $(x^2+1)\frac{dy}{dx}$</summary>
+          <p>Divide every term, right side too. $P$ is coefficient of $y$ <i>after</i> dividing.</p>
+        </details>
+        <details><summary>Simplifying $e^{\int P}$</summary>
+          <ul>
+            <li>$e^{k\ln f}=f^k$: $\frac2x\to x^2$, $-\frac1x\to\frac1x$, $\frac{f'}{f}\to f$, $\frac{f'}{2f}\to\sqrt f$.</li>
+            <li>Trig/hyp: $\cot\theta\to\sin\theta$, $\tanh x\to\cosh x$, $2\tanh x\to\cosh^2x$, $\coth x\to\sinh x$.</li>
+            <li>Partial fractions first ⇒ IF is a ratio, e.g. $\frac{x}{x+7}$.</li>
+            <li>$\frac1{\sqrt{x^2+1}}\to e^{\sinh^{-1}x}=x+\sqrt{x^2+1}$ (log form of $\sinh^{-1}$).</li>
+            <li>Any non-zero multiple of IF works.</li>
+          </ul>
+        </details>
+        <details><summary>Right side hard to integrate</summary>
+          <p>Use part (a) of the question (identity, substitution, by-parts result). Else by parts, partial fractions, or MF19 standard form ($\sinh^{-1}$, $\cosh^{-1}$).</p>
+        </details>
+        <details><summary>Forgot $+C$ before dividing</summary>
+          <p>Wrong: constant must end up as $\frac{C}{\text{IF}}$, not $C$.</p>
+        </details>
+        <details><summary>Constant coefficient, e.g. $\frac{dy}{dx}+5y=e^{-7x}$</summary>
+          <p>Still IF ($e^{5x}$). Same steps.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P3">
+    <span class="id">P3</span>
+    <div>
+      <span class="name">2nd order constant coefficient: CF + PI</span><span class="uses">uses <a href="#F2">F2</a> <a href="#F3">F3</a> <a href="#F4">F4</a></span>
+      <ol class="steps">
+        <li>Auxiliary equation ⇒ roots ⇒ CF.</li>
+        <li>Trial PI from right side. Check it is not in CF.</li>
+        <li>Differentiate trial twice. Sub into left side.</li>
+        <li>Compare coefficients ⇒ unknowns.</li>
+        <li>Write $y=$ CF + PI (in question's variable: $x$ or $t$).</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Leading coefficient not 1, e.g. $9y''+6y'+y$</summary>
+          <p>Keep it: $9m^2+6m+1=0$. Roots often fractions ($-\frac13$ repeated).</p>
+        </details>
+        <details><summary>Right side only $\sin$ or only $\cos$</summary>
+          <p>Trial needs both: $\lambda\cos px+\mu\sin px$.</p>
+        </details>
+        <details><summary>Right side $27x^2$ only</summary>
+          <p>Trial needs full $\lambda x^2+\mu x+\nu$. Compare $x^2$, $x$, constant terms.</p>
+        </details>
+        <details><summary>Trial in CF: form given, e.g. $kxe^{-x}$ or $kx^2e^{2x}$</summary>
+          <p>Differentiate given form with product rule. Sub. Solve for $k$. ($x^2$ when root is repeated.)</p>
+        </details>
+        <details><summary>Disguised exponential on right side</summary>
+          <p>$\cosh x+\sinh x=e^x$ ⇒ $(\cosh x+\sinh x)^{\frac12}=e^{\frac x2}$. Trial $\lambda e^{\frac x2}$.</p>
+        </details>
+        <details><summary>Complex roots</summary>
+          <p>Answer in real form $e^{px}(A\cos qx+B\sin qx)$. No $i$ in final answer.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P4">
+    <span class="id">P4</span>
+    <div>
+      <span class="name">Particular solution from initial conditions</span><span class="uses">uses <a href="#F2">F2</a></span>
+      <ol class="steps">
+        <li>Start from full general solution (CF + PI). Keep both $A$, $B$.</li>
+        <li>Sub $x=0$, $y=$ given ⇒ equation 1.</li>
+        <li>Differentiate general solution. Sub $x=0$, $\frac{dy}{dx}=$ given ⇒ equation 2.</li>
+        <li>Solve simultaneously. Write $y=\dots$ with numbers.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>Repeated or complex root CF</summary>
+          <p>Differentiating needs product rule: $(A+Bx)e^{\alpha x}$, $e^{px}\cos qx$.</p>
+        </details>
+        <details><summary>After a substitution</summary>
+          <p>Convert conditions to new variable first. E.g. $v=y^4$: $v(0)=y(0)^4$, $v'=4y^3y'$. $y=\cosh u$: $y'=\sinh u\cdot u'$.</p>
+        </details>
+        <details><summary>1st order</summary>
+          <p>One condition, any point (e.g. $x=1$, $\theta=\frac\pi2$). Find $C$ before dividing by IF (<a href="#P2">P2</a>).</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P5">
+    <span class="id">P5</span>
+    <div>
+      <span class="name">Given substitution ⇒ "show that equation becomes …"</span><span class="uses">uses <a href="#F5">F5</a> <a href="#F6">F6</a></span>
+      <ol class="steps">
+        <li>Write substitution. Differentiate with respect to $x$: chain rule on $y$ terms, product rule on products.</li>
+        <li>2nd order target ⇒ differentiate again.</li>
+        <li>Sub derivatives into original equation. Simplify until it matches the shown equation.</li>
+        <li>Solve new equation (<a href="#P1">P1</a>, <a href="#P2">P2</a> or <a href="#P3">P3</a>).</li>
+        <li>Sub back ⇒ answer in original variables.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>New dependent variable: $v=y^n$, $v=\frac1y$, $y=x^2w$, $y=\cosh u$, $z=xy$</summary>
+          <ul>
+            <li>$v=y^n$: $v'=ny^{n-1}y'$. Differentiate again for $v''$ (product rule).</li>
+            <li>$y=x^2w$: $y'=2xw+x^2w'$, then product rule again.</li>
+            <li>Final answer: $y=\dots$ ($\cosh u=\dots$ also accepted).</li>
+          </ul>
+        </details>
+        <details><summary>New independent variable: $x=e^t$, $x=t^2$, $x=\frac1t$</summary>
+          <p>$\frac{dy}{dx}=\frac{dy/dt}{dx/dt}$. $x=e^t$: use <a href="#F5">F5</a>. Back: $t=\ln x$.</p>
+        </details>
+        <details><summary>$\frac{dy}{dx}=f\!\left(\frac yx\right)$ with $y=ux$</summary>
+          <p><a href="#F6">F6</a> ⇒ $x\frac{du}{dx}=f(u)-u$ ⇒ separable (<a href="#P1">P1</a>). May need $\sinh^{-1}$, then square.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="P6">
+    <span class="id">P6</span>
+    <div>
+      <span class="name">Behaviour for large $x$</span><span class="uses">uses <a href="#F2">F2</a> <a href="#F7">F7</a></span>
+      <ol class="steps">
+        <li>CF terms with $e^{-kx}$ ($k>0$) → 0 as $x\to\infty$. Say so.</li>
+        <li>Approximate solution for large $x$: $y\approx$ PI.</li>
+      </ol>
+      <div class="branches">
+        <details><summary>PI is $\lambda\sin x+\mu\cos x$: give $R\sin(x\pm\varphi)$</summary>
+          <p><a href="#F7">F7</a>: $R=\sqrt{\lambda^2+\mu^2}$, $\tan\varphi$ from ratio. Method must be shown.</p>
+        </details>
+        <details><summary>Approximate $\frac{d^2y}{dx^2}$ for large $x$</summary>
+          <p>Differentiate the PI.</p>
+        </details>
+        <details><summary>Find $x$ where $y=0$</summary>
+          <p>Set particular solution $=0$. Solve, often in $\ln$ form.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>

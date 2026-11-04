@@ -30,6 +30,8 @@
         <p>Complementary function (CF): solves equation with right side = 0. Holds all arbitrary constants.</p>
         <p>Particular integral (PI): one solution of full equation. No constants.</p>
         <p>Learn it: definitions, nothing to derive.</p>
+        <p>Picture: change initial conditions ⇒ start changes, end always settles onto PI.</p>
+        <video src="{{root}}assets/media/fp2/transient-dies.mp4" poster="{{root}}assets/media/fp2/transient-dies.jpg" controls muted loop playsinline preload="none"></video>
       </div>
     </div>
   </div>
@@ -44,6 +46,8 @@
       <div class="word">
         <p>Swap $y''\to m^2$, $y'\to m$, $y\to1$. Solve for $m$.</p>
         <p>2 different real roots ⇒ 2 exponentials. Same root twice ⇒ $(A+Bx)$ × exponential. Complex ⇒ real part goes in $e^{px}$, imaginary part is the cos/sin frequency.</p>
+        <p>Picture: complex roots ⇒ imaginary part = wiggle speed, real part = envelope (below 0 dies, above 0 grows).</p>
+        <video src="{{root}}assets/media/fp2/root-shapes.mp4" poster="{{root}}assets/media/fp2/root-shapes.jpg" controls muted loop playsinline preload="none"></video>
       </div>
       <div class="derive">
         <ol>
@@ -61,7 +65,7 @@
     <div>
       <span class="name">PI trial form</span>
       <div class="hl">$$\begin{array}{ll}\text{RHS} & \text{try}\\ \hline \text{polynomial, top power }x^n & \lambda_nx^n+\dots+\lambda_1x+\lambda_0\\ ae^{kx} & \lambda e^{kx}\\ a\cos px\text{ and/or }b\sin px & \lambda\cos px+\mu\sin px\end{array}$$</div>
-      <p class="note">Sum on RHS ⇒ sum of trials. Trial already in CF ⇒ multiply trial by $x$.</p>
+      <p class="note">Sum on RHS ⇒ sum of trials. Trial already in CF ⇒ ×$x$ (×$x^2$ if repeated root). Papers give this form.</p>
       <div class="word">
         <p>Copy the shape of the right side with unknown numbers.</p>
         <p>Polynomial: every power up to the top one. Only sin or only cos: still use both.</p>
@@ -107,6 +111,25 @@
       </div>
       <div class="derive">
         <p>Product rule on $u\cdot x$: $u'\cdot x+u\cdot1$.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F7">
+    <span class="id">F7</span>
+    <div>
+      <span class="name">Amplitude form</span>
+      <div class="hl">$$\lambda\sin x+\mu\cos x=R\sin(x+\varphi),\qquad R=\sqrt{\lambda^2+\mu^2},\quad\tan\varphi=\frac{\mu}{\lambda}$$</div>
+      <p class="note">From A Level Maths (9709). Used for large-$x$ answers (<a href="#P6">P6</a>).</p>
+      <div class="word">
+        <p>Amplitude = square root of (sin coefficient² + cos coefficient²).</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Expand: $R\sin(x+\varphi)=R\cos\varphi\,\sin x+R\sin\varphi\,\cos x$.</li>
+          <li>Match: sin coefficient $=R\cos\varphi$, cos coefficient $=R\sin\varphi$.</li>
+          <li>Square and add ⇒ $R$. Divide ⇒ $\tan\varphi$.</li>
+        </ol>
       </div>
     </div>
   </div>
