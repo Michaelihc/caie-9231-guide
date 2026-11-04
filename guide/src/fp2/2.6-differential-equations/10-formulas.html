@@ -1,0 +1,113 @@
+<section id="formulas">
+  <h2>Formulas</h2>
+
+  <div class="item nomf" id="F1">
+    <span class="id">F1</span>
+    <div>
+      <span class="name">Integrating factor</span>
+      <div class="hl">$$\frac{dy}{dx}+P(x)\,y=Q(x)\;\Rightarrow\;\text{IF}=e^{\int P\,dx},\qquad \frac{d}{dx}\big(\text{IF}\cdot y\big)=\text{IF}\cdot Q$$</div>
+      <p class="note">Coefficient of $\frac{dy}{dx}$ must be 1 first. No $+C$ in IF.</p>
+      <div class="word">
+        <p>Make dy/dx stand alone. IF = $e$ to the integral of what multiplies $y$.</p>
+        <p>Times everything by IF ⇒ left side = derivative of (IF × $y$).</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Want IF × left side to be one product-rule derivative: (IF × $y$)′ = IF × $y'$ + IF′ × $y$.</li>
+          <li>IF × left side = IF × $y'$ + IF × ($y$'s coefficient) × $y$. Match ⇒ IF′ = ($y$'s coefficient) × IF.</li>
+          <li>Separate, integrate: ln IF = ∫ ($y$'s coefficient) d$x$ ⇒ IF = $e^{\int y\text{'s coefficient}\,dx}$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F2">
+    <span class="id">F2</span>
+    <div>
+      <span class="name">General solution = CF + PI</span>
+      <div class="hl">$$y=\underbrace{y_{\text{CF}}}_{\text{RHS}=0,\ \text{has constants}}+\underbrace{y_{\text{PI}}}_{\text{any one solution, no constants}}$$</div>
+      <div class="word">
+        <p>Complementary function (CF): solves equation with right side = 0. Holds all arbitrary constants.</p>
+        <p>Particular integral (PI): one solution of full equation. No constants.</p>
+        <p>Learn it: definitions, nothing to derive.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F3">
+    <span class="id">F3</span>
+    <div>
+      <span class="name">Auxiliary equation + CF</span>
+      <div class="hl">$$a\,y''+b\,y'+c\,y=0\;\Rightarrow\;am^2+bm+c=0$$</div>
+      <div class="hl">$$\begin{array}{ll}\text{2 real roots }\alpha\ne\beta: & y=Ae^{\alpha x}+Be^{\beta x}\\ \text{repeated root }\alpha: & y=(A+Bx)e^{\alpha x}\\ \text{complex }p\pm qi: & y=e^{px}(A\cos qx+B\sin qx)\end{array}$$</div>
+      <p class="note">1st order $a\,y'+b\,y=0$: $m=-\frac ba$, $y=Ae^{mx}$.</p>
+      <div class="word">
+        <p>Swap $y''\to m^2$, $y'\to m$, $y\to1$. Solve for $m$.</p>
+        <p>2 different real roots ⇒ 2 exponentials. Same root twice ⇒ $(A+Bx)$ × exponential. Complex ⇒ real part goes in $e^{px}$, imaginary part is the cos/sin frequency.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Try $y=e^{mx}$: $y'=me^{mx}$, $y''=m^2e^{mx}$.</li>
+          <li>Sub in, divide by $e^{mx}$ (never 0) ⇒ $am^2+bm+c=0$.</li>
+          <li>Complex $p\pm qi$: $e^{(p\pm qi)x}=e^{px}(\cos qx\pm i\sin qx)$ ⇒ combine into $e^{px}(A\cos qx+B\sin qx)$.</li>
+        </ol>
+        <p>Repeated root: only one exponential, so second solution is $x\times$ it. Learn this case.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F4">
+    <span class="id">F4</span>
+    <div>
+      <span class="name">PI trial form</span>
+      <div class="hl">$$\begin{array}{ll}\text{RHS} & \text{try}\\ \hline \text{polynomial, top power }x^n & \lambda_nx^n+\dots+\lambda_1x+\lambda_0\\ ae^{kx} & \lambda e^{kx}\\ a\cos px\text{ and/or }b\sin px & \lambda\cos px+\mu\sin px\end{array}$$</div>
+      <p class="note">Sum on RHS ⇒ sum of trials. Trial already in CF ⇒ multiply trial by $x$.</p>
+      <div class="word">
+        <p>Copy the shape of the right side with unknown numbers.</p>
+        <p>Polynomial: every power up to the top one. Only sin or only cos: still use both.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Trial must survive differentiating: derivatives of $x^n$ give every lower power ⇒ need them all.</li>
+          <li>Derivative of cos is sin and back ⇒ need both.</li>
+          <li>Trial already in CF ⇒ it gives 0 on left side ⇒ useless ⇒ times $x$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F5">
+    <span class="id">F5</span>
+    <div>
+      <span class="name">Substitution $x=e^t$</span>
+      <div class="hl">$$x\frac{dy}{dx}=\frac{dy}{dt},\qquad x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt}$$</div>
+      <p class="note">Turns $ax^2y''+bxy'+cy$ into constant coefficients. Back: $t=\ln x$.</p>
+      <div class="word">
+        <p>$x$ times first derivative = first $t$-derivative.</p>
+        <p>$x^2$ times second derivative = second $t$-derivative minus first $t$-derivative.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Chain rule: $\frac{dy}{dt}=\frac{dy}{dx}\cdot\frac{dx}{dt}=\frac{dy}{dx}\cdot e^t=x\frac{dy}{dx}$.</li>
+          <li>Differentiate again in $t$, product rule: $\frac{d^2y}{dt^2}=x\frac{dy}{dx}+x\cdot\frac{d^2y}{dx^2}\cdot x$.</li>
+          <li>Rearrange: $x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt}$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F6">
+    <span class="id">F6</span>
+    <div>
+      <span class="name">Substitution $y=ux$</span>
+      <div class="hl">$$y=ux\;\Rightarrow\;\frac{dy}{dx}=u+x\frac{du}{dx}$$</div>
+      <p class="note">For $\frac{dy}{dx}=f\!\left(\frac yx\right)$. Gives separable equation in $u,x$.</p>
+      <div class="word">
+        <p>dy/dx = $u$ + $x$ times du/dx.</p>
+      </div>
+      <div class="derive">
+        <p>Product rule on $u\cdot x$: $u'\cdot x+u\cdot1$.</p>
+      </div>
+    </div>
+  </div>
+</section>
