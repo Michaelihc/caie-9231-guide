@@ -235,3 +235,9 @@ code { font-size: 0.9em; }
 section.store { display: contents; }
 .try .jxgbox.short { aspect-ratio: 16 / 7; }
 .try .jxgbox + .jxgbox { margin-top: 0.4rem; }
+
+/* label the edge-case list under each skill */
+.branches::before { content: "Edge cases"; font-size: 0.78rem; font-weight: 600; color: var(--ink-2); margin-bottom: 0.05rem; }
+.solve::before { content: "Watch it solved"; }
+.js .solve::before { content: none; }
+.more-panel.solve video { width: 100%; max-width: 40rem; aspect-ratio: 16 / 9; border-radius: 4px; background: #1b2331; display: block; }

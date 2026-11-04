@@ -78,7 +78,12 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     `10-formulas.html` with class `inline` and a non-numbered id (`Fif`): hidden from list and index,
     hover chip = formula, tap = card (word/derive buttons) opens under the step.
   - Steps = what to do. Not why.
-- **Branch**: expandable (`<details>`) sub-case of a skill. Edge cases and variants only. Few per skill.
+  - **Watch it solved** button (`<div class="solve"><video …></div>` after the steps): manim clip of one typical
+    example solved step by step, symbols morphing line to line (`TransformMatchingShapes`), step in words on top.
+    `manim/<unit>_solves.py`, base class `Solve` (list of (words, maths) steps). Check the example numerically
+    first. Only exception to "no worked examples": as an animation, never as static text. Chain related skills on
+    one example where natural (DE: S3 → S4 → S6 on one equation).
+- **Branch**: expandable (`<details>`) sub-case of a skill, shown under an "Edge cases" label. Edge cases and variants only. Few per skill.
 - Leave out problem-solving parts (e.g. "find k so that…", choosing a strategy). Only steps.
 
 ## Units

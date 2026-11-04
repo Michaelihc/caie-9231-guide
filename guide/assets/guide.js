@@ -3,7 +3,7 @@
 document.documentElement.classList.add("js");
 
 const ROOT = (document.currentScript && document.currentScript.src.replace(/assets\/guide\.js.*$/, "")) || "";
-const LABELS = { word: "Word equation", derive: "Don't want to memorise", try: "Try it" };
+const LABELS = { solve: "Watch it solved", word: "Word equation", derive: "Don't want to memorise", try: "Try it" };
 
 // load a script once, on demand
 const loaded = {};
@@ -26,15 +26,15 @@ async function startWidget(panel) {
 }
 
 document.querySelectorAll(".item").forEach((item) => {
-  const ORDER = { word: 0, derive: 1, try: 2 };
-  const kindOf = (el) => ["word", "derive", "try"].find((k) => el.classList.contains(k));
-  const panels = [...item.querySelectorAll(":scope > div > .word, :scope > div > .derive, :scope > div > .try")]
+  const ORDER = { solve: -1, word: 0, derive: 1, try: 2 };
+  const kindOf = (el) => ["solve", "word", "derive", "try"].find((k) => el.classList.contains(k));
+  const panels = [...item.querySelectorAll(":scope > div > .solve, :scope > div > .word, :scope > div > .derive, :scope > div > .try")]
     .sort((a, b) => ORDER[kindOf(a)] - ORDER[kindOf(b)]);
   if (!panels.length) return;
   const bar = document.createElement("div");
   bar.className = "more";
   panels.forEach((panel) => {
-    const kind = ["word", "derive", "try"].find((k) => panel.classList.contains(k));
+    const kind = kindOf(panel);
     panel.id = `${item.id}-${kind}`;
     panel.classList.add("more-panel");
     const btn = document.createElement("button");
