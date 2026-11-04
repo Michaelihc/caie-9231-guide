@@ -1,4 +1,4 @@
-/* Layout: one left-aligned column (~74ch). Formula + procedure IDs hang in the left margin on
+/* Layout: one left-aligned column (~74ch). Formula + skill IDs hang in the left margin on
    wide screens, inline on phones. One bold element: highlighter swipe on ★ (not in MF19). */
 :root {
   --paper: #f6f7f4;      /* recycled exam paper, faint green-grey */
@@ -8,6 +8,7 @@
   --pen: #2445a3;        /* fountain-pen blue: IDs, links */
   --hl: #ffe14d;         /* highlighter */
   --hl-ink: #1b2331;
+  --hl-line: #b89400;     /* underline for formula chips */
   --panel: #ffffff;
   --font: "IBM Plex Sans Condensed", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
   --s-0: 0.875rem; --s-1: 1rem; --s-2: 1.25rem; --s-3: 1.75rem;
@@ -15,12 +16,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #14181e; --ink: #e4e8ee; --ink-2: #9aa5b4; --rule: #2b323c;
-    --pen: #8fb0ff; --hl: #6d5c00; --hl-ink: #fff6c2; --panel: #1a1f27; color-scheme: dark;
+    --pen: #8fb0ff; --hl: #6d5c00; --hl-ink: #fff6c2; --hl-line: #e2c400; --panel: #1a1f27; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #14181e; --ink: #e4e8ee; --ink-2: #9aa5b4; --rule: #2b323c;
-  --pen: #8fb0ff; --hl: #6d5c00; --hl-ink: #fff6c2; --panel: #1a1f27; color-scheme: dark;
+  --pen: #8fb0ff; --hl: #6d5c00; --hl-ink: #fff6c2; --hl-line: #e2c400; --panel: #1a1f27; color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -46,7 +47,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--pen); outline-
 h2 { font-size: var(--s-2); margin: 0 0 0.6rem; font-weight: 700; display: flex; align-items: baseline; gap: 0.6rem; }
 h2 small { font-size: var(--s-0); font-weight: 400; color: var(--ink-2); }
 
-/* formula + procedure rows: hanging id */
+/* formula + skill rows: hanging id */
 .item { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); column-gap: 0.4rem; padding-block: 0.55rem; border-top: 1px solid var(--rule); scroll-margin-top: 1rem; }
 .item > .id { font-weight: 700; color: var(--pen); font-variant-numeric: tabular-nums; padding-top: 0.05rem; }
 .item > div { min-width: 0; }
@@ -70,7 +71,7 @@ h2 small { font-size: var(--s-0); font-weight: 400; color: var(--ink-2); }
 }
 .nomf .hl .katex-display { margin: 0.15rem 0; }
 
-/* procedures */
+/* skills */
 .uses { font-size: var(--s-0); color: var(--ink-2); margin-left: 0.4rem; font-weight: 400; }
 .uses a { color: var(--pen); }
 ol.steps { margin: 0.35rem 0 0; padding-left: 1.3rem; display: grid; gap: 0.2rem; }
@@ -196,3 +197,31 @@ code { font-size: 0.9em; }
 .item.settled:not(.peek) > div > :not(.item-head) { display: none; }
 .jump li.settled a { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--rule); }
 @media print { .settle-btn { display: none; } }
+
+/* formula used in place inside a skill (built by guide.js) */
+.item.inline { display: none; }
+.item.inline.open-inline {
+  display: grid; margin-top: 0.4rem; padding: 0.5rem 0.6rem;
+  border: 1px solid var(--rule); border-radius: 4px; background: var(--panel); border-top-width: 1px;
+}
+.fx { position: relative; cursor: pointer; border-bottom: 2px dotted var(--hl-line); }
+.fx[aria-expanded="true"] { background: color-mix(in srgb, var(--hl) 35%, transparent); }
+.fx:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.fx-tip {
+  display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 20;
+  width: max-content; max-width: min(30rem, 88vw); overflow-x: auto;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--ink) 18%, transparent); padding: 0.4rem 0.6rem; font-size: var(--s-0);
+}
+.fx-tip small { color: var(--ink-2); font-weight: 400; margin-left: 0.3rem; }
+.fx-tip .hl { margin-top: 0.3rem; }
+@media (hover: hover) { .fx:hover > .fx-tip { display: block; } }
+.fx:focus-visible > .fx-tip { display: block; }
+
+/* JSXGraph "Try it" widgets */
+.try .jxgbox {
+  width: 100%; max-width: 40rem; aspect-ratio: 16 / 10; position: relative; overflow: hidden;
+  touch-action: none; border: 1px solid var(--rule); border-radius: 4px; background: var(--panel);
+}
+.try .widget-note { color: var(--ink-2); margin: 0; }
+.try .JXGtext { font-family: var(--font); }

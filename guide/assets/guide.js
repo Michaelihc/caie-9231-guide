@@ -1,16 +1,37 @@
-// Turn .word / .derive panels inside each item into two toggle buttons.
+// Turn .word / .derive / .try panels inside each item into toggle buttons.
 // Without JS the panels simply show (see .js rules in style.css).
 document.documentElement.classList.add("js");
 
-const LABELS = { word: "Word equation", derive: "Don't want to memorise" };
+const ROOT = (document.currentScript && document.currentScript.src.replace(/assets\/guide\.js.*$/, "")) || "";
+const LABELS = { word: "Word equation", derive: "Don't want to memorise", try: "Try it" };
+
+// load a script once, on demand
+const loaded = {};
+const loadScript = (src) => (loaded[src] ||= new Promise((ok, fail) => {
+  const el = document.createElement("script");
+  el.src = ROOT + src; el.onload = ok; el.onerror = () => fail(new Error(`could not load ${src}`));
+  document.head.append(el);
+}));
+
+async function startWidget(panel) {
+  if (panel.dataset.started) return;
+  panel.dataset.started = "1";
+  try {
+    await loadScript("assets/jsxgraph/jsxgraphcore.js");
+    await loadScript("assets/widgets.js");
+    window.CAIE_WIDGETS[panel.dataset.widget](panel);
+  } catch (e) {
+    panel.textContent = `Widget did not load (${e.message}). Reload the page to try again.`;
+  }
+}
 
 document.querySelectorAll(".item").forEach((item) => {
-  const panels = [...item.querySelectorAll(":scope > div > .word, :scope > div > .derive")];
+  const panels = [...item.querySelectorAll(":scope > div > .word, :scope > div > .derive, :scope > div > .try")];
   if (!panels.length) return;
   const bar = document.createElement("div");
   bar.className = "more";
   panels.forEach((panel) => {
-    const kind = panel.classList.contains("word") ? "word" : "derive";
+    const kind = ["word", "derive", "try"].find((k) => panel.classList.contains(k));
     panel.id = `${item.id}-${kind}`;
     panel.classList.add("more-panel");
     const btn = document.createElement("button");
@@ -24,10 +45,40 @@ document.querySelectorAll(".item").forEach((item) => {
       btn.setAttribute("aria-expanded", String(open));
       panel.classList.toggle("open", open);
       if (!open) panel.querySelectorAll("video").forEach((v) => v.pause());
+      if (open && kind === "try") startWidget(panel);
     });
     bar.append(btn);
   });
   panels[0].before(bar);
+});
+
+// ---- Formula chips: formula used in place inside a skill. Hover = formula; tap/click = full card under the step.
+document.querySelectorAll(".fx[data-f]").forEach((chip) => {
+  const card = document.getElementById(chip.dataset.f);
+  if (!card) return;
+  if (!card._home) { card._home = document.createComment(card.id); card.before(card._home); }
+  chip.tabIndex = 0;
+  chip.setAttribute("role", "button");
+  chip.setAttribute("aria-expanded", "false");
+  const name = card.querySelector(".name")?.textContent.trim() || "Formula";
+  const tip = document.createElement("span");
+  tip.className = "fx-tip";
+  tip.setAttribute("role", "tooltip");
+  tip.innerHTML = `<b>${name}</b> <small>tap for more</small>`;
+  const formula = card.querySelector(".hl");
+  if (formula) tip.append(formula.cloneNode(true));
+  chip.append(tip);
+  const toggle = () => {
+    const host = chip.closest("li") || chip.parentElement;
+    const here = card.parentElement === host && card.classList.contains("open-inline");
+    document.querySelectorAll(`.fx[data-f="${card.id}"]`).forEach((c) => c.setAttribute("aria-expanded", "false"));
+    if (here) { card.classList.remove("open-inline"); card._home.after(card); return; }
+    host.append(card);
+    card.classList.add("open-inline");
+    chip.setAttribute("aria-expanded", "true");
+  };
+  chip.addEventListener("click", (e) => { if (!e.target.closest(".fx-tip")) toggle(); });
+  chip.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
 });
 
 // ---- Settle: move formulas you are confident about to a collapsed box at page bottom ----
@@ -41,7 +92,7 @@ const save = (set) => {
   try { localStorage.setItem(STORE, JSON.stringify([...set])); } catch { /* storage blocked: lasts this visit */ }
 };
 const settled = load();
-const formulas = [...document.querySelectorAll('.item[id^="F"]')];
+const formulas = [...document.querySelectorAll('.item[id^="F"]:not(.inline)')];
 
 if (formulas.length) {
   // bottom box, placed after the last content section (before the pager)

@@ -9,6 +9,7 @@
     "artifact": "node scripts/build.mjs && node scripts/preview.mjs --artifact"
   },
   "dependencies": {
+    "jsxgraph": "^1.9.2",
     "katex": "0.16.11"
   }
 }

@@ -6,7 +6,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 
 ## Standing rule: no syllabus, no paper ⇒ no add
 
-- Before adding anything (formula, form, procedure, branch): check syllabus + past papers.
+- Before adding anything (formula, form, skill, branch): check syllabus + past papers.
   - Syllabus: 9231 2020–22 and 2023–25, plus 9709 (assumed knowledge), in `resources/syllabus/`.
   - Papers: grep all qp + ms 2002–2025 (`pdftotext -layout`, `resources/papers/`).
 - Not in syllabus **and** never in a paper ⇒ do not add. Remove it if already there.
@@ -39,6 +39,9 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
     - Dot/cross formulas ⇒ **picture clip** in the word panel: what the formula means as a shadow
       (dot = length × shadow) or area (|cross| = parallelogram area), plus one "Picture: …" line.
       Motif: slide something, the shadow/area stays the same. Setup clips stay in the derive panel.
+    - **Try it** (3rd button): interactive JSXGraph widget, `<div class="try" data-widget="name"></div>`.
+      Widgets live in `guide/assets/widgets.js` (shared `setup()` = theme colours, word labels, no zoom/pan).
+      JSXGraph + widgets.js load only when a Try it opens. Same motif: drag/slide, see what stays the same.
     - Geometric derivations ⇒ manim clip in the derive panel (`manim/<unit>.py`, export with
       `scripts/manim_export.sh <part> manim/<unit>.py Scene…` ⇒ `guide/assets/media/<part>/`).
       Embed: `<video src="{{root}}assets/media/…mp4" poster="…jpg" controls muted loop playsinline preload="none">`.
@@ -46,10 +49,14 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
     "Settled formulas (n)" box at page bottom (title click = peek). Saved in localStorage key
     `caie9231.settled`, keyed `<part>/<unit>.html#<formula name>` ⇒ renaming a formula unsettles it;
     renumbering doesn't.
-- **Procedure** (`P#`): compact actionable numbered steps for one standard task.
+- **Skill** (`S#`): compact actionable numbered steps for one standard task.
   - Can call formulas (list them in `uses`). E.g. solve 1st-order DE ⇒ calls integrating-factor formula.
+  - Formula only used inside one skill (e.g. integrating factor) ⇒ don't list it. Write it in place in the step
+    as a chip: `<span class="fx" data-f="Fif">IF $=e^{\int P\,dx}$</span>`. Formula card stays in
+    `10-formulas.html` with class `inline` and a non-numbered id (`Fif`): hidden from list and index,
+    hover chip = formula, tap = card (word/derive buttons) opens under the step.
   - Steps = what to do. Not why.
-- **Branch**: expandable (`<details>`) sub-case of a procedure. Edge cases and variants only. Few per procedure.
+- **Branch**: expandable (`<details>`) sub-case of a skill. Edge cases and variants only. Few per skill.
 - Leave out problem-solving parts (e.g. "find k so that…", choosing a strategy). Only steps.
 
 ## Units
@@ -66,7 +73,7 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 1. Read unit in syllabus text (`pdftotext -layout`). Read MF19 section for unit.
 2. Scan past papers (`resources/papers/<year>/9231_*_qp_1*.pdf`, 2002–2025) for question types ⇒ edge-case branches.
 3. Make `guide/src/<fp1|fp2>/<num>-<slug>/` (slug from `units.json`). Add modules, joined in name order:
-   `10-formulas.html`, `20-procedures.html` (copy markup from `fp1/1.6-vectors/`). IDs `F#`/`P#` feed the
+   `10-formulas.html`, `20-skills.html` (copy markup from `fp1/1.6-vectors/`). IDs `F#`/`S#` feed the
    "On this page" index automatically.
 4. `npm run build` ⇒ `dist/` site (index, part pages, unit pages, sidebar, prev/next).
    While editing: `npm run dev` (localhost:8080, rebuild + browser reload on save, ~0.2 s).
@@ -76,6 +83,10 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
    `root` = `dist`, `files` = every other file in `dist/`. Open viewers update in place.
    Single page instead: `npm run preview -- <part>/<page>.html` ⇒ one self-contained file in `preview/`.
 5. Screenshot once with Playwright (light + dark) to check layout.
+6. **No-calculus check**: could someone good at maths who never learned calculus solve a real CAIE question
+   using only this page? Test: `python3 -I scripts/page2text.py dist/<page>.html` ⇒ give text + 2–3 real
+   papers (qp, then ms) to a tester agent playing that persona; it logs GAP / UNCLEAR / MISSING STEP. Fix
+   gaps in the page (skills, chips, branches), re-test once.
 
 ## Repo layout
 

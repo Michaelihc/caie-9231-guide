@@ -97,19 +97,19 @@ function pager(u, depth) {
 
 // in-page index of F#/P# items, built from module source
 function jumpIndex(src) {
-  const re = /<div class="item([^"]*)" id="([FP]\d+)">\s*<span class="id">[^<]*<\/span>\s*<div>\s*<span class="name">([\s\S]*?)<\/span>/g;
-  const groups = { F: [], P: [] };
+  const re = /<div class="item([^"]*)" id="([FS]\d+)">\s*<span class="id">[^<]*<\/span>\s*<div>\s*<span class="name">([\s\S]*?)<\/span>/g;
+  const groups = { F: [], S: [] };
   for (const m of src.matchAll(re)) {
     const star = m[1].includes("nomf") ? '<span class="star" title="not in MF19">★</span>' : "";
     groups[m[2][0]].push(`<li><a href="#${m[2]}"><b>${m[2]}</b> ${m[3]}</a>${star}</li>`);
   }
   const block = (title, items) => (items.length ? `<div><h3>${title}</h3><ol>${items.join("")}</ol></div>` : "");
-  const body = block("Formulas", groups.F) + block("Procedures", groups.P);
+  const body = block("Formulas", groups.F) + block("Skills", groups.S);
   return body ? `<details class="jump" open><summary>On this page</summary><div class="jump-cols">${body}</div></details>` : "";
 }
 
 const KEY = `<ul class="key">
-  <li><b>F</b> formula</li><li><b>P</b> procedure</li>
+  <li><b>F</b> formula</li><li><b>S</b> skill</li>
   <li><b class="hlkey">★ highlighted</b> not in MF19, learn it</li><li><b>+</b> tap for edge cases</li>
 </ul>`;
 
@@ -135,6 +135,9 @@ fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(path.join(dist, "assets/katex/fonts"), { recursive: true });
 fs.cpSync(G("assets"), path.join(dist, "assets"), { recursive: true });
 fs.copyFileSync(path.join(katexDir, "katex.min.css"), path.join(dist, "assets/katex/katex.min.css"));
+// JSXGraph (interactive "Try it" widgets), loaded on demand by guide.js
+fs.mkdirSync(path.join(dist, "assets/jsxgraph"), { recursive: true });
+fs.copyFileSync(path.join(root, "node_modules/jsxgraph/distrib/jsxgraphcore.js"), path.join(dist, "assets/jsxgraph/jsxgraphcore.js"));
 for (const f of fs.readdirSync(path.join(katexDir, "fonts"))) {
   fs.copyFileSync(path.join(katexDir, "fonts", f), path.join(dist, "assets/katex/fonts", f));
 }
