@@ -9,7 +9,7 @@ out=guide/assets/media/$part; mkdir -p "$out"
 for scene in "$@"; do
   .venv/bin/manim -qm --progress_bar none "$file" "$scene"
   src=media/videos/$mod/720p30/$scene.mp4
-  name=$(echo "$scene" | sed -E 's/([a-z])([A-Z])/\1-\2/g' | tr 'A-Z' 'a-z')
+  name=$(echo "$scene" | sed -E 's/([a-z0-9])([A-Z])/\1-\2/g; s/([A-Z])([A-Z][a-z])/\1-\2/g' | tr 'A-Z' 'a-z')
   ffmpeg -loglevel error -y -i "$src" -c:v libx264 -crf 30 -preset slow -pix_fmt yuv420p -movflags +faststart -an "$out/$name.mp4"
   ffmpeg -loglevel error -y -sseof -0.2 -i "$src" -frames:v 1 -q:v 4 "$out/$name.jpg"
   echo "$out/$name.mp4 $(du -h "$out/$name.mp4" | cut -f1)"

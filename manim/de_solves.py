@@ -63,7 +63,7 @@ class IFSolve(Solve):
     steps = [
         ("start", r"x\frac{dy}{dx}+2y=e^{x},\quad y=3\text{ when }x=1"),
         ("divide every term by $x$", r"\frac{dy}{dx}+\frac{2}{x}\,y=\frac{e^{x}}{x}"),
-        ("IF $=e^{\int P\,dx}$", r"\text{IF}=e^{\int\frac{2}{x}dx}=e^{2\ln x}=x^{2}"),
+        (r"IF $=e^{\int P\,dx}$", r"\text{IF}=e^{\int\frac{2}{x}dx}=e^{2\ln x}=x^{2}"),
         ("multiply every term by IF", r"x^{2}\frac{dy}{dx}+2x\,y=x\,e^{x}"),
         ("left side is one derivative", r"\frac{d}{dx}\left(x^{2}y\right)=x\,e^{x}"),
         ("integrate (by parts), $+C$ now", r"x^{2}y=(x-1)e^{x}+C"),
@@ -78,7 +78,7 @@ class CFPISolve(Solve):
         ("start", r"\frac{d^2y}{dx^2}+2\frac{dy}{dx}+5y=10\sin x"),
         ("auxiliary equation", r"m^{2}+2m+5=0"),
         ("roots", r"m=-1\pm2i"),
-        ("complex roots $\Rightarrow$ CF", r"y_{\text{CF}}=e^{-x}(A\cos2x+B\sin2x)"),
+        (r"complex roots $\Rightarrow$ CF", r"y_{\text{CF}}=e^{-x}(A\cos2x+B\sin2x)"),
         ("trial PI: both cos and sin", r"y=\lambda\cos x+\mu\sin x"),
         ("sub into left side, collect", r"(4\lambda+2\mu)\cos x+(4\mu-2\lambda)\sin x=10\sin x"),
         ("compare coefficients", r"4\lambda+2\mu=0,\ \ 4\mu-2\lambda=10\ \Rightarrow\ \lambda=-1,\ \mu=2"),
