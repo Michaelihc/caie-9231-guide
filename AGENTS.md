@@ -14,6 +14,9 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 
 ## Writing style
 
+- Assume A Level Maths (9709): don't teach its calculus, R-formula, etc. Only Further Maths content,
+  plus 9709 facts used in a non-obvious way here (e.g. by-parts loop for $e^{ax}\sin bx$).
+
 - Compact phrasing, grug speak. Few words. Drop "the", "a", "you should".
 - Simple words. Short lines. Symbols ok: ⇒ ⇔ ∥ ⊥ → ≠.
 - Math stays exact. Grug words, not grug math.
@@ -85,10 +88,11 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
    `root` = `dist`, `files` = every other file in `dist/`. Open viewers update in place.
    Single page instead: `npm run preview -- <part>/<page>.html` ⇒ one self-contained file in `preview/`.
 5. Screenshot once with Playwright (light + dark) to check layout.
-6. **No-calculus check**: could someone good at maths who never learned calculus solve a real CAIE question
-   using only this page? Test: `python3 -I scripts/page2text.py dist/<page>.html` ⇒ give text + 2–3 real
-   papers (qp, then ms) to a tester agent on a smaller model (`model: sonnet` or `haiku`) playing that persona; it logs GAP / UNCLEAR / MISSING STEP. Fix
-   gaps in the page (skills, chips, branches), re-test once.
+6. **No-further-maths check**: could someone who knows A Level Maths (9709) but never studied Further Maths
+   solve a real CAIE question using only this page? Test: `python3 -I scripts/page2text.py dist/<page>.html`
+   ⇒ give text + 2–3 real papers (qp, then ms) to a tester agent on a smaller model (`model: sonnet` or
+   `haiku`) playing that persona; it logs GAP / UNCLEAR / MISSING STEP. Fix gaps in the page (skills, chips,
+   branches), re-test once.
 
 ## Repo layout
 
