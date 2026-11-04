@@ -22,6 +22,17 @@ Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 - Math stays exact. Grug words, not grug math.
 - No intros, no motivation, no worked examples, no exam tips.
 
+## Words vs symbols
+
+Pick whichever is clearer for the reader; don't translate for the sake of it. Add new cases here.
+
+- Formula already says it compactly ⇒ keep the symbols, no word paraphrase next to it.
+  e.g. S2 (DE): "IF $=e^{\int P\,dx}$" alone. Not "…: integrate $P$, then $e$ to that" (words add nothing, read worse).
+- Naming objects in derivations ⇒ words that say what they belong to ("line direction", "plane normal"),
+  not single letters. Only the unknown you solve for gets a letter.
+- Unclear word ⇒ make the word say more ("direction" → "line direction"). Never a words ↔ letters key/glossary.
+- Word equation panel = the one place a formula is said in words (user asked for it). Elsewhere, symbols first.
+
 ## Terms
 
 - **Formula** (`F#`): fact or equation.
