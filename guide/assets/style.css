@@ -256,6 +256,7 @@ section.store { display: contents; }
 .solve-line .katex { font-size: clamp(0.95em, 3.4vw, 1.2em); }
 .solve-line.dim { opacity: 0.45; }
 .solve-steps .op { display: none; }
+.solve-line .fbox { border-color: var(--hl-line) !important; border-radius: 3px; }   /* terms still to sub in */
 .solve-op { position: absolute; left: 0; top: 0; visibility: hidden; }
 .solve-op .katex { font-size: clamp(0.95em, 3.4vw, 1.2em); }
 .solve-line.anchor { justify-self: stretch; padding-left: var(--anchor, 40%); }   /* shared column, see setAnchor in solve.js */

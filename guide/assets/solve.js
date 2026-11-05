@@ -25,6 +25,7 @@ window.CAIE_SOLVE = (() => {
     const out = [];
     const walk = (node) => {
       if (node.matches(".frac-line")) { out.push({ el: node, key: "bar" }); return; }
+      if (node.matches(".fbox")) { out.push({ el: node, key: "box" }); return; }       // \boxed{…} frame
       if (node.querySelector(":scope > svg")) { out.push({ el: node, key: "svg" }); return; }
       const kids = [...node.children];
       if (!kids.length) {
@@ -48,12 +49,13 @@ window.CAIE_SOLVE = (() => {
   function snapshot(stage, line) {
     const sr = stage.getBoundingClientRect();
     return leaves(line).map((g) => {
-      const text = g.key !== "bar" && g.key !== "svg";
+      const text = g.key !== "bar" && g.key !== "svg" && g.key !== "box";
       const r = boxOf(g.el, text);
       const cs = getComputedStyle(g.el);
       return { ...g, text, r: { x: r.left - sr.left, y: r.top - sr.top, w: r.width, h: r.height },
         font: { fontFamily: cs.fontFamily, fontStyle: cs.fontStyle, fontWeight: cs.fontWeight, fontSize: cs.fontSize },
-        node: g.key === "svg" ? g.el.cloneNode(true) : null };
+        node: g.key === "svg" ? g.el.cloneNode(true) : null,
+        border: g.key === "box" ? `${cs.borderTopWidth} solid ${cs.borderTopColor}` : "" };
     }).filter((g) => g.r.w || g.r.h);
   }
 
@@ -61,6 +63,7 @@ window.CAIE_SOLVE = (() => {
   function glyph(layer, g) {
     let c;
     if (g.key === "bar") { c = el("div"); c.style.background = "currentColor"; }
+    else if (g.key === "box") { c = el("div"); Object.assign(c.style, { border: g.border, boxSizing: "border-box", borderRadius: "3px" }); }
     else if (g.key === "svg") { c = g.node.cloneNode(true); c.style.overflow = "hidden"; c.style.fontSize = g.font.fontSize; }
     else { c = el("span"); c.textContent = g.key; Object.assign(c.style, g.font, { lineHeight: "normal", whiteSpace: "pre" }); }
     Object.assign(c.style, { position: "absolute", left: "0px", top: "0px", margin: "0", transformOrigin: "0 0" });
