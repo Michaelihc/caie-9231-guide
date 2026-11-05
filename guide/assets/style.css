@@ -176,9 +176,10 @@ code { font-size: 0.9em; }
 .word::before { content: "Word equation"; }
 .derive::before { content: "Derive instead of memorising"; }
 .js .word::before, .js .derive::before { content: none; }
-.js .more-panel:not(.open) { display: none; }
+.js :is(.word, .derive, .try, .solve):not(.open) { display: none; }   /* hidden from first paint, before guide.js runs */
+.js .solve-steps { display: none; }                                       /* player builds from it; never flash the list */
 .more-panel video { width: 100%; max-width: 40rem; aspect-ratio: 16 / 9; border-radius: 4px; background: #1b2331; display: block; }
-@media print { .more { display: none; } .js .more-panel:not(.open) { display: grid; } }
+@media print { .more { display: none; } .js :is(.word, .derive, .try):not(.open) { display: grid; } }
 
 /* settle (built by guide.js; state in localStorage) */
 .item-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
@@ -263,3 +264,4 @@ section.store { display: contents; }
 
 /* author display rules must not override the hidden attribute */
 [hidden] { display: none !important; }
+.solve-warm { position: absolute; visibility: hidden; pointer-events: none; left: 0; top: 0; height: 0; overflow: hidden; }
