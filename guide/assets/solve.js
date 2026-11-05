@@ -15,7 +15,7 @@ window.CAIE_SOLVE = (() => {
   // "how much to take in"; when it's wrong for a step, set data-hold on that step instead of bending these numbers.
   const PAUSE = { base: 300, perGlyph: 60, min: 450, max: 2400 };
   const holdFor = (work) => Math.max(PAUSE.min, Math.min(PAUSE.max, PAUSE.base + PAUSE.perGlyph * work));
-  const EASE = "cubic-bezier(.65,0,.35,1)";                       // ease-in-out, same for every glyph
+  const EASE = "cubic-bezier(.55,-0.08,.3,1.22)";                 // ease-in-out with a slight overshoot (bounce), same for every glyph
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
   const blank = (t) => /^[\s​]*$/.test(t);
 
