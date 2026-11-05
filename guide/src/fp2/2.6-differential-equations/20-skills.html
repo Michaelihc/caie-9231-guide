@@ -78,16 +78,29 @@
         <li>Compare coefficients ⇒ unknowns.</li>
         <li>Write <span class="fx" data-f="Fgs">$y=$ CF + PI</span> (in question's variable: $x$ or $t$).</li>
       </ol>
+      <!-- Watch it solved, patterns (see AGENTS.md "Watch it solved"). Follow these when writing other solves:
+         - Animate what a person writes on paper. Nothing done in the head: one derivative per step, copy the
+           equation down, substitute one term at a time.
+         - Match the concept, not raw symbols. Trial PI pulls from the right side of line 1 (data-from="1"): its
+           shape (sin x) becomes the trial. Differentiate = a d/dx operator appears in front of the copied line,
+           then joins y (dy/dx). Second derivative = another d/dx lands on dy/dx, then the two merge into d2y/dx2.
+         - data-from="n": new line copies line n; same line pulls the substituted expression from line n.
+         - Pre-wrap: if a line will need two rows later (substitution), give it the same two-row layout from the
+           first step, so it never re-wraps mid-animation.
+         - Pauses are automatic (amount of new/moved symbols); add data-hold="ms" only to override.
+         - Example numbers: no symbol may appear from nothing (no implicit 1s); same quantity twice ⇒ it splits. -->
       <div class="solve">
         <ol class="solve-steps">
           <li data-line="1"><span class="w">start</span>$$\frac{d^2y}{dx^2}+4\frac{dy}{dx}+13y=80\sin x$$</li>
           <li data-line="2"><span class="w">auxiliary equation</span>$$m^{2}+4m+13=0$$</li>
           <li data-line="2"><span class="w">roots</span>$$m=-2\pm3i$$</li>
           <li data-line="2"><span class="w">complex roots $\Rightarrow$ CF</span>$$y=e^{-2x}(A\cos3x+B\sin3x)$$</li>
-          <li data-line="3"><span class="w">trial PI: both cos and sin</span>$$y=\lambda\cos x+\mu\sin x$$</li>
-          <li data-line="4"><span class="w">differentiate</span>$$\frac{dy}{dx}=-\lambda\sin x+\mu\cos x$$</li>
-          <li data-line="5"><span class="w">differentiate again</span>$$\frac{d^2y}{dx^2}=-\lambda\cos x-\mu\sin x$$</li>
-          <li data-line="6" data-from="1"><span class="w">copy the equation down</span>$$\frac{d^2y}{dx^2}+4\frac{dy}{dx}+13y=80\sin x$$</li>
+          <li data-line="3" data-from="1"><span class="w">trial PI: shape of right side ($\sin x$), both cos and sin</span>$$y=\lambda\cos x+\mu\sin x$$</li>
+          <li data-line="4" data-from="3"><span class="w">differentiate</span>$$\frac{d}{dx}\,y=-\lambda\sin x+\mu\cos x$$</li>
+          <li data-line="4"><span class="w">$\frac{d}{dx}$ joins $y$</span>$$\frac{dy}{dx}=-\lambda\sin x+\mu\cos x$$</li>
+          <li data-line="5" data-from="4"><span class="w">differentiate again</span>$$\frac{d}{dx}\,\frac{dy}{dx}=-\lambda\cos x-\mu\sin x$$</li>
+          <li data-line="5"><span class="w">two $\frac{d}{dx}$ merge</span>$$\frac{d^2y}{dx^2}=-\lambda\cos x-\mu\sin x$$</li>
+          <li data-line="6" data-from="1"><span class="w">copy the equation down</span>$$\begin{aligned}&\frac{d^2y}{dx^2}+4\frac{dy}{dx}\\&+13y=80\sin x\end{aligned}$$</li>
           <li data-line="6" data-from="5"><span class="w">sub in $\frac{d^2y}{dx^2}$</span>$$\begin{aligned}&(-\lambda\cos x-\mu\sin x)+4\frac{dy}{dx}\\&+13y=80\sin x\end{aligned}$$</li>
           <li data-line="6" data-from="4"><span class="w">sub in $\frac{dy}{dx}$</span>$$\begin{aligned}&(-\lambda\cos x-\mu\sin x)+4(-\lambda\sin x+\mu\cos x)\\&+13y=80\sin x\end{aligned}$$</li>
           <li data-line="6" data-from="3"><span class="w">sub in $y$</span>$$\begin{aligned}&(-\lambda\cos x-\mu\sin x)+4(-\lambda\sin x+\mu\cos x)\\&+13(\lambda\cos x+\mu\sin x)=80\sin x\end{aligned}$$</li>

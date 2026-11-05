@@ -101,6 +101,13 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     derivative per step, copy the equation down, substitute one term at a time. Many short steps, short pauses.
     `data-from="n"` on a step = pull from line n: on a new line it copies line n (e.g. copy the equation down); on
     the same line it substitutes, the expression flies in from line n (which lights up), replaced glyphs fade.
+    Match the concept, not raw symbols: trial PI pulls from the right side of line 1 (its shape becomes the trial);
+    differentiate = a $\frac{d}{dx}$ appears in front of the copied line, then joins $y$; 2nd derivative = another
+    $\frac{d}{dx}$ lands on $\frac{dy}{dx}$, then they merge. Pre-wrap: a line that will need two rows gets them
+    from its first step (no re-wrap mid-animation). Lines between source and target fade right down during a move.
+    Pauses: default = automatic from how many glyphs are new or moved (`PAUSE` constants at top of solve.js);
+    only a proxy, so set `data-hold="ms"` on any step where it feels wrong. Pattern notes also sit as a comment
+    above S3's solve in `fp2/2.6-differential-equations/20-skills.html`.
     Show every step a solver writes (e.g. $\int e^y\,dy=\int x\,dx$ before integrating). Check the example
     numerically first. Only exception to "no worked examples": as an animation, never as static text (the list is
     a no-JS fallback only). Chain related skills on one example where natural (DE: S3 → S4 → S6 on one equation).

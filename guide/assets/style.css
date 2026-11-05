@@ -265,3 +265,4 @@ section.store { display: contents; }
 /* author display rules must not override the hidden attribute */
 [hidden] { display: none !important; }
 .solve-warm { position: absolute; visibility: hidden; pointer-events: none; left: 0; top: 0; height: 0; overflow: hidden; }
+.solve-line.pass { opacity: 0.12; transition-duration: 0.2s; }

@@ -8,7 +8,13 @@
 // line, so nothing snaps at the end.
 window.CAIE_SOLVE = (() => {
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const MOVE_MS = 900, HOLD_MS = 1100, FADE_MS = 160;
+  const MOVE_MS = 900, FADE_MS = 160;
+  // pause after a step = how much there is to take in: glyphs that are new or moved on their own (block slides
+  // are free). A derivative or a copy ⇒ short; collecting terms ⇒ longer. data-hold="ms" on a step overrides.
+  // Tune here: PAUSE.base + PAUSE.perGlyph × work, clamped to [PAUSE.min, PAUSE.max] ms. Work is only a proxy for
+  // "how much to take in"; when it's wrong for a step, set data-hold on that step instead of bending these numbers.
+  const PAUSE = { base: 300, perGlyph: 60, min: 450, max: 2400 };
+  const holdFor = (work) => Math.max(PAUSE.min, Math.min(PAUSE.max, PAUSE.base + PAUSE.perGlyph * work));
   const EASE = "cubic-bezier(.65,0,.35,1)";                       // ease-in-out, same for every glyph
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
   const blank = (t) => /^[\s​]*$/.test(t);
@@ -136,6 +142,7 @@ window.CAIE_SOLVE = (() => {
     const incoming = B.map((b) => [glyph(layer, b), b]);
     const leaving = inPlace ? A.filter((a, x) => !usedA.has(x)).map((a) => [glyph(layer, a), a]) : [];
     placeAll(stage, [...incoming, ...leaving]);
+    layer.work = B.filter((b, y) => !matchB.has(y) || matchB.get(y).lane).length;
     incoming.forEach(([c, b], y) => {
       const m = matchB.get(y);
       if (!m) {                                               // new glyph: fades in over the second half, yellow → ink
@@ -185,7 +192,8 @@ window.CAIE_SOLVE = (() => {
     let lineNo = 1;
     const steps = [...list.children].map((li) => {
       lineNo = Number(li.dataset.line) || lineNo;
-      return { line: lineNo, from: Number(li.dataset.from) || 0, words: li.querySelector(".w")?.innerHTML || "",
+      return { line: lineNo, from: Number(li.dataset.from) || 0, hold: Number(li.dataset.hold) || 0,
+        words: li.querySelector(".w")?.innerHTML || "",
         math: (li.querySelector(".katex-display") || li.querySelector(".katex"))?.outerHTML || "" };
     });
     list.hidden = true;
@@ -203,7 +211,7 @@ window.CAIE_SOLVE = (() => {
     bar.append(count);
     panel.append(stage, bar);
 
-    let i = -1, busy = false, playing = true, timer = null;
+    let i = -1, busy = false, playing = true, timer = null, nextHold = 1200;
     const slot = (n) => lines.children[n - 1];
     const lineEl = (k) => el("div", "solve-line", steps[k].math);
     const mark = () => {
@@ -252,10 +260,16 @@ window.CAIE_SOLVE = (() => {
       setLabel(steps[k].words);
       mark();
       glideLines(lines, before);
+      // glyphs travelling between lines pass over the lines in between ⇒ fade those right down for the move
+      const kids = [...lines.children], a = kids.indexOf(target ? (from || next) : (from || slot(steps[k - 1].line))), z = kids.indexOf(next);
+      const passed = kids.filter((l, n) => n > Math.min(a, z) && n < Math.max(a, z));
+      passed.forEach((l) => l.classList.add("pass"));
       await document.fonts.ready;                         // first use of a KaTeX font (big ∫, tall brackets) loads late
       const B = snapshot(stage, next);
       const layer = morph(stage, A, B, !!target, X);
+      nextHold = steps[k].hold || holdFor(layer.work);
       await new Promise((ok) => setTimeout(ok, MOVE_MS));
+      passed.forEach((l) => l.classList.remove("pass"));
       next.style.visibility = "";                          // real line under the copies, same pixels ⇒ cross-fade
       await layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE_MS, easing: "ease-out", fill: "forwards" }).finished;
       layer.remove();
@@ -271,7 +285,7 @@ window.CAIE_SOLVE = (() => {
         if (!playing) return;
         if (await forward()) schedule();
         else { playing = false; update(); }
-      }, HOLD_MS);
+      }, nextHold);
     }
 
     bNext.onclick = async () => { playing = false; clearTimeout(timer); await forward(); update(); };
