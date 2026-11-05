@@ -244,7 +244,7 @@ section.store { display: contents; }
 
 /* Watch it solved: in-page player (solve.js) */
 .solve-stage {
-  position: relative; overflow: hidden; max-width: 40rem; min-height: 15.5rem;
+  position: relative; overflow: hidden; max-width: 40rem;
   background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.5rem 0.8rem 0.8rem;
 }
 .solve-label { color: var(--hl-line); font-weight: 600; text-align: center; min-height: 1.7em; }
@@ -253,10 +253,13 @@ section.store { display: contents; }
 .solve-line .math-row { overflow: visible; }
 .solve-line .katex-display { margin: 0.3rem 0; }
 .solve-line .katex { font-size: clamp(0.95em, 3.4vw, 1.2em); }
-.solve-line.dim { opacity: 0.38; }
+.solve-line.dim { opacity: 0.45; }
 .solve-line.final .katex-display { outline: 2px solid var(--hl-line); outline-offset: 5px; border-radius: 3px; }
 .solve-layer { position: absolute; inset: 0; pointer-events: none; color: var(--ink); }
 .solve-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-top: 0.4rem; }
 .solve-bar .more-btn:disabled { opacity: 0.4; cursor: default; }
 .solve-bar .count { margin-left: auto; color: var(--ink-2); font-size: var(--s-0); font-variant-numeric: tabular-nums; }
 .solve-steps .w { display: block; color: var(--ink-2); font-size: var(--s-0); }
+
+/* author display rules must not override the hidden attribute */
+[hidden] { display: none !important; }
