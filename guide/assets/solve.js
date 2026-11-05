@@ -109,11 +109,22 @@ window.CAIE_SOLVE = (() => {
     stage.append(layer);
     const ink = getComputedStyle(stage).color;
     const hl = getComputedStyle(stage).getPropertyValue("--hl-line").trim() || ink;
-    const usedA = new Set(), matchB = new Map();             // b index -> { r: start box, lane: own curved lane? }
-    for (const [a, b] of lcsPairs(A, B)) { usedA.add(a); matchB.set(b, { r: A[a].r, lane: false }); }
-    if (X) {                                                  // substitution: unmatched run comes from X, in reading order
-      const rest = B.map((b, y) => [b, y]).filter(([, y]) => !matchB.has(y));
-      for (const [x, k] of lcsPairs(X, rest.map(([b]) => b))) matchB.set(rest[k][1], { r: X[x].r, lane: true });
+    const usedA = new Set(), gone = new Set(), matchB = new Map();             // b index -> { r: start box, lane: own curved lane? }
+    if (X) {
+      // substitution = one run of the line replaced. Same start + same end of the line stay put (matched directly);
+      // the new middle comes from X's right side (not its \mathllap'd "dy/dx =" part), in reading order;
+      // the old middle (the term being replaced) leaves.
+      let p = 0, q = 0;
+      while (p < A.length && p < B.length && A[p].key === B[p].key) p++;
+      while (q < A.length - p && q < B.length - p && A[A.length - 1 - q].key === B[B.length - 1 - q].key) q++;
+      for (let n = 0; n < p; n++) { usedA.add(n); matchB.set(n, { r: A[n].r, lane: false }); }
+      for (let n = 1; n <= q; n++) { usedA.add(A.length - n); matchB.set(B.length - n, { r: A[A.length - n].r, lane: false }); }
+      for (let n = p; n < A.length - q; n++) gone.add(n);    // replaced term: leaves, never re-used elsewhere
+      const rhs = X.filter((g) => !g.el.closest(".llap"));
+      const mid = B.slice(p, B.length - q);
+      for (const [x, k] of lcsPairs(rhs, mid)) matchB.set(p + k, { r: rhs[x].r, lane: true });
+    } else {
+      for (const [a, b] of lcsPairs(A, B)) { usedA.add(a); matchB.set(b, { r: A[a].r, lane: false }); }
     }
     const quantity = (k) => /^[0-9A-Za-zͰ-Ͽ]+$/.test(k);
     const nearest = (list, g, ok = () => true) => {
@@ -127,7 +138,7 @@ window.CAIE_SOLVE = (() => {
     };
     B.forEach((b, y) => {                                      // same glyph moved out of order
       if (matchB.has(y)) return;
-      const x = nearest(A, b, (n) => !usedA.has(n));
+      const x = nearest(A, b, (n) => !usedA.has(n) && !gone.has(n));
       if (x >= 0) { usedA.add(x); matchB.set(y, { r: A[x].r, lane: true }); }
     });
     // split: the new line uses a quantity more often than before ⇒ extra copies fly out of the same source glyph
@@ -170,7 +181,9 @@ window.CAIE_SOLVE = (() => {
         c.animate([{ opacity: 1 }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });
         return;
       }
-      c.animate([{ opacity: 1 }, { opacity: 0, offset: 0.35 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });   // fade out early
+      const out = X ? [{ opacity: 1 }, { opacity: 1, offset: 0.55 }, { opacity: 0, offset: 0.85 }, { opacity: 0 }]   // replaced: fades as the new expression lands
+        : [{ opacity: 1 }, { opacity: 0, offset: 0.35 }, { opacity: 0 }];                                          // otherwise: fades early
+      c.animate(out, { duration: MOVE_MS, fill: "forwards" });
     });
     return layer;
   }
@@ -193,6 +206,8 @@ window.CAIE_SOLVE = (() => {
     const steps = [...list.children].map((li) => {
       lineNo = Number(li.dataset.line) || lineNo;
       return { line: lineNo, from: Number(li.dataset.from) || 0, hold: Number(li.dataset.hold) || 0,
+        chain: li.hasAttribute("data-chain"),                // plays straight after the previous step: same beat
+        anchor: li.hasAttribute("data-anchor"),              // left edge on the shared anchor column (see setAnchor)
         words: li.querySelector(".w")?.innerHTML || "",
         math: (li.querySelector(".katex-display") || li.querySelector(".katex"))?.outerHTML || "" };
     });
@@ -213,7 +228,25 @@ window.CAIE_SOLVE = (() => {
 
     let i = -1, busy = false, playing = true, timer = null, nextHold = 1200;
     const slot = (n) => lines.children[n - 1];
-    const lineEl = (k) => el("div", "solve-line", steps[k].math);
+    const lineEl = (k) => el("div", "solve-line" + (steps[k].anchor ? " anchor" : ""), steps[k].math);
+    // anchored lines share one column: \mathllap{…} parts hang left of it, the rest starts on it. So whatever sits on
+    // the column in one line (y=, dy/dx= right sides; the terms of the stacked equation) lines up with the others and a
+    // substitution drops straight down. Column x chosen so the widest left + right parts sit centred.
+    function setAnchor() {
+      let L = 0, R = 0;
+      for (const st of steps.filter((s) => s.anchor)) {
+        const m = el("div", "solve-line anchor", st.math);
+        m.style.cssText = "position:absolute;visibility:hidden;padding-left:0";
+        lines.append(m);
+        const box = m.querySelector(".katex").getBoundingClientRect(), r = document.createRange();
+        r.selectNodeContents(m);
+        const all = r.getBoundingClientRect();
+        L = Math.max(L, box.left - all.left); R = Math.max(R, all.right - box.left);
+        m.remove();
+      }
+      const W = lines.getBoundingClientRect().width;
+      lines.style.setProperty("--anchor", `${Math.max(L + 9, (W - L - R) / 2 + L)}px`);
+    }
     const mark = () => {
       [...lines.children].forEach((l, n) => {
         l.classList.toggle("dim", n + 1 !== steps[i].line && n + 1 !== steps[i].from);
@@ -225,8 +258,11 @@ window.CAIE_SOLVE = (() => {
       label.innerHTML = html;
       if (!REDUCED) label.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: "ease-out" });
     };
+    // beats: a chained step belongs to the beat of the step before it. Counter, Back and pauses work in beats.
+    const beats = steps.filter((st) => !st.chain).length;
+    const beatNo = (k) => steps.slice(0, k + 1).filter((st) => !st.chain).length;
     const update = () => {
-      count.textContent = `step ${i + 1} of ${steps.length}`;
+      count.textContent = `step ${beatNo(i)} of ${beats}`;
       bPlay.textContent = playing ? "Pause" : i >= steps.length - 1 ? "Play again" : "Play";
       bBack.disabled = i <= 0; bNext.disabled = i >= steps.length - 1;
     };
@@ -241,7 +277,8 @@ window.CAIE_SOLVE = (() => {
       mark(); update();
     }
 
-    async function forward() {
+    let lastWork = 0;
+    async function stepOnce() {
       if (busy || i >= steps.length - 1) return false;
       if (i < 0 || REDUCED) { render(i + 1); return true; }
       busy = true;
@@ -267,7 +304,7 @@ window.CAIE_SOLVE = (() => {
       await document.fonts.ready;                         // first use of a KaTeX font (big ∫, tall brackets) loads late
       const B = snapshot(stage, next);
       const layer = morph(stage, A, B, !!target, X);
-      nextHold = steps[k].hold || holdFor(layer.work);
+      lastWork = layer.work;
       await new Promise((ok) => setTimeout(ok, MOVE_MS));
       passed.forEach((l) => l.classList.remove("pass"));
       next.style.visibility = "";                          // real line under the copies, same pixels ⇒ cross-fade
@@ -275,6 +312,19 @@ window.CAIE_SOLVE = (() => {
       layer.remove();
       update();
       busy = false;
+      return true;
+    }
+
+    // one beat: the step plus any chained steps after it; pause after = total work of the beat (or data-hold)
+    async function forward() {
+      if (busy || i >= steps.length - 1) return false;
+      let work = 0, k;
+      do {
+        k = i + 1;
+        if (!(await stepOnce())) break;
+        work += lastWork;
+      } while (steps[i + 1]?.chain);
+      nextHold = steps[k].hold || holdFor(work);
       return true;
     }
 
@@ -289,7 +339,13 @@ window.CAIE_SOLVE = (() => {
     }
 
     bNext.onclick = async () => { playing = false; clearTimeout(timer); await forward(); update(); };
-    bBack.onclick = () => { if (busy || i <= 0) return; playing = false; clearTimeout(timer); render(i - 1); };
+    bBack.onclick = () => {
+      if (busy || i <= 0) return;
+      playing = false; clearTimeout(timer);
+      let j = i;
+      while (j > 0 && steps[j].chain) j--;                 // start of this beat
+      render(Math.max(0, j - 1));                          // end of the beat before
+    };
     bRestart.onclick = () => { if (busy) return; render(0); playing = true; update(); schedule(); };
     bPlay.onclick = () => {
       if (busy) return;
@@ -305,7 +361,8 @@ window.CAIE_SOLVE = (() => {
     const warm = el("div", "solve-warm", steps.map((st) => st.math).join(""));
     stage.append(warm);
     render(0);
-    document.fonts.ready.then(() => { warm.remove(); schedule(); });
+    if (steps.some((st) => st.anchor)) { setAnchor(); addEventListener("resize", setAnchor); }
+    document.fonts.ready.then(() => { warm.remove(); if (steps.some((st) => st.anchor)) setAnchor(); schedule(); });
   }
 
   return { start };

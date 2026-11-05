@@ -87,6 +87,10 @@
          - data-from="n": new line copies line n; same line pulls the substituted expression from line n.
          - Pre-wrap: if a line will need two rows later (substitution), give it the same two-row layout from the
            first step, so it never re-wraps mid-animation.
+         - data-chain: plays in the same beat as the step before, no pause (d/dx lands then joins; copy then unfold).
+         - Substitution: copy the equation compact, unfold one term per row (chained). data-anchor + \mathllap{...}:
+           labels (dy/dx =) and coefficients/brackets (+4( ) hang left of one shared column, so right sides and the
+           terms they replace line up and each sub drops straight down onto its row. Leading minus: {-}.
          - Pauses are automatic (amount of new/moved symbols); add data-hold="ms" only to override.
          - Example numbers: no symbol may appear from nothing (no implicit 1s); same quantity twice ⇒ it splits. -->
       <div class="solve">
@@ -95,15 +99,16 @@
           <li data-line="2"><span class="w">auxiliary equation</span>$$m^{2}+4m+13=0$$</li>
           <li data-line="2"><span class="w">roots</span>$$m=-2\pm3i$$</li>
           <li data-line="2"><span class="w">complex roots $\Rightarrow$ CF</span>$$y=e^{-2x}(A\cos3x+B\sin3x)$$</li>
-          <li data-line="3" data-from="1"><span class="w">trial PI: shape of right side ($\sin x$), both cos and sin</span>$$y=\lambda\cos x+\mu\sin x$$</li>
-          <li data-line="4" data-from="3"><span class="w">differentiate</span>$$\frac{d}{dx}\,y=-\lambda\sin x+\mu\cos x$$</li>
-          <li data-line="4"><span class="w">$\frac{d}{dx}$ joins $y$</span>$$\frac{dy}{dx}=-\lambda\sin x+\mu\cos x$$</li>
-          <li data-line="5" data-from="4"><span class="w">differentiate again</span>$$\frac{d}{dx}\,\frac{dy}{dx}=-\lambda\cos x-\mu\sin x$$</li>
-          <li data-line="5"><span class="w">two $\frac{d}{dx}$ merge</span>$$\frac{d^2y}{dx^2}=-\lambda\cos x-\mu\sin x$$</li>
-          <li data-line="6" data-from="1"><span class="w">copy the equation down</span>$$\begin{aligned}&\frac{d^2y}{dx^2}+4\frac{dy}{dx}\\&+13y=80\sin x\end{aligned}$$</li>
-          <li data-line="6" data-from="5"><span class="w">sub in $\frac{d^2y}{dx^2}$</span>$$\begin{aligned}&(-\lambda\cos x-\mu\sin x)+4\frac{dy}{dx}\\&+13y=80\sin x\end{aligned}$$</li>
-          <li data-line="6" data-from="4"><span class="w">sub in $\frac{dy}{dx}$</span>$$\begin{aligned}&(-\lambda\cos x-\mu\sin x)+4(-\lambda\sin x+\mu\cos x)\\&+13y=80\sin x\end{aligned}$$</li>
-          <li data-line="6" data-from="3"><span class="w">sub in $y$</span>$$\begin{aligned}&(-\lambda\cos x-\mu\sin x)+4(-\lambda\sin x+\mu\cos x)\\&+13(\lambda\cos x+\mu\sin x)=80\sin x\end{aligned}$$</li>
+          <li data-line="3" data-from="1" data-anchor><span class="w">trial PI: shape of right side ($\sin x$), both cos and sin</span>$$\mathllap{y={}}\lambda\cos x+\mu\sin x$$</li>
+          <li data-line="4" data-from="3" data-anchor><span class="w">differentiate</span>$$\mathllap{\frac{d}{dx}\,y={}}{-}\lambda\sin x+\mu\cos x$$</li>
+          <li data-line="4" data-chain data-anchor><span class="w">differentiate</span>$$\mathllap{\frac{dy}{dx}={}}{-}\lambda\sin x+\mu\cos x$$</li>
+          <li data-line="5" data-from="4" data-anchor><span class="w">differentiate again</span>$$\mathllap{\frac{d}{dx}\,\frac{dy}{dx}={}}{-}\lambda\cos x-\mu\sin x$$</li>
+          <li data-line="5" data-chain data-anchor><span class="w">differentiate again</span>$$\mathllap{\frac{d^2y}{dx^2}={}}{-}\lambda\cos x-\mu\sin x$$</li>
+          <li data-line="6" data-from="1"><span class="w">copy the equation down, one term per row</span>$$\begin{aligned}&\frac{d^2y}{dx^2}+4\frac{dy}{dx}\\&+13y=80\sin x\end{aligned}$$</li>
+          <li data-line="6" data-chain data-anchor><span class="w">copy the equation down, one term per row</span>$$\begin{aligned}&\frac{d^2y}{dx^2}\\[3pt]&\mathllap{{}+4}\frac{dy}{dx}\\[3pt]&\mathllap{{}+13}y\\[3pt]&\mathllap{{}={}}80\sin x\end{aligned}$$</li>
+          <li data-line="6" data-from="5" data-anchor><span class="w">sub in $\frac{d^2y}{dx^2}$</span>$$\begin{aligned}&\mathllap{(}{-}\lambda\cos x-\mu\sin x)\\[3pt]&\mathllap{{}+4}\frac{dy}{dx}\\[3pt]&\mathllap{{}+13}y\\[3pt]&\mathllap{{}={}}80\sin x\end{aligned}$$</li>
+          <li data-line="6" data-from="4" data-anchor><span class="w">sub in $\frac{dy}{dx}$</span>$$\begin{aligned}&\mathllap{(}{-}\lambda\cos x-\mu\sin x)\\[3pt]&\mathllap{{}+4(}{-}\lambda\sin x+\mu\cos x)\\[3pt]&\mathllap{{}+13}y\\[3pt]&\mathllap{{}={}}80\sin x\end{aligned}$$</li>
+          <li data-line="6" data-from="3" data-anchor><span class="w">sub in $y$</span>$$\begin{aligned}&\mathllap{(}{-}\lambda\cos x-\mu\sin x)\\[3pt]&\mathllap{{}+4(}{-}\lambda\sin x+\mu\cos x)\\[3pt]&\mathllap{{}+13(}\lambda\cos x+\mu\sin x)\\[3pt]&\mathllap{{}={}}80\sin x\end{aligned}$$</li>
           <li data-line="6"><span class="w">collect cos terms, collect sin terms</span>$$(12\lambda+4\mu)\cos x+(12\mu-4\lambda)\sin x=80\sin x$$</li>
           <li data-line="6"><span class="w">compare coefficients</span>$$12\lambda+4\mu=0,\ \ 12\mu-4\lambda=80\ \Rightarrow\ \lambda=-2,\ \mu=6$$</li>
           <li data-line="2"><span class="w">$y=$ CF $+$ PI</span>$$y=e^{-2x}(A\cos3x+B\sin3x)-2\cos x+6\sin x$$</li>
