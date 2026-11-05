@@ -114,7 +114,7 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     ($\mathllap{\frac{dy}{dx}={}}$) and the coefficients/brackets ($\mathllap{{}+4(}$) so the right sides and the terms
     they replace sit on the same column ⇒ each sub drops straight down onto its row, replaced term fades as it lands.
     Sub step matching: same start + end of the line stay, middle comes from the source line's right side.
-    Box the terms still to sub in (`\boxed{…}`, drawn in highlight colour; the box leaves with its term); rows spaced `\\[10pt]`.
+    Box the terms still to sub in (`\kern-0.3em\boxed{…}`, coefficient `\mathllap{{}+4\kern0.35em}`: box padding hangs left, term stays on the column; highlight colour; box leaves with its term); rows spaced `\\[10pt]`.
     Write a leading minus after a hung part as `{-}` (else it gets binary spacing).
     Pauses: default = automatic from how many glyphs are new or moved (`PAUSE` constants at top of solve.js);
     only a proxy, so set `data-hold="ms"` on any step where it feels wrong. Pattern notes also sit as a comment
