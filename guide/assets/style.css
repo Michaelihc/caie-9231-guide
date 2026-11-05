@@ -255,6 +255,9 @@ section.store { display: contents; }
 .solve-line .katex-display { margin: 0.3rem 0; }
 .solve-line .katex { font-size: clamp(0.95em, 3.4vw, 1.2em); }
 .solve-line.dim { opacity: 0.45; }
+.solve-steps .op { display: none; }
+.solve-op { position: absolute; left: 0; top: 0; visibility: hidden; }
+.solve-op .katex { font-size: clamp(0.95em, 3.4vw, 1.2em); }
 .solve-line.anchor { justify-self: stretch; padding-left: var(--anchor, 40%); }   /* shared column, see setAnchor in solve.js */
 .solve-line.anchor .katex-display, .solve-line.anchor .katex-display > .katex { text-align: left; }
 .solve-line.final .katex-display { outline: 2px solid var(--hl-line); outline-offset: 5px; border-radius: 3px; }

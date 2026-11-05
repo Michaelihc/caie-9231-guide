@@ -15,7 +15,8 @@ window.CAIE_SOLVE = (() => {
   // "how much to take in"; when it's wrong for a step, set data-hold on that step instead of bending these numbers.
   const PAUSE = { base: 300, perGlyph: 60, min: 450, max: 2400 };
   const holdFor = (work) => Math.max(PAUSE.min, Math.min(PAUSE.max, PAUSE.base + PAUSE.perGlyph * work));
-  const EASE = "cubic-bezier(.55,-0.08,.3,1.22)";                 // ease-in-out with a slight overshoot (bounce), same for every glyph
+  const EASE = "cubic-bezier(.65,0,.35,1)";                       // ease-in-out, same for every glyph
+  const BOUNCE = "cubic-bezier(.35,.1,.3,1.5)";                     // operator flying in (d/dx): lands with an overshoot
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
   const blank = (t) => /^[\s​]*$/.test(t);
 
@@ -104,7 +105,9 @@ window.CAIE_SOLVE = (() => {
 
   // A = snapshot of the source, B = snapshot of the target (target line is laid out but hidden),
   // X = optional extra source line (substitution: the expression flies in from its own line; X stays put)
-  function morph(stage, A, B, inPlace, X = null) {
+  // OP = optional operator (data-op, e.g. d/dx) glyphs, already placed left of the target line: fly in on the same
+  // beat and land on the left side (\mathllap part). Lands on a new glyph ⇒ becomes it; on a kept one ⇒ merges into it.
+  function morph(stage, A, B, inPlace, X = null, OP = null) {
     const layer = el("div", "solve-layer");
     stage.append(layer);
     const ink = getComputedStyle(stage).color;
@@ -123,8 +126,24 @@ window.CAIE_SOLVE = (() => {
       const rhs = X.filter((g) => !g.el.closest(".llap"));
       const mid = B.slice(p, B.length - q);
       for (const [x, k] of lcsPairs(rhs, mid)) matchB.set(p + k, { r: rhs[x].r, lane: true });
+    } else if (OP) {                                         // left side and right side matched on their own
+      const side = (L, left) => L.map((g, n) => [g, n]).filter(([g]) => !!g.el.closest(".llap") === left);
+      for (const left of [true, false]) {
+        const a = side(A, left), b = side(B, left);
+        for (const [x, y] of lcsPairs(a.map(([g]) => g), b.map(([g]) => g))) {
+          usedA.add(a[x][1]); matchB.set(b[y][1], { r: A[a[x][1]].r, lane: false });
+        }
+      }
     } else {
       for (const [a, b] of lcsPairs(A, B)) { usedA.add(a); matchB.set(b, { r: A[a].r, lane: false }); }
+    }
+    const ghosts = [];                                        // operator glyphs landing on glyphs that already come from A
+    if (OP) {
+      const lhs = B.map((g, n) => [g, n]).filter(([g]) => g.el.closest(".llap"));
+      for (const [o, k] of lcsPairs(OP, lhs.map(([g]) => g))) {
+        const y = lhs[k][1];
+        if (matchB.has(y)) ghosts.push([OP[o], B[y]]); else matchB.set(y, { r: OP[o].r, fly: true });
+      }
     }
     const quantity = (k) => /^[0-9A-Za-zͰ-Ͽ]+$/.test(k);
     const nearest = (list, g, ok = () => true) => {
@@ -163,7 +182,10 @@ window.CAIE_SOLVE = (() => {
       }
       const a = m.r;
       const dx = a.x - b.r.x, dy = a.y - b.r.y, s = b.r.h ? a.h / b.r.h : 1;
-      if (!m.lane) {                                          // keeps order: slides with the block
+      if (m.fly) {                                            // operator glyph: flies in and bounces into place
+        c.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${s})` }, { transform: "none" }], { ...opts, easing: BOUNCE });
+        c.animate([{ color: hl }, { color: hl, offset: 0.7 }, { color: ink }], { duration: MOVE_MS, easing: "linear", fill: "both" });
+      } else if (!m.lane) {                                   // keeps order: slides with the block
         c.animate(curve(dx, dy, s, -Math.sign(dx) * Math.min(Math.abs(dx) * 0.05, 5)), opts);
       } else {                                                // reordered / split / substituted: own lane
         const bow = Math.abs(dy) > lineH ? 0 : (dx > 0 ? -1 : 1) * Math.min(lineH * 0.9 + Math.abs(dx) * 0.18, lineH * 2.2);
@@ -172,6 +194,17 @@ window.CAIE_SOLVE = (() => {
           { duration: MOVE_MS, easing: "linear", fill: "both" });
       }
     });
+    if (ghosts.length) {
+      const gs = ghosts.map(([o]) => [glyph(layer, o), o]);
+      placeAll(stage, gs);
+      gs.forEach(([c, o], n) => {
+        const t = ghosts[n][1].r, dx = t.x - o.r.x, dy = t.y - o.r.y, s = o.r.h ? t.h / o.r.h : 1;
+        c.style.color = hl;
+        c.animate([{ transform: "none" }, { transform: `translate(${dx}px, ${dy}px) scale(${s})` }], { ...opts, easing: BOUNCE, fill: "forwards" });
+        c.animate([{ opacity: 1 }, { opacity: 1, offset: 0.75 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });
+      });
+      layer.work += gs.length;
+    }
     leaving.forEach(([c, a]) => {
       const y = !X && quantity(a.key) ? nearest(B, a) : -1;   // substitution: replaced glyphs just fade
       if (y >= 0) {                                           // merge: flies into the surviving copy, fades on arrival
@@ -207,7 +240,8 @@ window.CAIE_SOLVE = (() => {
       lineNo = Number(li.dataset.line) || lineNo;
       return { line: lineNo, from: Number(li.dataset.from) || 0, hold: Number(li.dataset.hold) || 0,
         chain: li.hasAttribute("data-chain"),                // plays straight after the previous step: same beat
-        anchor: li.hasAttribute("data-anchor"),              // left edge on the shared anchor column (see setAnchor)
+        anchor: li.hasAttribute("data-anchor"),
+        op: li.querySelector(".op .katex")?.outerHTML || "",   // operator that flies in on this step (e.g. d/dx)              // left edge on the shared anchor column (see setAnchor)
         words: li.querySelector(".w")?.innerHTML || "",
         math: (li.querySelector(".katex-display") || li.querySelector(".katex"))?.outerHTML || "" };
     });
@@ -303,7 +337,18 @@ window.CAIE_SOLVE = (() => {
       passed.forEach((l) => l.classList.add("pass"));
       await document.fonts.ready;                         // first use of a KaTeX font (big ∫, tall brackets) loads late
       const B = snapshot(stage, next);
-      const layer = morph(stage, A, B, !!target, X);
+      let OP = null;
+      if (steps[k].op) {                                   // operator starts just left of the new line's left side
+        const o = el("div", "solve-op", steps[k].op);
+        stage.append(o);
+        const sr = stage.getBoundingClientRect(), ob = o.getBoundingClientRect();
+        const lhs = B.filter((g) => g.el.closest(".llap"));
+        const left = Math.min(...lhs.map((g) => g.r.x)), mid = lhs.reduce((a, g) => a + g.r.y + g.r.h / 2, 0) / lhs.length;
+        const ox = Math.max(4, left - ob.width - 110) - (ob.left - sr.left), oy = mid - ob.height / 2 - (ob.top - sr.top);
+        OP = snapshot(stage, o).map((g) => ({ ...g, r: { ...g.r, x: g.r.x + ox, y: g.r.y + oy } }));
+        o.remove();
+      }
+      const layer = morph(stage, A, B, !!target, X, OP);
       lastWork = layer.work;
       await new Promise((ok) => setTimeout(ok, MOVE_MS));
       passed.forEach((l) => l.classList.remove("pass"));

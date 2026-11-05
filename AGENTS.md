@@ -102,8 +102,10 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     `data-from="n"` on a step = pull from line n: on a new line it copies line n (e.g. copy the equation down); on
     the same line it substitutes, the expression flies in from line n (which lights up), replaced glyphs fade.
     Match the concept, not raw symbols: trial PI pulls from the right side of line 1 (its shape becomes the trial);
-    differentiate = one step from the line above: $y$ grows into $\frac{dy}{dx}$ in the same morph as the right side
-    changes (never a separate beat); 2nd derivative = the 2s join $\frac{dy}{dx}$ the same way. Pre-wrap: a line that will need two rows gets them
+    differentiate = one step from the line above, one beat: a $\frac{d}{dx}$ (`<span class="op">$\dfrac{d}{dx}$</span>`
+    in the step = `data-op`) flies in from the left with a bounce (bounce only on it) while the right side morphs, and
+    joins $y$ into $\frac{dy}{dx}$; 2nd derivative = it flies onto $\frac{dy}{dx}$ and merges, the 2s appear. Left side must
+    be `\mathllap`'d (it lands there). Pre-wrap: a line that will need two rows gets them
     from its first step (no re-wrap mid-animation). Lines between source and target fade right down during a move.
     `data-chain` = step plays straight after the one before, same beat, no pause (counter + Back count beats):
     use for the 2nd half of one idea (e.g. compact copy, then unfold).

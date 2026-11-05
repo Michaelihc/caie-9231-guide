@@ -82,8 +82,8 @@
          - Animate what a person writes on paper. Nothing done in the head: one derivative per step, copy the
            equation down, substitute one term at a time.
          - Match the concept, not raw symbols. Trial PI pulls from the right side of line 1 (data-from="1"): its
-           shape (sin x) becomes the trial. Differentiate = one step from the line above: d/dx joins y while the right side changes, same morph;
-           second derivative = the 2s join dy/dx while the right side changes.
+           shape (sin x) becomes the trial. Differentiate = one step, one beat: data-op d/dx flies in (bounce) while the right side morphs, joins y;
+           second derivative = it lands on dy/dx and merges, 2s appear.
          - data-from="n": new line copies line n; same line pulls the substituted expression from line n.
          - Pre-wrap: if a line will need two rows later (substitution), give it the same two-row layout from the
            first step, so it never re-wraps mid-animation.
@@ -100,8 +100,8 @@
           <li data-line="2"><span class="w">roots</span>$$m=-2\pm3i$$</li>
           <li data-line="2"><span class="w">complex roots $\Rightarrow$ CF</span>$$y=e^{-2x}(A\cos3x+B\sin3x)$$</li>
           <li data-line="3" data-from="1" data-anchor><span class="w">trial PI: shape of right side ($\sin x$), both cos and sin</span>$$\mathllap{y={}}\lambda\cos x+\mu\sin x$$</li>
-          <li data-line="4" data-from="3" data-anchor><span class="w">differentiate</span>$$\mathllap{\frac{dy}{dx}={}}{-}\lambda\sin x+\mu\cos x$$</li>
-          <li data-line="5" data-from="4" data-anchor><span class="w">differentiate again</span>$$\mathllap{\frac{d^2y}{dx^2}={}}{-}\lambda\cos x-\mu\sin x$$</li>
+          <li data-line="4" data-from="3" data-anchor><span class="w">differentiate</span><span class="op">$\dfrac{d}{dx}$</span>$$\mathllap{\frac{dy}{dx}={}}{-}\lambda\sin x+\mu\cos x$$</li>
+          <li data-line="5" data-from="4" data-anchor><span class="w">differentiate again</span><span class="op">$\dfrac{d}{dx}$</span>$$\mathllap{\frac{d^2y}{dx^2}={}}{-}\lambda\cos x-\mu\sin x$$</li>
           <li data-line="6" data-from="1"><span class="w">copy the equation down, one term per row</span>$$\begin{aligned}&\frac{d^2y}{dx^2}+4\frac{dy}{dx}\\&+13y=80\sin x\end{aligned}$$</li>
           <li data-line="6" data-chain data-anchor><span class="w">copy the equation down, one term per row</span>$$\begin{aligned}&\frac{d^2y}{dx^2}\\[3pt]&\mathllap{{}+4}\frac{dy}{dx}\\[3pt]&\mathllap{{}+13}y\\[3pt]&\mathllap{{}={}}80\sin x\end{aligned}$$</li>
           <li data-line="6" data-from="5" data-anchor><span class="w">sub in $\frac{d^2y}{dx^2}$</span>$$\begin{aligned}&\mathllap{(}{-}\lambda\cos x-\mu\sin x)\\[3pt]&\mathllap{{}+4}\frac{dy}{dx}\\[3pt]&\mathllap{{}+13}y\\[3pt]&\mathllap{{}={}}80\sin x\end{aligned}$$</li>
