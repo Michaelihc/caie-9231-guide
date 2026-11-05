@@ -13,11 +13,11 @@
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">start</span>$$\frac{dy}{dx}=x\,e^{-y}$$</li>
-          <li data-line="1"><span class="w">all $y$ with $dy$, all $x$ with $dx$</span>$$e^{y}\,dy=x\,dx$$</li>
-          <li data-line="1"><span class="w">integral sign on both sides</span>$$\int e^{y}\,dy=\int x\,dx$$</li>
-          <li data-line="1"><span class="w">integrate, one $+C$</span>$$e^{y}=\tfrac12x^{2}+C$$</li>
-          <li data-line="1"><span class="w">make $y$ the subject</span>$$y=\ln\left(\tfrac12x^{2}+C\right)$$</li>
+          <li data-line="1"><span class="w">start</span>$$\frac{dy}{dx}=2x\,e^{-y}$$</li>
+          <li data-line="1"><span class="w">all $y$ with $dy$, all $x$ with $dx$</span>$$e^{y}\,dy=2x\,dx$$</li>
+          <li data-line="1"><span class="w">integral sign on both sides</span>$$\int e^{y}\,dy=\int 2x\,dx$$</li>
+          <li data-line="1"><span class="w">integrate, one $+C$</span>$$e^{y}=x^{2}+C$$</li>
+          <li data-line="1"><span class="w">make $y$ the subject</span>$$y=\ln\left(x^{2}+C\right)$$</li>
         </ol>
       </div>
     </div>
@@ -38,15 +38,15 @@
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">start: $y=3$ when $x=1$</span>$$x\frac{dy}{dx}+2y=e^{x}$$</li>
-          <li data-line="1"><span class="w">divide every term by $x$</span>$$\frac{dy}{dx}+\frac{2}{x}\,y=\frac{e^{x}}{x}$$</li>
+          <li data-line="1"><span class="w">start: $y=5$ when $x=2$</span>$$x\frac{dy}{dx}+2y=4x^{2}$$</li>
+          <li data-line="1"><span class="w">divide every term by $x$</span>$$\frac{dy}{dx}+\frac{2}{x}\,y=4x$$</li>
           <li data-line="2"><span class="w">IF $=e^{\int P\,dx}$</span>$$\text{IF}=e^{\int\frac{2}{x}dx}=e^{2\ln x}=x^{2}$$</li>
-          <li data-line="1"><span class="w">multiply every term by IF</span>$$x^{2}\frac{dy}{dx}+2x\,y=x\,e^{x}$$</li>
-          <li data-line="1"><span class="w">left side is one derivative</span>$$\frac{d}{dx}\left(x^{2}y\right)=x\,e^{x}$$</li>
-          <li data-line="1"><span class="w">integral sign on both sides</span>$$x^{2}y=\int x\,e^{x}\,dx$$</li>
-          <li data-line="1"><span class="w">by parts, $+C$ now</span>$$x^{2}y=(x-1)e^{x}+C$$</li>
-          <li data-line="3"><span class="w">initial condition: $x=1$, $y=3$</span>$$3=0+C\ \Rightarrow\ C=3$$</li>
-          <li data-line="1"><span class="w">divide by IF</span>$$y=\frac{(x-1)e^{x}+3}{x^{2}}$$</li>
+          <li data-line="1"><span class="w">multiply every term by IF</span>$$x^{2}\frac{dy}{dx}+2x\,y=4x^{3}$$</li>
+          <li data-line="1"><span class="w">left side is one derivative</span>$$\frac{d}{dx}\left(x^{2}y\right)=4x^{3}$$</li>
+          <li data-line="1"><span class="w">integral sign on both sides</span>$$x^{2}y=\int 4x^{3}\,dx$$</li>
+          <li data-line="1"><span class="w">integrate, $+C$ now</span>$$x^{2}y=x^{4}+C$$</li>
+          <li data-line="3"><span class="w">initial condition: $x=2$, $y=5$</span>$$4\times5=16+C\ \Rightarrow\ C=4$$</li>
+          <li data-line="1"><span class="w">divide by IF</span>$$y=x^{2}+\frac{4}{x^{2}}$$</li>
         </ol>
       </div>
       <div class="branches">
@@ -80,14 +80,14 @@
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">start</span>$$\frac{d^2y}{dx^2}+2\frac{dy}{dx}+5y=10\sin x$$</li>
-          <li data-line="2"><span class="w">auxiliary equation</span>$$m^{2}+2m+5=0$$</li>
-          <li data-line="2"><span class="w">roots</span>$$m=-1\pm2i$$</li>
-          <li data-line="2"><span class="w">complex roots $\Rightarrow$ CF</span>$$y=e^{-x}(A\cos2x+B\sin2x)$$</li>
+          <li data-line="1"><span class="w">start</span>$$\frac{d^2y}{dx^2}+4\frac{dy}{dx}+13y=80\sin x$$</li>
+          <li data-line="2"><span class="w">auxiliary equation</span>$$m^{2}+4m+13=0$$</li>
+          <li data-line="2"><span class="w">roots</span>$$m=-2\pm3i$$</li>
+          <li data-line="2"><span class="w">complex roots $\Rightarrow$ CF</span>$$y=e^{-2x}(A\cos3x+B\sin3x)$$</li>
           <li data-line="3"><span class="w">trial PI: both cos and sin</span>$$y=\lambda\cos x+\mu\sin x$$</li>
-          <li data-line="3"><span class="w">sub into left side, collect</span>$$(4\lambda+2\mu)\cos x+(4\mu-2\lambda)\sin x=10\sin x$$</li>
-          <li data-line="3"><span class="w">compare coefficients</span>$$4\lambda+2\mu=0,\ \ 4\mu-2\lambda=10\ \Rightarrow\ \lambda=-1,\ \mu=2$$</li>
-          <li data-line="2"><span class="w">$y=$ CF $+$ PI</span>$$y=e^{-x}(A\cos2x+B\sin2x)-\cos x+2\sin x$$</li>
+          <li data-line="3"><span class="w">sub into left side, collect</span>$$(12\lambda+4\mu)\cos x+(12\mu-4\lambda)\sin x=80\sin x$$</li>
+          <li data-line="3"><span class="w">compare coefficients</span>$$12\lambda+4\mu=0,\ \ 12\mu-4\lambda=80\ \Rightarrow\ \lambda=-2,\ \mu=6$$</li>
+          <li data-line="2"><span class="w">$y=$ CF $+$ PI</span>$$y=e^{-2x}(A\cos3x+B\sin3x)-2\cos x+6\sin x$$</li>
         </ol>
       </div>
       <div class="branches">
@@ -117,11 +117,11 @@
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">general solution; $y=0$, $\frac{dy}{dx}=0$ when $x=0$</span>$$y=e^{-x}(A\cos2x+B\sin2x)-\cos x+2\sin x$$</li>
-          <li data-line="2"><span class="w">sub $x=0$, $y=0$</span>$$0=A-1\ \Rightarrow\ A=1$$</li>
-          <li data-line="3"><span class="w">differentiate (product rule)</span>$$\frac{dy}{dx}=e^{-x}\big((2B-A)\cos2x-(2A+B)\sin2x\big)+\sin x+2\cos x$$</li>
-          <li data-line="3"><span class="w">sub $x=0$, $\frac{dy}{dx}=0$</span>$$0=2B-A+2\ \Rightarrow\ B=-\tfrac12$$</li>
-          <li data-line="1"><span class="w">particular solution</span>$$y=e^{-x}\left(\cos2x-\tfrac12\sin2x\right)-\cos x+2\sin x$$</li>
+          <li data-line="1"><span class="w">general solution; $y=0$, $\frac{dy}{dx}=0$ when $x=0$</span>$$y=e^{-2x}(A\cos3x+B\sin3x)-2\cos x+6\sin x$$</li>
+          <li data-line="2"><span class="w">sub $x=0$, $y=0$</span>$$0=A-2\ \Rightarrow\ A=2$$</li>
+          <li data-line="3"><span class="w">differentiate (product rule)</span>$$\frac{dy}{dx}=e^{-2x}\big((3B-2A)\cos3x-(3A+2B)\sin3x\big)+2\sin x+6\cos x$$</li>
+          <li data-line="3"><span class="w">sub $x=0$, $\frac{dy}{dx}=0$</span>$$0=3B-2A+6\ \Rightarrow\ B=-\tfrac23$$</li>
+          <li data-line="1"><span class="w">particular solution</span>$$y=e^{-2x}\left(2\cos3x-\tfrac23\sin3x\right)-2\cos x+6\sin x$$</li>
         </ol>
       </div>
       <div class="branches">
@@ -146,12 +146,12 @@
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">start</span>$$x^{2}\frac{d^2y}{dx^2}-2x\frac{dy}{dx}+2y=0$$</li>
-          <li data-line="1"><span class="w">swap: $x\frac{dy}{dx}\to\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}\to\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>$$\left(\frac{d^2y}{dt^2}-\frac{dy}{dt}\right)-2\frac{dy}{dt}+2y=0$$</li>
-          <li data-line="1"><span class="w">simplify: constant coefficients</span>$$\frac{d^2y}{dt^2}-3\frac{dy}{dt}+2y=0$$</li>
-          <li data-line="2"><span class="w">auxiliary equation</span>$$m^{2}-3m+2=0\ \Rightarrow\ m=1,\ 2$$</li>
-          <li data-line="2"><span class="w">CF in $t$</span>$$y=Ae^{t}+Be^{2t}$$</li>
-          <li data-line="2"><span class="w">back: $e^{t}=x$</span>$$y=Ax+Bx^{2}$$</li>
+          <li data-line="1"><span class="w">start</span>$$x^{2}\frac{d^2y}{dx^2}-4x\frac{dy}{dx}+6y=0$$</li>
+          <li data-line="1"><span class="w">swap: $x\frac{dy}{dx}\to\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}\to\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>$$\left(\frac{d^2y}{dt^2}-\frac{dy}{dt}\right)-4\frac{dy}{dt}+6y=0$$</li>
+          <li data-line="1"><span class="w">simplify: constant coefficients</span>$$\frac{d^2y}{dt^2}-5\frac{dy}{dt}+6y=0$$</li>
+          <li data-line="2"><span class="w">auxiliary equation</span>$$m^{2}-5m+6=0\ \Rightarrow\ m=2,\ 3$$</li>
+          <li data-line="2"><span class="w">CF in $t$</span>$$y=Ae^{2t}+Be^{3t}$$</li>
+          <li data-line="2"><span class="w">back: $e^{t}=x$</span>$$y=Ax^{2}+Bx^{3}$$</li>
         </ol>
       </div>
       <div class="branches">
@@ -176,10 +176,10 @@
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">particular solution</span>$$y=e^{-x}\left(\cos2x-\tfrac12\sin2x\right)-\cos x+2\sin x$$</li>
-          <li data-line="1"><span class="w">$e^{-x}\to0$ as $x\to\infty$</span>$$y\approx2\sin x-\cos x$$</li>
-          <li data-line="2"><span class="w">R-formula</span>$$R=\sqrt{2^{2}+1^{2}}=\sqrt5,\quad \tan\varphi=-\tfrac12$$</li>
-          <li data-line="1"><span class="w">large-$x$ answer</span>$$y\approx\sqrt5\,\sin(x-0.464)$$</li>
+          <li data-line="1"><span class="w">particular solution</span>$$y=e^{-2x}\left(2\cos3x-\tfrac23\sin3x\right)-2\cos x+6\sin x$$</li>
+          <li data-line="1"><span class="w">$e^{-2x}\to0$ as $x\to\infty$</span>$$y\approx6\sin x-2\cos x$$</li>
+          <li data-line="2"><span class="w">R-formula</span>$$R=\sqrt{6^{2}+2^{2}}=2\sqrt{10},\quad \tan\varphi=-\tfrac26$$</li>
+          <li data-line="1"><span class="w">large-$x$ answer</span>$$y\approx2\sqrt{10}\,\sin(x-0.322)$$</li>
         </ol>
       </div>
     </div>

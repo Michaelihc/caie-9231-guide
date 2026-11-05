@@ -91,6 +91,9 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     Each step `<li data-line="n">` says which on-screen line it writes to. Morph in place on the same line as long
     as possible (∫ signs just appear on the line); a new line only for a genuine side calculation (IF, auxiliary
     equation, finding $C$). Side results flow back into the main line by morphing it again.
+    Pick example numbers so no glyph appears from nothing or vanishes: avoid 1 as a coefficient, power or root
+    (implicit in the line before, e.g. $m^2+2m+5$ ⇒ $m=-1\pm2i$ makes a 1 appear), avoid ½ from $\int x\,dx$ (use $2x$),
+    avoid by-parts results like $(x-1)e^x$; leave a ratio unsimplified if that keeps its digits from the line above.
     Show every step a solver writes (e.g. $\int e^y\,dy=\int x\,dx$ before integrating). Check the example
     numerically first. Only exception to "no worked examples": as an animation, never as static text (the list is
     a no-JS fallback only). Chain related skills on one example where natural (DE: S3 → S4 → S6 on one equation).
