@@ -82,6 +82,9 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     Markup after the steps: `<div class="solve"><ol class="solve-steps"><li><span class="w">words</span>$$maths$$</li>…</ol></div>`.
     `guide/assets/solve.js` (loaded on first open) plays it: up to 3 lines, each glyph of the new line flies from
     where the same glyph sat in the previous line, step words on top, Back / Play / Next / Restart, final answer boxed.
+    Morph keeps the line's structure: glyphs matched in reading order (LCS) slide as a block; reordered glyphs
+    arc in their own lane (left-movers over, right-movers under); leaving glyphs fade first; new glyphs fade in
+    last, briefly highlighted.
     Each step `<li data-line="n">` says which on-screen line it writes to. Morph in place on the same line as long
     as possible (∫ signs just appear on the line); a new line only for a genuine side calculation (IF, auxiliary
     equation, finding $C$). Side results flow back into the main line by morphing it again.
