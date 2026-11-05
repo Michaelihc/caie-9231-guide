@@ -85,6 +85,9 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     Morph keeps the line's structure: glyphs matched in reading order (LCS) slide as a block; reordered glyphs
     arc in their own lane (left-movers over, right-movers under); leaving glyphs fade first; new glyphs fade in
     last, briefly highlighted.
+    Same quantity used more often in the new line ⇒ it visibly splits: extra copies fly out of the one source glyph
+    (e.g. $m=-2\pm3i$ ⇒ $\cos3x$ and $\sin3x$, the 3 splits in two). Fewer uses ⇒ extra copies merge into the
+    survivor. Only numbers, letters, Greek; never signs or brackets. No quantity may appear from nowhere.
     Smoothness: copies sit on each glyph's exact text box, fonts are preloaded before measuring, label has a fixed
     height, other lines glide; copies cross-fade into the real line (handoff error 0 px, 60 fps). Panels and the
     step list are hidden from first paint (`js` class set in `<head>`).

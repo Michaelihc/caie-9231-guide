@@ -114,6 +114,22 @@ window.CAIE_SOLVE = (() => {
       });
       if (best >= 0) { usedA.add(best); matchB.set(y, [best, true]); }
     });
+    // split: the new line uses a quantity more often than the old one ⇒ extra copies fly out of the same source glyph
+    const quantity = (k) => /^[0-9A-Za-z\u0370-\u03ff]+$/.test(k);
+    const nearest = (list, g, ok) => {
+      let best = -1, bestD = Infinity;
+      list.forEach((o, n) => {
+        if (o.key !== g.key || !ok(n)) return;
+        const d = Math.abs(o.r.x - g.r.x) + Math.abs(o.r.y - g.r.y);
+        if (d < bestD) { bestD = d; best = n; }
+      });
+      return best;
+    };
+    B.forEach((b, y) => {
+      if (matchB.has(y) || !quantity(b.key)) return;
+      const x = nearest(A, b, () => true);
+      if (x >= 0) matchB.set(y, [x, true]);
+    });
     const lineH = Math.max(...B.map((b) => b.r.h), 16);
     const opts = { duration: MOVE_MS, easing: EASE, fill: "both" };
     const incoming = B.map((b) => [glyph(layer, b), b]);
@@ -137,8 +153,16 @@ window.CAIE_SOLVE = (() => {
           { duration: MOVE_MS, easing: "linear", fill: "both" });
       }
     });
-    leaving.forEach(([c]) => {                                // glyphs that left the line fade out early
-      c.animate([{ opacity: 1 }, { opacity: 0, offset: 0.35 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });
+    leaving.forEach(([c, a]) => {
+      const y = quantity(a.key) ? nearest(B, a, () => true) : -1;
+      if (y >= 0) {                                           // merge: flies into the surviving copy, fades on arrival
+        const t = B[y].r, dx = t.x - a.r.x, dy = t.y - a.r.y, s = a.r.h ? t.h / a.r.h : 1;
+        c.animate([{ transform: "none" }, { transform: `translate(${dx}px, ${dy}px) scale(${s})` }],
+          { duration: MOVE_MS, easing: EASE, fill: "forwards" });
+        c.animate([{ opacity: 1 }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });
+        return;
+      }
+      c.animate([{ opacity: 1 }, { opacity: 0, offset: 0.35 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });   // fade out early
     });
     return layer;
   }
