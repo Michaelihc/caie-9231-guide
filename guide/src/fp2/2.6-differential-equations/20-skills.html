@@ -11,7 +11,15 @@
         <li>Integrate both sides. One $+C$, on the right.</li>
         <li>Initial condition ⇒ $C$. Rearrange for $y$ if asked.</li>
       </ol>
-      <div class="solve"><video src="{{root}}assets/media/fp2/sep-solve.mp4" poster="{{root}}assets/media/fp2/sep-solve.jpg" controls muted playsinline preload="none"></video></div>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li><span class="w">start</span>$$\frac{dy}{dx}=x\,e^{-y}$$</li>
+          <li><span class="w">all $y$ with $dy$, all $x$ with $dx$</span>$$e^{y}\,dy=x\,dx$$</li>
+          <li><span class="w">integral sign on both sides</span>$$\int e^{y}\,dy=\int x\,dx$$</li>
+          <li><span class="w">integrate, one $+C$</span>$$e^{y}=\tfrac12x^{2}+C$$</li>
+          <li><span class="w">make $y$ the subject</span>$$y=\ln\left(\tfrac12x^{2}+C\right)$$</li>
+        </ol>
+      </div>
     </div>
   </div>
 
@@ -28,7 +36,19 @@
         <li>Initial condition ⇒ $C$.</li>
         <li>Divide whole thing by IF. Answer must start $y=\dots$</li>
       </ol>
-      <div class="solve"><video src="{{root}}assets/media/fp2/if-solve.mp4" poster="{{root}}assets/media/fp2/if-solve.jpg" controls muted playsinline preload="none"></video></div>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li><span class="w">start</span>$$x\frac{dy}{dx}+2y=e^{x},\quad y=3\text{ when }x=1$$</li>
+          <li><span class="w">divide every term by $x$</span>$$\frac{dy}{dx}+\frac{2}{x}\,y=\frac{e^{x}}{x}$$</li>
+          <li><span class="w">IF $=e^{\int P\,dx}$</span>$$\text{IF}=e^{\int\frac{2}{x}dx}=e^{2\ln x}=x^{2}$$</li>
+          <li><span class="w">multiply every term by IF</span>$$x^{2}\frac{dy}{dx}+2x\,y=x\,e^{x}$$</li>
+          <li><span class="w">left side is one derivative</span>$$\frac{d}{dx}\left(x^{2}y\right)=x\,e^{x}$$</li>
+          <li><span class="w">integral sign on both sides</span>$$x^{2}y=\int x\,e^{x}\,dx$$</li>
+          <li><span class="w">by parts, $+C$ now</span>$$x^{2}y=(x-1)e^{x}+C$$</li>
+          <li><span class="w">initial condition: $x=1$, $y=3$</span>$$3=0+C\ \Rightarrow\ C=3$$</li>
+          <li><span class="w">divide by IF</span>$$y=\frac{(x-1)e^{x}+3}{x^{2}}$$</li>
+        </ol>
+      </div>
       <div class="branches">
         <details><summary>Simplifying $e^{\int P}$</summary>
           <ul>
@@ -58,7 +78,18 @@
         <li>Compare coefficients ⇒ unknowns.</li>
         <li>Write <span class="fx" data-f="Fgs">$y=$ CF + PI</span> (in question's variable: $x$ or $t$).</li>
       </ol>
-      <div class="solve"><video src="{{root}}assets/media/fp2/cfpi-solve.mp4" poster="{{root}}assets/media/fp2/cfpi-solve.jpg" controls muted playsinline preload="none"></video></div>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li><span class="w">start</span>$$\frac{d^2y}{dx^2}+2\frac{dy}{dx}+5y=10\sin x$$</li>
+          <li><span class="w">auxiliary equation</span>$$m^{2}+2m+5=0$$</li>
+          <li><span class="w">roots</span>$$m=-1\pm2i$$</li>
+          <li><span class="w">complex roots $\Rightarrow$ CF</span>$$y_{\text{CF}}=e^{-x}(A\cos2x+B\sin2x)$$</li>
+          <li><span class="w">trial PI: both cos and sin</span>$$y=\lambda\cos x+\mu\sin x$$</li>
+          <li><span class="w">sub into left side, collect</span>$$(4\lambda+2\mu)\cos x+(4\mu-2\lambda)\sin x=10\sin x$$</li>
+          <li><span class="w">compare coefficients</span>$$4\lambda+2\mu=0,\ \ 4\mu-2\lambda=10\ \Rightarrow\ \lambda=-1,\ \mu=2$$</li>
+          <li><span class="w">$y=$ CF $+$ PI</span>$$y=e^{-x}(A\cos2x+B\sin2x)-\cos x+2\sin x$$</li>
+        </ol>
+      </div>
       <div class="branches">
         <details><summary>Right side only $\sin$ or only $\cos$</summary>
           <p>Trial needs both: $\lambda\cos px+\mu\sin px$.</p>
@@ -84,7 +115,15 @@
         <li>Differentiate general solution. Sub $x=0$, $\frac{dy}{dx}=$ given ⇒ equation 2.</li>
         <li>Solve simultaneously. Write $y=\dots$ with numbers.</li>
       </ol>
-      <div class="solve"><video src="{{root}}assets/media/fp2/ic-solve.mp4" poster="{{root}}assets/media/fp2/ic-solve.jpg" controls muted playsinline preload="none"></video></div>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li><span class="w">general solution; $y=0$, $\frac{dy}{dx}=0$ when $x=0$</span>$$y=e^{-x}(A\cos2x+B\sin2x)-\cos x+2\sin x$$</li>
+          <li><span class="w">sub $x=0$, $y=0$</span>$$0=A-1\ \Rightarrow\ A=1$$</li>
+          <li><span class="w">differentiate (product rule)</span>$$\frac{dy}{dx}=e^{-x}\big((2B-A)\cos2x-(2A+B)\sin2x\big)+\sin x+2\cos x$$</li>
+          <li><span class="w">sub $x=0$, $\frac{dy}{dx}=0$</span>$$0=2B-A+2\ \Rightarrow\ B=-\tfrac12$$</li>
+          <li><span class="w">particular solution</span>$$y=e^{-x}\left(\cos2x-\tfrac12\sin2x\right)-\cos x+2\sin x$$</li>
+        </ol>
+      </div>
       <div class="branches">
         <details><summary>After a substitution</summary>
           <p>Convert conditions to new variable first. E.g. $v=y^4$: $v(0)=y(0)^4$, $v'=4y^3y'$. $y=\cosh u$: $y'=\sinh u\cdot u'$.</p>
@@ -105,7 +144,16 @@
         <li>Solve new equation (<a href="#S1">S1</a>, <a href="#S2">S2</a> or <a href="#S3">S3</a>).</li>
         <li>Sub back ⇒ answer in original variables, e.g. $v=y^4$ ⇒ $y=v^{\frac14}$, $x=e^t$ ⇒ $t=\ln x$.</li>
       </ol>
-      <div class="solve"><video src="{{root}}assets/media/fp2/sub-solve.mp4" poster="{{root}}assets/media/fp2/sub-solve.jpg" controls muted playsinline preload="none"></video></div>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li><span class="w">start</span>$$x^{2}\frac{d^2y}{dx^2}-2x\frac{dy}{dx}+2y=0$$</li>
+          <li><span class="w">swap: $x\frac{dy}{dx}\to\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}\to\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>$$\left(\frac{d^2y}{dt^2}-\frac{dy}{dt}\right)-2\frac{dy}{dt}+2y=0$$</li>
+          <li><span class="w">simplify: constant coefficients</span>$$\frac{d^2y}{dt^2}-3\frac{dy}{dt}+2y=0$$</li>
+          <li><span class="w">auxiliary equation</span>$$m^{2}-3m+2=0\ \Rightarrow\ m=1,\ 2$$</li>
+          <li><span class="w">CF in $t$</span>$$y=Ae^{t}+Be^{2t}$$</li>
+          <li><span class="w">back: $e^{t}=x$</span>$$y=Ax+Bx^{2}$$</li>
+        </ol>
+      </div>
       <div class="branches">
         <details><summary>$x=e^t$</summary>
           <p>Use <span class="fx" data-f="Fet">$x\frac{dy}{dx}=\frac{dy}{dt}$, $x^2\frac{d^2y}{dx^2}=\frac{d^2y}{dt^2}-\frac{dy}{dt}$</span>. Back: $t=\ln x$.</p>
@@ -126,7 +174,14 @@
         <li>CF terms with $e^{-kx}$ ($k>0$) → 0 as $x\to\infty$. Say so.</li>
         <li>Approximate solution for large $x$: <span class="fx" data-f="Fgs">$y\approx$ PI</span>.</li>
       </ol>
-      <div class="solve"><video src="{{root}}assets/media/fp2/large-x-solve.mp4" poster="{{root}}assets/media/fp2/large-x-solve.jpg" controls muted playsinline preload="none"></video></div>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li><span class="w">particular solution</span>$$y=e^{-x}\left(\cos2x-\tfrac12\sin2x\right)-\cos x+2\sin x$$</li>
+          <li><span class="w">$e^{-x}\to0$ as $x\to\infty$</span>$$y\approx2\sin x-\cos x$$</li>
+          <li><span class="w">R-formula</span>$$R=\sqrt{2^{2}+1^{2}}=\sqrt5,\quad \tan\varphi=-\tfrac12$$</li>
+          <li><span class="w">large-$x$ answer</span>$$y\approx\sqrt5\,\sin(x-0.464)$$</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>

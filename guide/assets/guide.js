@@ -49,6 +49,10 @@ document.querySelectorAll(".item").forEach((item) => {
       panel.classList.toggle("open", open);
       if (!open) panel.querySelectorAll("video").forEach((v) => v.pause());
       if (open && kind === "try") startWidget(panel);
+      if (kind === "solve") {
+        if (open) loadScript("assets/solve.js").then(() => window.CAIE_SOLVE.start(panel)).catch((e) => { panel.textContent = e.message; });
+        else panel._pause?.();
+      }
     });
     bar.append(btn);
   });

@@ -241,3 +241,22 @@ section.store { display: contents; }
 .solve::before { content: "Watch it solved"; }
 .js .solve::before { content: none; }
 .more-panel.solve video { width: 100%; max-width: 40rem; aspect-ratio: 16 / 9; border-radius: 4px; background: #1b2331; display: block; }
+
+/* Watch it solved: in-page player (solve.js) */
+.solve-stage {
+  position: relative; overflow: hidden; max-width: 40rem; min-height: 15.5rem;
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.5rem 0.8rem 0.8rem;
+}
+.solve-label { color: var(--hl-line); font-weight: 600; text-align: center; min-height: 1.7em; }
+.solve-lines { display: grid; gap: 0.15rem; justify-items: center; }
+.solve-line { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 7px 9px; transition: opacity 0.4s; }
+.solve-line .math-row { overflow: visible; }
+.solve-line .katex-display { margin: 0.3rem 0; }
+.solve-line .katex { font-size: clamp(0.95em, 3.4vw, 1.2em); }
+.solve-line.dim { opacity: 0.38; }
+.solve-line.final .katex-display { outline: 2px solid var(--hl-line); outline-offset: 5px; border-radius: 3px; }
+.solve-layer { position: absolute; inset: 0; pointer-events: none; color: var(--ink); }
+.solve-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-top: 0.4rem; }
+.solve-bar .more-btn:disabled { opacity: 0.4; cursor: default; }
+.solve-bar .count { margin-left: auto; color: var(--ink-2); font-size: var(--s-0); font-variant-numeric: tabular-nums; }
+.solve-steps .w { display: block; color: var(--ink-2); font-size: var(--s-0); }
