@@ -16,7 +16,7 @@ window.CAIE_SOLVE = (() => {
   const PAUSE = { base: 300, perGlyph: 60, min: 450, max: 2400 };
   const holdFor = (work) => Math.max(PAUSE.min, Math.min(PAUSE.max, PAUSE.base + PAUSE.perGlyph * work));
   const EASE = "cubic-bezier(.65,0,.35,1)";                       // ease-in-out, same for every glyph
-  const BOUNCE = "cubic-bezier(.35,.1,.3,1.5)";                     // operator flying in (d/dx): lands with an overshoot
+  const FLY = "cubic-bezier(.3,.5,.3,1)";                          // operator flying in (d/dx): ease-out, no overshoot
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
   const blank = (t) => /^[\s​]*$/.test(t);
 
@@ -182,8 +182,8 @@ window.CAIE_SOLVE = (() => {
       }
       const a = m.r;
       const dx = a.x - b.r.x, dy = a.y - b.r.y, s = b.r.h ? a.h / b.r.h : 1;
-      if (m.fly) {                                            // operator glyph: flies in and bounces into place
-        c.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${s})` }, { transform: "none" }], { ...opts, easing: BOUNCE });
+      if (m.fly) {                                            // operator glyph: flies in and settles into place
+        c.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${s})` }, { transform: "none" }], { ...opts, easing: FLY });
         c.animate([{ color: hl }, { color: hl, offset: 0.7 }, { color: ink }], { duration: MOVE_MS, easing: "linear", fill: "both" });
       } else if (!m.lane) {                                   // keeps order: slides with the block
         c.animate(curve(dx, dy, s, -Math.sign(dx) * Math.min(Math.abs(dx) * 0.05, 5)), opts);
@@ -200,7 +200,7 @@ window.CAIE_SOLVE = (() => {
       gs.forEach(([c, o], n) => {
         const t = ghosts[n][1].r, dx = t.x - o.r.x, dy = t.y - o.r.y, s = o.r.h ? t.h / o.r.h : 1;
         c.style.color = hl;
-        c.animate([{ transform: "none" }, { transform: `translate(${dx}px, ${dy}px) scale(${s})` }], { ...opts, easing: BOUNCE, fill: "forwards" });
+        c.animate([{ transform: "none" }, { transform: `translate(${dx}px, ${dy}px) scale(${s})` }], { ...opts, easing: FLY, fill: "forwards" });
         c.animate([{ opacity: 1 }, { opacity: 1, offset: 0.75 }, { opacity: 0 }], { duration: MOVE_MS, fill: "forwards" });
       });
       layer.work += gs.length;

@@ -103,13 +103,13 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     the same line it substitutes, the expression flies in from line n (which lights up), replaced glyphs fade.
     Match the concept, not raw symbols: trial PI pulls from the right side of line 1 (its shape becomes the trial);
     differentiate = one step from the line above, one beat: a $\frac{d}{dx}$ (`<span class="op">$\dfrac{d}{dx}$</span>`
-    in the step = `data-op`) flies in from the left with a bounce (bounce only on it) while the right side morphs, and
+    in the step = `data-op`) flies in from the left (ease-out, no overshoot) while the right side morphs, and
     joins $y$ into $\frac{dy}{dx}$; 2nd derivative = it flies onto $\frac{dy}{dx}$ and merges, the 2s appear. Left side must
     be `\mathllap`'d (it lands there). Pre-wrap: a line that will need two rows gets them
     from its first step (no re-wrap mid-animation). Lines between source and target fade right down during a move.
     `data-chain` = step plays straight after the one before, same beat, no pause (counter + Back count beats):
-    use for the 2nd half of one idea (e.g. compact copy, then unfold).
-    Substituting into an equation: copy it down compact, then unfold one term per row (chained). `data-anchor` puts
+    use for the 2nd half of one idea. Rarely needed: prefer one morph that does both.
+    Substituting into an equation: copy it down already split one term per row, in one beat (no separate wrap step). `data-anchor` puts
     a line's left edge on one shared column; `\mathllap{…}` parts hang left of it. Hang the labels
     ($\mathllap{\frac{dy}{dx}={}}$) and the coefficients/brackets ($\mathllap{{}+4(}$) so the right sides and the terms
     they replace sit on the same column ⇒ each sub drops straight down onto its row, replaced term fades as it lands.
