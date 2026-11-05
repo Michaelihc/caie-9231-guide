@@ -8,7 +8,7 @@
 // line, so nothing snaps at the end.
 window.CAIE_SOLVE = (() => {
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const MOVE_MS = 900, HOLD_MS = 1700, FADE_MS = 160;
+  const MOVE_MS = 900, HOLD_MS = 1100, FADE_MS = 160;
   const EASE = "cubic-bezier(.65,0,.35,1)";                       // ease-in-out, same for every glyph
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
   const blank = (t) => /^[\s​]*$/.test(t);
@@ -96,27 +96,21 @@ window.CAIE_SOLVE = (() => {
     return frames;
   }
 
-  // A = snapshot of the source, B = snapshot of the target (target line is laid out but hidden)
-  function morph(stage, A, B, inPlace) {
+  // A = snapshot of the source, B = snapshot of the target (target line is laid out but hidden),
+  // X = optional extra source line (substitution: the expression flies in from its own line; X stays put)
+  function morph(stage, A, B, inPlace, X = null) {
     const layer = el("div", "solve-layer");
     stage.append(layer);
     const ink = getComputedStyle(stage).color;
     const hl = getComputedStyle(stage).getPropertyValue("--hl-line").trim() || ink;
-    const usedA = new Set(), matchB = new Map();             // b index -> [a index, reordered?]
-    for (const [a, b] of lcsPairs(A, B)) { usedA.add(a); matchB.set(b, [a, false]); }
-    B.forEach((b, y) => {                                      // leftovers: same glyph moved out of order
-      if (matchB.has(y)) return;
-      let best = -1, bestD = Infinity;
-      A.forEach((a, x) => {
-        if (usedA.has(x) || a.key !== b.key) return;
-        const d = Math.abs(a.r.x - b.r.x) + Math.abs(a.r.y - b.r.y);
-        if (d < bestD) { bestD = d; best = x; }
-      });
-      if (best >= 0) { usedA.add(best); matchB.set(y, [best, true]); }
-    });
-    // split: the new line uses a quantity more often than the old one ⇒ extra copies fly out of the same source glyph
-    const quantity = (k) => /^[0-9A-Za-z\u0370-\u03ff]+$/.test(k);
-    const nearest = (list, g, ok) => {
+    const usedA = new Set(), matchB = new Map();             // b index -> { r: start box, lane: own curved lane? }
+    for (const [a, b] of lcsPairs(A, B)) { usedA.add(a); matchB.set(b, { r: A[a].r, lane: false }); }
+    if (X) {                                                  // substitution: unmatched run comes from X, in reading order
+      const rest = B.map((b, y) => [b, y]).filter(([, y]) => !matchB.has(y));
+      for (const [x, k] of lcsPairs(X, rest.map(([b]) => b))) matchB.set(rest[k][1], { r: X[x].r, lane: true });
+    }
+    const quantity = (k) => /^[0-9A-Za-zͰ-Ͽ]+$/.test(k);
+    const nearest = (list, g, ok = () => true) => {
       let best = -1, bestD = Infinity;
       list.forEach((o, n) => {
         if (o.key !== g.key || !ok(n)) return;
@@ -125,10 +119,17 @@ window.CAIE_SOLVE = (() => {
       });
       return best;
     };
+    B.forEach((b, y) => {                                      // same glyph moved out of order
+      if (matchB.has(y)) return;
+      const x = nearest(A, b, (n) => !usedA.has(n));
+      if (x >= 0) { usedA.add(x); matchB.set(y, { r: A[x].r, lane: true }); }
+    });
+    // split: the new line uses a quantity more often than before ⇒ extra copies fly out of the same source glyph
+    const pool = X ? [...A, ...X] : A;
     B.forEach((b, y) => {
       if (matchB.has(y) || !quantity(b.key)) return;
-      const x = nearest(A, b, () => true);
-      if (x >= 0) matchB.set(y, [x, true]);
+      const x = nearest(pool, b);
+      if (x >= 0) matchB.set(y, { r: pool[x].r, lane: true });
     });
     const lineH = Math.max(...B.map((b) => b.r.h), 16);
     const opts = { duration: MOVE_MS, easing: EASE, fill: "both" };
@@ -142,19 +143,19 @@ window.CAIE_SOLVE = (() => {
           { opacity: 1, color: ink }], { ...opts, easing: "linear" });
         return;
       }
-      const a = A[m[0]].r;
+      const a = m.r;
       const dx = a.x - b.r.x, dy = a.y - b.r.y, s = b.r.h ? a.h / b.r.h : 1;
-      if (!m[1]) {                                            // keeps order: slides with the block
+      if (!m.lane) {                                          // keeps order: slides with the block
         c.animate(curve(dx, dy, s, -Math.sign(dx) * Math.min(Math.abs(dx) * 0.05, 5)), opts);
-      } else {                                                // reordered: own lane, clear of the block
-        const bow = (dx > 0 ? -1 : 1) * Math.min(lineH * 0.9 + Math.abs(dx) * 0.18, lineH * 2.2);
+      } else {                                                // reordered / split / substituted: own lane
+        const bow = Math.abs(dy) > lineH ? 0 : (dx > 0 ? -1 : 1) * Math.min(lineH * 0.9 + Math.abs(dx) * 0.18, lineH * 2.2);
         c.animate(curve(dx, dy, s, bow), opts);
         c.animate([{ color: ink }, { color: hl, offset: 0.3 }, { color: hl, offset: 0.7 }, { color: ink }],
           { duration: MOVE_MS, easing: "linear", fill: "both" });
       }
     });
     leaving.forEach(([c, a]) => {
-      const y = quantity(a.key) ? nearest(B, a, () => true) : -1;
+      const y = !X && quantity(a.key) ? nearest(B, a) : -1;   // substitution: replaced glyphs just fade
       if (y >= 0) {                                           // merge: flies into the surviving copy, fades on arrival
         const t = B[y].r, dx = t.x - a.r.x, dy = t.y - a.r.y, s = a.r.h ? t.h / a.r.h : 1;
         c.animate([{ transform: "none" }, { transform: `translate(${dx}px, ${dy}px) scale(${s})` }],
@@ -184,7 +185,7 @@ window.CAIE_SOLVE = (() => {
     let lineNo = 1;
     const steps = [...list.children].map((li) => {
       lineNo = Number(li.dataset.line) || lineNo;
-      return { line: lineNo, words: li.querySelector(".w")?.innerHTML || "",
+      return { line: lineNo, from: Number(li.dataset.from) || 0, words: li.querySelector(".w")?.innerHTML || "",
         math: (li.querySelector(".katex-display") || li.querySelector(".katex"))?.outerHTML || "" };
     });
     list.hidden = true;
@@ -207,7 +208,7 @@ window.CAIE_SOLVE = (() => {
     const lineEl = (k) => el("div", "solve-line", steps[k].math);
     const mark = () => {
       [...lines.children].forEach((l, n) => {
-        l.classList.toggle("dim", n + 1 !== steps[i].line);
+        l.classList.toggle("dim", n + 1 !== steps[i].line && n + 1 !== steps[i].from);
         l.classList.toggle("final", i === steps.length - 1 && n + 1 === steps[i].line);
       });
     };
@@ -238,8 +239,11 @@ window.CAIE_SOLVE = (() => {
       busy = true;
       const k = i + 1, t = steps[k].line;
       const target = slot(t);
-      const source = target || slot(steps[i].line);       // in place: the line itself; new line: copy from active line
+      const from = steps[k].from ? slot(steps[k].from) : null;
+      // in place: the line itself (+ named line to pull from); new line: copy from named line, else active line
+      const source = target || from || slot(steps[i].line);
       const A = snapshot(stage, source);
+      const X = target && from ? snapshot(stage, from) : null;
       const before = new Map([...lines.children].map((l) => [l, l.getBoundingClientRect().top]));
       const next = lineEl(k);
       next.style.visibility = "hidden";
@@ -250,7 +254,7 @@ window.CAIE_SOLVE = (() => {
       glideLines(lines, before);
       await document.fonts.ready;                         // first use of a KaTeX font (big ∫, tall brackets) loads late
       const B = snapshot(stage, next);
-      const layer = morph(stage, A, B, !!target);
+      const layer = morph(stage, A, B, !!target, X);
       await new Promise((ok) => setTimeout(ok, MOVE_MS));
       next.style.visibility = "";                          // real line under the copies, same pixels ⇒ cross-fade
       await layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE_MS, easing: "ease-out", fill: "forwards" }).finished;

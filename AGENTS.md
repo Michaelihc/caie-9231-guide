@@ -97,6 +97,10 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
     Pick example numbers so no glyph appears from nothing or vanishes: avoid 1 as a coefficient, power or root
     (implicit in the line before, e.g. $m^2+2m+5$ ⇒ $m=-1\pm2i$ makes a 1 appear), avoid ½ from $\int x\,dx$ (use $2x$),
     avoid by-parts results like $(x-1)e^x$; leave a ratio unsimplified if that keeps its digits from the line above.
+    **How would a human solve it?** Animate what a person writes on paper, nothing done in the head: one
+    derivative per step, copy the equation down, substitute one term at a time. Many short steps, short pauses.
+    `data-from="n"` on a step = pull from line n: on a new line it copies line n (e.g. copy the equation down); on
+    the same line it substitutes, the expression flies in from line n (which lights up), replaced glyphs fade.
     Show every step a solver writes (e.g. $\int e^y\,dy=\int x\,dx$ before integrating). Check the example
     numerically first. Only exception to "no worked examples": as an animation, never as static text (the list is
     a no-JS fallback only). Chain related skills on one example where natural (DE: S3 → S4 → S6 on one equation).
