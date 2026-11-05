@@ -31,7 +31,7 @@ let html = fs.readFileSync(src, "utf8");
 html = html.replace(/<link rel="stylesheet" href="(?!https?:)([^"]+)">/g, (_, href) => {
   const file = path.resolve(dir, href);
   const css = fs.readFileSync(file, "utf8").replace(/url\(([^)"']+\.woff2)\)/g, (m, u) => `url(${dataUri(path.resolve(path.dirname(file), u))})`)
-    .replace(/url\(([^)"']+\.(woff|ttf))\)[^,;]*,?/g, ""); // keep woff2 only
+    .replace(/url\(([^)"']+\.(woff|ttf))\)[^,;}]*,?/g, ""); // keep woff2 only (stop at "}": never eat the next rule)
   return `<style>${css}</style>`;
 });
 html = html.replace(/<script src="(?!https?:)([^"]+)"><\/script>/g, (_, s) => `<script>${fs.readFileSync(path.resolve(dir, s), "utf8")}</script>`);
