@@ -1,0 +1,247 @@
+<section id="skills">
+  <h2>Skills</h2>
+
+  <div class="item" id="S1">
+    <span class="id">S1</span>
+    <div>
+      <span class="name">3 equations: unique solution or not</span>
+      <p class="trigger"><b>When:</b> 3 equations in $x,y,z$ with an unknown constant: "find the values of $a$ for which the system does not have a unique solution", or "show it has a unique solution and interpret geometrically".</p>
+      <ol class="steps">
+        <li>Left-side numbers, row by row ⇒ <span class="fx" data-f="Fsys">matrix $M$</span>.</li>
+        <li>Find $\det M$ (FP1). Expand along row/column with most zeros.</li>
+        <li>No unique solution ⇔ $\det M=0$ ⇒ solve for the constant.</li>
+        <li>Unique ⇔ $\det M\ne0$ ⇒ "3 planes meet at a single point".</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">start: no unique solution?</span>$$\begin{aligned}2x+3y+4z&=5\\4x+ky+2z&=-2\\6x+9y+10z&=11\end{aligned}$$</li>
+          <li data-line="2" data-from="1"><span class="w">left-side numbers ⇒ determinant $=0$</span>$$\begin{vmatrix}2&3&4\\4&k&2\\6&9&10\end{vmatrix}=0$$</li>
+          <li data-line="2"><span class="w">expand along row 1</span>$$2(10k-18)-3(40-12)+4(36-6k)=0$$</li>
+          <li data-line="2"><span class="w">multiply out</span>$$20k-36-84+144-24k=0$$</li>
+          <li data-line="2"><span class="w">collect</span>$$-4k+24=0$$</li>
+          <li data-line="2"><span class="w">solve</span>$$k=6$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>"Show unique for all $a>0$"</summary>
+          <ul>
+            <li>Factorise $\det M$; show each factor $\ne0$ in the given range.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S2">
+    <span class="id">S2</span>
+    <div>
+      <span class="name">det = 0: consistent or not, which picture</span>
+      <p class="trigger"><b>When:</b> $\det M=0$ case of S1: "show the system is consistent / inconsistent", "interpret geometrically", "find the value for which the system is consistent".</p>
+      <ol class="steps">
+        <li>Eliminate one variable twice: (eq 2) − multiple × (eq 1), (eq 3) − multiple × (eq 1).</li>
+        <li>det = 0 ⇒ the 2 new equations have the same left side (or multiples). Compare right sides.</li>
+        <li>Agree ⇒ consistent (infinitely many solutions). Contradiction (e.g. $0=2$) ⇒ inconsistent.</li>
+        <li>Any 2 rows of left-side numbers multiples? ⇒ <span class="fx" data-f="Fplanes">name the picture</span>.</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">start: $k=6$</span>$$\begin{aligned}2x+3y+4z&=5\\4x+6y+2z&=-2\\6x+9y+10z&=11\end{aligned}$$</li>
+          <li data-line="2"><span class="w">eq 2 − 2 × eq 1</span>$$(4x+6y+2z)-2(2x+3y+4z)=-2-2(5)$$</li>
+          <li data-line="2"><span class="w">simplify</span>$$-6z=-12\ \Rightarrow\ z=2$$</li>
+          <li data-line="3"><span class="w">eq 3 − 3 × eq 1</span>$$(6x+9y+10z)-3(2x+3y+4z)=11-3(5)$$</li>
+          <li data-line="3"><span class="w">simplify</span>$$-2z=-4\ \Rightarrow\ z=2$$</li>
+          <li data-line="3"><span class="w">same $z$ ⇒ consistent</span>$$z=2\ \text{both}\ \Rightarrow\ \text{consistent}$$</li>
+          <li data-line="4"><span class="w">no 2 rows multiples ⇒ picture</span>$$\text{sheaf: 3 planes share 1 line}$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>"Consistent for all values of $a$"</summary>
+          <ul>
+            <li>Find one solution that does not use $a$: set the variable next to $a$ to 0, solve the rest, check all 3 equations.</li>
+          </ul>
+        </details>
+        <details><summary>Find right-side value for consistent</summary>
+          <ul>
+            <li>Keep it as a letter through the elimination. Set the two results equal ⇒ solve.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S3">
+    <span class="id">S3</span>
+    <div>
+      <span class="name">Eigenvalues</span>
+      <p class="trigger"><b>When:</b> "Find the eigenvalues of $A$", "show that the characteristic equation of $A$ is $\lambda^3-\dots=0$", "state the eigenvalues".</p>
+      <ol class="steps">
+        <li>Triangular (zeros all below or all above diagonal) ⇒ eigenvalues = diagonal entries. Done.</li>
+        <li>Else <span class="fx" data-f="Fchar">$\det(A-\lambda I)=0$</span>: take $\lambda$ off each diagonal entry. Expand along row/column with most zeros.</li>
+        <li>Keep common factors like $(4-\lambda)$ outside; don't multiply out.</li>
+        <li>Solve. Cubic with no factor showing ⇒ factor theorem (try factors of constant term).</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">start</span>$$A=\begin{pmatrix}3&2&5\\0&4&0\\5&-2&3\end{pmatrix}$$</li>
+          <li data-line="2" data-from="1"><span class="w">take $\lambda$ off the diagonal, determinant $=0$</span>$$\begin{vmatrix}3-\lambda&2&5\\0&4-\lambda&0\\5&-2&3-\lambda\end{vmatrix}=0$$</li>
+          <li data-line="2"><span class="w">expand along row 2 (most zeros)</span>$$(4-\lambda)\big((3-\lambda)(3-\lambda)-5\times5\big)=0$$</li>
+          <li data-line="2"><span class="w">difference of two squares</span>$$(4-\lambda)(3-\lambda-5)(3-\lambda+5)=0$$</li>
+          <li data-line="2"><span class="w">simplify</span>$$(4-\lambda)(-2-\lambda)(8-\lambda)=0$$</li>
+          <li data-line="2"><span class="w">eigenvalues</span>$$\lambda=4,\ -2,\ 8$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>"Show char. equation is $\lambda^3-\dots=0$"</summary>
+          <ul>
+            <li>$\det(A-\lambda I)$ starts $-\lambda^3$ for 3×3. Multiply out, then × $(-1)$ to match.</li>
+          </ul>
+        </details>
+        <details><summary>Given an eigenvector, find its eigenvalue</summary>
+          <ul>
+            <li>Work out $A\V e$. Answer = number × $\V e$ ⇒ that number.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S4">
+    <span class="id">S4</span>
+    <div>
+      <span class="name">Eigenvectors</span>
+      <p class="trigger"><b>When:</b> "Find corresponding eigenvectors", or first half of "find $P$ and $D$" (S5).</p>
+      <ol class="steps">
+        <li>For each eigenvalue: write $A-\lambda I$.</li>
+        <li>3×3: <span class="fx" data-f="Fcross">eigenvector = cross product of 2 rows</span>. 2×2: row $(p\ \ q)$ ⇒ $\begin{pmatrix}q\\-p\end{pmatrix}$.</li>
+        <li>Divide out common factor ⇒ simplest whole numbers.</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">$\lambda=4$: take 4 off the diagonal</span>$$A-4I=\begin{pmatrix}-1&2&5\\0&0&0\\5&-2&-1\end{pmatrix}$$</li>
+          <li data-line="2"><span class="w">row 2 is zero ⇒ rows 1 and 3</span>$$\begin{pmatrix}-1\\2\\5\end{pmatrix}\times\begin{pmatrix}5\\-2\\-1\end{pmatrix}=\begin{pmatrix}8\\24\\-8\end{pmatrix}$$</li>
+          <li data-line="2"><span class="w">divide by 8</span>$$\V e_1=\begin{pmatrix}1\\3\\-1\end{pmatrix}$$</li>
+          <li data-line="1"><span class="w">$\lambda=-2$: take $-2$ off the diagonal</span>$$A+2I=\begin{pmatrix}5&2&5\\0&6&0\\5&-2&5\end{pmatrix}$$</li>
+          <li data-line="3"><span class="w">rows 1 and 2</span>$$\begin{pmatrix}5\\2\\5\end{pmatrix}\times\begin{pmatrix}0\\6\\0\end{pmatrix}=\begin{pmatrix}-30\\0\\30\end{pmatrix}$$</li>
+          <li data-line="3"><span class="w">divide by 30</span>$$\V e_2=\begin{pmatrix}-1\\0\\1\end{pmatrix}$$</li>
+          <li data-line="1"><span class="w">$\lambda=8$: rows 1, 3 are multiples ⇒ use rows 1, 2</span>$$A-8I=\begin{pmatrix}-5&2&5\\0&-4&0\\5&-2&-5\end{pmatrix}$$</li>
+          <li data-line="4"><span class="w">rows 1 and 2</span>$$\begin{pmatrix}-5\\2\\5\end{pmatrix}\times\begin{pmatrix}0\\-4\\0\end{pmatrix}=\begin{pmatrix}20\\0\\20\end{pmatrix}$$</li>
+          <li data-line="4"><span class="w">divide by 20</span>$$\V e_3=\begin{pmatrix}1\\0\\1\end{pmatrix}$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>Cross product gives $\V 0$</summary>
+          <ul>
+            <li>Those 2 rows are multiples (or one is zero). Pick a different pair.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S5">
+    <span class="id">S5</span>
+    <div>
+      <span class="name">Find $P$ and diagonal $D$</span>
+      <p class="trigger"><b>When:</b> "Find a matrix $P$ and a diagonal matrix $D$ such that $A^5=PDP^{-1}$" (or $A^{-1}$, $A^2$, $14A+24I$, …).</p>
+      <ol class="steps">
+        <li>Eigenvalues (S3), eigenvectors (S4).</li>
+        <li><span class="fx" data-f="Fdiag">$P$ = eigenvectors as columns</span>.</li>
+        <li>$D$ = diagonal of $f(\lambda)$, same order: $A^5\to\lambda^5$, $A^{-1}\to\frac1\lambda$, $14A+24I\to14\lambda+24$.</li>
+        <li>Don't work out $P^{-1}$ unless asked.</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">from S3, S4: want $A^5=PDP^{-1}$</span>$$\lambda=4,\ -2,\ 8:\quad\begin{pmatrix}1\\3\\-1\end{pmatrix},\ \begin{pmatrix}-1\\0\\1\end{pmatrix},\ \begin{pmatrix}1\\0\\1\end{pmatrix}$$</li>
+          <li data-line="2" data-from="1"><span class="w">eigenvectors side by side</span>$$P=\begin{pmatrix}1&-1&1\\3&0&0\\-1&1&1\end{pmatrix}$$</li>
+          <li data-line="3" data-from="1"><span class="w">eigenvalues down the diagonal, same order</span>$$\begin{pmatrix}4&0&0\\0&-2&0\\0&0&8\end{pmatrix}$$</li>
+          <li data-line="3"><span class="w">$A^5$ ⇒ each to the power 5</span>$$D=\begin{pmatrix}4^5&0&0\\0&(-2)^5&0\\0&0&8^5\end{pmatrix}$$</li>
+          <li data-line="3"><span class="w">work out</span>$$D=\begin{pmatrix}1024&0&0\\0&-32&0\\0&0&32768\end{pmatrix}$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>Mark scheme traps</summary>
+          <ul>
+            <li>Column of zeros in $P$ ⇒ 0 marks for $P$.</li>
+            <li>Order in $D$ must match order of columns in $P$.</li>
+          </ul>
+        </details>
+        <details><summary>Given eigenvalues + eigenvectors, find $A$</summary>
+          <ul>
+            <li>$A=PDP^{-1}$: build $P$, $D$; find $P^{-1}$ (FP1, or S6 on $P$); multiply out.</li>
+            <li>$A^{-1}$ wanted ⇒ $PD^{-1}P^{-1}$. Given $P^{-1}AP=D$ ⇒ $A=PDP^{-1}$.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S6">
+    <span class="id">S6</span>
+    <div>
+      <span class="name">Use characteristic equation: inverse, powers</span>
+      <p class="trigger"><b>When:</b> "Use the characteristic equation of $A$ to find $A^{-1}$", "… to find $A^3$", "… to show $A^4=pA^2+qI$".</p>
+      <ol class="steps">
+        <li>Characteristic equation (S3), multiplied out: $\lambda^3+a\lambda^2+b\lambda+c=0$. Triangular ⇒ multiply out $(\lambda-d_1)(\lambda-d_2)(\lambda-d_3)$.</li>
+        <li><span class="fx" data-f="Fch">Swap $\lambda\to A$, $c\to cI$</span>: $A^3+aA^2+bA+cI=O$.</li>
+        <li>Inverse: multiply by $A^{-1}$ ⇒ $A^2+aA+bI+cA^{-1}=O$ ⇒ make $A^{-1}$ subject. Work out $A^2$.</li>
+        <li>Higher power: make $A^3$ subject; multiply by $A$; replace $A^3$ again.</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">from S3</span>$$(4-\lambda)(-2-\lambda)(8-\lambda)=0$$</li>
+          <li data-line="1"><span class="w">multiply out</span>$$-\lambda^3+10\lambda^2-8\lambda-64=0$$</li>
+          <li data-line="1"><span class="w">× $(-1)$</span>$$\lambda^3-10\lambda^2+8\lambda+64=0$$</li>
+          <li data-line="1"><span class="w">swap $\lambda\to A$, $64\to64I$</span>$$A^3-10A^2+8A+64I=O$$</li>
+          <li data-line="1"><span class="w">multiply by $A^{-1}$</span>$$A^2-10A+8I+64A^{-1}=O$$</li>
+          <li data-line="1"><span class="w">make $A^{-1}$ the subject</span>$$A^{-1}=-\tfrac{1}{64}\left(A^2-10A+8I\right)$$</li>
+          <li data-line="2"><span class="w">work out $A^2$</span>$$A^2=\begin{pmatrix}34&4&30\\0&16&0\\30&-4&34\end{pmatrix}$$</li>
+          <li data-line="3"><span class="w">$A^2-10A+8I$</span>$$\begin{pmatrix}34-30+8&4-20&30-50\\0&16-40+8&0\\30-50&-4+20&34-30+8\end{pmatrix}$$</li>
+          <li data-line="3"><span class="w">work out</span>$$\begin{pmatrix}12&-16&-20\\0&-16&0\\-20&16&12\end{pmatrix}$$</li>
+          <li data-line="1" data-from="3"><span class="w">sub in, times $-\frac{1}{64}$</span>$$A^{-1}=\frac{1}{64}\begin{pmatrix}-12&16&20\\0&16&0\\20&-16&-12\end{pmatrix}$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>Inverse of $A^2$, or $A^{-2}$ in terms of $A$</summary>
+          <ul>
+            <li>$(A^2)^{-1}=(A^{-1})^2$. Or multiply the swapped equation by $A^{-2}$ and replace any $A^{-1}$ using step 3.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S7">
+    <span class="id">S7</span>
+    <div>
+      <span class="name">Prove eigenvalue of a related matrix</span>
+      <p class="trigger"><b>When:</b> "$\lambda$ is an eigenvalue of $A$ with eigenvector $\V e$. Show that $\V e$ is an eigenvector of $A^3$ with eigenvalue $\lambda^3$" (or $A^{-1}$, $AB$, $A+kI$).</p>
+      <ol class="steps">
+        <li>Write <span class="fx" data-f="Fev">$A\V e=\lambda\V e$</span> (and $B\V e=\mu\V e$ if given).</li>
+        <li>Multiply both sides on the left by the matrix needed ($A$, $A^{-1}$, $B$).</li>
+        <li>Replace each $A\V e$ by $\lambda\V e$. Numbers move to the front.</li>
+        <li>End with (matrix)$\,\V e$ = (number)$\,\V e$. State: eigenvector $\V e$, <span class="fx" data-f="Fprop">eigenvalue = that number</span>.</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">start</span>$$A\V e=\lambda\V e$$</li>
+          <li data-line="2" data-from="1"><span class="w">multiply on left by $A$</span>$$A(A\V e)=A(\lambda\V e)$$</li>
+          <li data-line="2"><span class="w">number to the front</span>$$A^2\V e=\lambda(A\V e)$$</li>
+          <li data-line="2" data-from="1"><span class="w">replace $A\V e$ by $\lambda\V e$</span>$$A^2\V e=\lambda(\lambda\V e)$$</li>
+          <li data-line="2"><span class="w">tidy</span>$$A^2\V e=\lambda^2\V e$$</li>
+          <li data-line="3" data-from="2"><span class="w">multiply on left by $A$ again</span>$$A(A^2\V e)=A(\lambda^2\V e)$$</li>
+          <li data-line="3"><span class="w">number to the front</span>$$A^3\V e=\lambda^2(A\V e)$$</li>
+          <li data-line="3" data-from="1"><span class="w">replace $A\V e$ by $\lambda\V e$</span>$$A^3\V e=\lambda^2(\lambda\V e)$$</li>
+          <li data-line="3"><span class="w">tidy ⇒ eigenvalue $\lambda^3$</span>$$A^3\V e=\lambda^3\V e$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>$A^{-1}$</summary>
+          <ul>
+            <li>Multiply by $A^{-1}$: $\V e=\lambda A^{-1}\V e$. $A$ non-singular ⇒ $\lambda\ne0$ ⇒ divide: $A^{-1}\V e=\frac1\lambda\V e$.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+</section>

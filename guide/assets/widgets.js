@@ -60,6 +60,37 @@ window.CAIE_WIDGETS = (() => {
   const range = (a, z, step) => Array.from({ length: Math.floor((z - a) / step + 1e-9) + 1 }, (_, i) => a + i * step);
 
   return {
+    // Ae=λe (FP2 matrices): drag the arrow round. Matrix output usually turns off the arrow's line;
+    // on 2 directions it stays on the line ⇒ eigenvector, stretch factor = eigenvalue.
+    "eigen-drag"(panel) {
+      const M = [[2, 1], [1, 2]];
+      const { b, C, text, pt, hidden } = setup(panel, [-5.2, 5.2, 5.2, -5.2], {
+        keepAspect: true, note: "Matrix (2 1 / 1 2). Drag the arrow tip round the circle.",
+      });
+      const O = hidden([0, 0]);
+      const R = 1.6;
+      const ring = b.create("circle", [O, R], { strokeColor: C.rule, strokeWidth: 1, dash: 2, fixed: true, highlight: false });
+      const tip = b.create("glider", [R * Math.cos(0.5), R * Math.sin(0.5), ring],
+        { name: "", size: 6, fillColor: C.ink, strokeColor: C.ink, highlight: false, showInfobox: false });
+      const v = () => [tip.X(), tip.Y()];
+      const Av = () => { const [x, y] = v(); return [M[0][0] * x + M[0][1] * y, M[1][0] * x + M[1][1] * y]; };
+      const turn = () => { const [x, y] = v(), [p, q] = Av(); return Math.atan2(x * q - y * p, x * p + y * q); };
+      const on = () => Math.abs(Math.sin(turn())) < 0.035;
+      const ratio = () => { const [x, y] = v(), [p, q] = Av(); return (x * p + y * q) / (x * x + y * y); };
+      tip.on("up", () => {                                       // near an eigen direction ⇒ snap onto it
+        if (Math.abs(Math.sin(turn())) > 0.12) return;
+        const a = Math.atan2(tip.Y(), tip.X()), dirs = [Math.PI / 4, -Math.PI / 4, 3 * Math.PI / 4, -3 * Math.PI / 4];
+        const best = dirs.reduce((m, d) => (Math.abs(Math.sin(a - d)) < Math.abs(Math.sin(a - m)) ? d : m), dirs[0]);
+        tip.moveTo([R * Math.cos(best), R * Math.sin(best)]);
+      });
+      b.create("line", [O, tip], { strokeColor: () => (on() ? C.hl : C.rule), strokeWidth: () => (on() ? 3 : 1), dash: 2, fixed: true, highlight: false });
+      const out = hidden([() => Av()[0], () => Av()[1]]);
+      b.create("arrow", [O, out], { strokeColor: C.pen, strokeWidth: 4, fixed: true, highlight: false });
+      b.create("arrow", [O, tip], { strokeColor: C.ink, strokeWidth: 3, fixed: true, highlight: false });
+      text(-5, 4.6, () => (on() ? `On its line: matrix × arrow = ${f1(ratio())} × arrow` : "Matrix × arrow turns off the arrow's line"));
+      text(-5, 3.9, () => (on() ? `⇒ eigenvector, eigenvalue ${f1(ratio())}` : "Find the 2 directions where it doesn't"), { color: C.ink2 });
+    },
+
     // F1 (vectors): drag both arrow tips. Shadow of arrow 2 on arrow 1; dot = length × shadow = component sum.
     "dot-shadow"(panel) {
       const { b, C, text, pt, hidden } = setup(panel, [-1.6, 4.4, 6.4, -0.6], {

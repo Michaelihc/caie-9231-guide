@@ -1,0 +1,140 @@
+<section id="formulas" class="store">
+
+  <div class="item nomf inline" id="Fsys">
+    <span class="id">Mx=b</span>
+    <div>
+      <span class="name">3 equations = 1 matrix equation</span>
+      <div class="hl">$$\begin{aligned}a_1x+b_1y+c_1z&=d_1\\a_2x+b_2y+c_2z&=d_2\\a_3x+b_3y+c_3z&=d_3\end{aligned}\iff\begin{pmatrix}a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\end{pmatrix}\cvec{x}{y}{z}=\cvec{d_1}{d_2}{d_3}$$</div>
+      <div class="hl">$$\det M\ne0\iff\text{unique solution}\iff\text{3 planes meet at 1 point}$$</div>
+      <div class="word">
+        <p>Left-side numbers, row by row, make the matrix. Right sides make the column.</p>
+        <p>Determinant not 0 ⇔ exactly one solution ⇔ three planes cross at one point.</p>
+        <p>Determinant 0 ⇒ no solutions or infinitely many: never exactly one.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Determinant not 0 ⇒ inverse exists ⇒ multiply both sides by it on the left ⇒ one answer, $\cvec xyz=M^{-1}\cvec{d_1}{d_2}{d_3}$.</li>
+          <li>Each equation is a plane (row of left-side numbers = plane normal). One answer = one point on all three.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fplanes">
+    <span class="id">planes</span>
+    <div>
+      <span class="name">det = 0: which picture</span>
+      <div class="hl">$$\begin{array}{l|l|l}\det M=0 & \text{no 2 planes parallel} & \text{2 planes parallel}\\\hline\text{consistent} & \text{sheaf: 3 planes share 1 line} & \text{2 planes identical, 3rd cuts them in a line}\\\text{inconsistent} & \text{triangular prism} & \text{2 parallel planes (not identical), 3rd cuts both}\end{array}$$</div>
+      <p class="note">Parallel ⇔ rows of left-side numbers are multiples. Identical ⇔ whole equations (right side too) are multiples.</p>
+      <div class="word">
+        <p>Consistent = at least one solution. Inconsistent = none.</p>
+        <p>Consistent, no parallel pair ⇒ all three planes hinge on one line, like pages of a book (sheaf).</p>
+        <p>Inconsistent, no parallel pair ⇒ each pair meets in a line, the three lines are parallel, no common point (prism).</p>
+        <p>Learn it: name the picture from the table.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fev">
+    <span class="id">Ae=λe</span>
+    <div>
+      <span class="name">Eigenvalue, eigenvector</span>
+      <div class="hl">$$A\V e=\lambda\V e,\qquad \V e\ne\V 0$$</div>
+      <p class="note">Any nonzero multiple of $\V e$ is also an eigenvector, same $\lambda$.</p>
+      <div class="word">
+        <p>Matrix times eigenvector = number times same eigenvector. Number = eigenvalue.</p>
+        <p>Picture: matrix only stretches the eigenvector (or flips it), never turns it off its line.</p>
+      </div>
+      <div class="try" data-widget="eigen-drag"></div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fchar">
+    <span class="id">det(A−λI)</span>
+    <div>
+      <span class="name">Characteristic equation</span>
+      <div class="hl">$$\det(A-\lambda I)=0$$</div>
+      <p class="note">Triangular (all zeros below diagonal, or all above) ⇒ eigenvalues = diagonal entries.</p>
+      <div class="word">
+        <p>Take $\lambda$ off every diagonal entry. Determinant of that = 0. Roots = eigenvalues.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Eigen equation $A\V e=\lambda\V e$ ⇒ $(A-\lambda I)\V e=\V 0$.</li>
+          <li>Nonzero eigenvector solves it ⇒ not the unique solution $\V 0$ ⇒ determinant of $A-\lambda I$ = 0.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fcross">
+    <span class="id">row×row</span>
+    <div>
+      <span class="name">Eigenvector from rows</span>
+      <div class="hl">$$\V e=(\text{row } i\text{ of }A-\lambda I)\times(\text{row } j\text{ of }A-\lambda I)\qquad 2\times2:\ \text{row }(p\ \ q)\Rightarrow\V e=\begin{pmatrix}q\\-p\end{pmatrix}$$</div>
+      <p class="note">Pick 2 rows that are not multiples (and not zero). Answer $\V 0$ ⇒ picked a bad pair, try another.</p>
+      <div class="word">
+        <p>Eigenvector is ⊥ every row of $A-\lambda I$. Cross product of two rows is ⊥ both ⇒ eigenvector.</p>
+        <p>Picture: rows are two arrows; eigenvector sticks straight out of the flat they span.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>$(A-\lambda I)\V e=\V 0$ row by row: each row · eigenvector = 0 ⇒ eigenvector ⊥ each row.</li>
+          <li>Vector ⊥ two given arrows = their cross product (or a multiple).</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fdiag">
+    <span class="id">PDP⁻¹</span>
+    <div>
+      <span class="name">Diagonal form</span>
+      <div class="hl">$$A=PDP^{-1},\qquad A^n=PD^nP^{-1},\qquad f(A)=P\,f(D)\,P^{-1}$$</div>
+      <div class="hl">$$P=\big(\V e_1\ \ \V e_2\ \ \V e_3\big),\qquad D=\begin{pmatrix}\lambda_1&0&0\\0&\lambda_2&0\\0&0&\lambda_3\end{pmatrix}$$</div>
+      <p class="note">Same order in $P$ and $D$. $f(D)$: apply $f$ to each diagonal entry, e.g. $A^{-1}\to\frac1\lambda$, $14A+24I\to14\lambda+24$.</p>
+      <div class="word">
+        <p>Eigenvectors side by side = $P$. Eigenvalues down the diagonal, same order = $D$.</p>
+        <p>Power (or inverse, or any polynomial) of $A$ ⇒ do it to the diagonal numbers only; $P$ stays.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>$A$ times each eigenvector column = eigenvalue × that column ⇒ $AP=PD$ ⇒ $A=PDP^{-1}$.</li>
+          <li>$A^2=PDP^{-1}PDP^{-1}=PD^2P^{-1}$: middle $P^{-1}P$ cancels. Same for any power.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fch">
+    <span class="id">C–H</span>
+    <div>
+      <span class="name">Cayley–Hamilton</span>
+      <div class="hl">$$\lambda^3+a\lambda^2+b\lambda+c=0\;\Rightarrow\;A^3+aA^2+bA+cI=O$$</div>
+      <div class="word">
+        <p>Matrix satisfies its own characteristic equation. Swap $\lambda\to A$; plain number $c\to cI$; right side 0 → zero matrix.</p>
+        <p>Learn it: proof not needed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf inline" id="Fprop">
+    <span class="id">f(λ)</span>
+    <div>
+      <span class="name">Eigenvalues of related matrices</span>
+      <div class="hl">$$A\V e=\lambda\V e,\ B\V e=\mu\V e\;\Rightarrow\;\begin{array}{c|c|c|c|c}A^n & A^{-1} & A+kI & AB & A+B\\\hline\lambda^n & \frac1\lambda & \lambda+k & \lambda\mu & \lambda+\mu\end{array}$$</div>
+      <p class="note">Same eigenvector $\V e$ every time.</p>
+      <div class="word">
+        <p>Whatever you do to $A$, do to $\lambda$. Eigenvector stays.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Start $A\V e=\lambda\V e$. Multiply on left by $A$ (or $A^{-1}$, $B$).</li>
+          <li>Swap each $A\V e$ for $\lambda\V e$; number $\lambda$ slides to the front.</li>
+          <li>End: (new matrix)$\,\V e$ = (number)$\,\V e$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+</section>
