@@ -39,8 +39,8 @@
       <p class="trigger"><b>When:</b> $\det M=0$ case of S1: "show the system is consistent / inconsistent", "interpret geometrically", "find the value for which the system is consistent".</p>
       <ol class="steps">
         <li>Eliminate one variable twice: (eq 2) − multiple × (eq 1), (eq 3) − multiple × (eq 1).</li>
-        <li>det = 0 ⇒ the 2 new equations have the same left side (or multiples). Compare right sides.</li>
-        <li>Agree ⇒ consistent (infinitely many solutions). Contradiction (e.g. $0=2$) ⇒ inconsistent.</li>
+        <li>det = 0 ⇒ the 2 new equations have the same left side up to a multiple (maybe negative). Solve both for the same variable.</li>
+        <li>Same value ⇒ consistent (infinitely many solutions). Different values (or $0=2$) ⇒ inconsistent.</li>
         <li>Any 2 rows of left-side numbers multiples? ⇒ <span class="fx" data-f="Fplanes">name the picture</span>.</li>
       </ol>
       <div class="solve">
@@ -73,7 +73,7 @@
     <span class="id">S3</span>
     <div>
       <span class="name">Eigenvalues</span>
-      <p class="trigger"><b>When:</b> "Find the eigenvalues of $A$", "show that the characteristic equation of $A$ is $\lambda^3-\dots=0$", "state the eigenvalues".</p>
+      <p class="trigger"><b>When:</b> "Find the eigenvalues of $A$", "show that the eigenvalues of $A$ are $-1$, $1$, $5$", "show that the characteristic equation of $A$ is $\lambda^3-\dots=0$", "state the eigenvalues".</p>
       <ol class="steps">
         <li>Triangular (zeros all below or all above diagonal) ⇒ eigenvalues = diagonal entries. Done.</li>
         <li>Else <span class="fx" data-f="Fchar">$\det(A-\lambda I)=0$</span>: take $\lambda$ off each diagonal entry. Expand along row/column with most zeros.</li>
@@ -94,6 +94,11 @@
         <details><summary>"Show char. equation is $\lambda^3-\dots=0$"</summary>
           <ul>
             <li>$\det(A-\lambda I)$ starts $-\lambda^3$ for 3×3. Multiply out, then × $(-1)$ to match.</li>
+          </ul>
+        </details>
+        <details><summary>"Show the eigenvalues are …"</summary>
+          <ul>
+            <li>Still expand $\det(A-\lambda I)=0$ and solve. Plugging in the given values is not what the mark scheme wants.</li>
           </ul>
         </details>
         <details><summary>Given an eigenvector, find its eigenvalue</summary>
@@ -179,7 +184,7 @@
     <span class="id">S6</span>
     <div>
       <span class="name">Use characteristic equation: inverse, powers</span>
-      <p class="trigger"><b>When:</b> "Use the characteristic equation of $A$ to find $A^{-1}$", "… to find $A^3$", "… to show $A^4=pA^2+qI$".</p>
+      <p class="trigger"><b>When:</b> "Use the characteristic equation of $A$ to find $A^{-1}$", "… to find $A^3$", "… to show $A^4=pA^2+qI$", "… to show $(A-2I)^3=aA^2+bA+cI$".</p>
       <ol class="steps">
         <li>Characteristic equation (S3), multiplied out: $\lambda^3+a\lambda^2+b\lambda+c=0$. Triangular ⇒ multiply out $(\lambda-d_1)(\lambda-d_2)(\lambda-d_3)$.</li>
         <li><span class="fx" data-f="Fch">Swap $\lambda\to A$, $c\to cI$</span>: $A^3+aA^2+bA+cI=O$.</li>
@@ -203,7 +208,13 @@
       <div class="branches">
         <details><summary>Inverse of $A^2$, or $A^{-2}$ in terms of $A$</summary>
           <ul>
-            <li>$(A^2)^{-1}=(A^{-1})^2$. Or multiply the swapped equation by $A^{-2}$ and replace any $A^{-1}$ using step 3.</li>
+            <li>$(A^2)^{-1}=(A^{-1})^2$: find $A^{-1}$ (step 3), then square that matrix.</li>
+            <li>$A^{-2}$ as $pI+qA$: multiply the swapped equation by $A^{-2}$; replace any $A^{-1}$ using step 3.</li>
+          </ul>
+        </details>
+        <details><summary>$(A-kI)^3$ in terms of $A^2$, $A$, $I$</summary>
+          <ul>
+            <li>Expand like $(x-k)^3$ ($A$ and $I$ commute): $A^3-3kA^2+3k^2A-k^3I$. Replace $A^3$ from step 2.</li>
           </ul>
         </details>
       </div>
