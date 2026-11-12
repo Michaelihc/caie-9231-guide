@@ -7,7 +7,7 @@
       <span class="name">3 equations: unique solution or not</span>
       <p class="trigger"><b>When:</b> 3 equations in $x,y,z$ with an unknown constant: "find the values of $a$ for which the system does not have a unique solution", or "show it has a unique solution and interpret geometrically".</p>
       <ol class="steps">
-        <li>Left-side numbers, row by row ⇒ <span class="fx" data-f="Fsys">matrix $M$</span>.</li>
+        <li>Left-side numbers, row by row ⇒ <span class="fx" data-f="Fsys">matrix $M$</span>. Missing variable ⇒ 0.</li>
         <li>Find $\det M$ (FP1). Expand along row/column with most zeros.</li>
         <li>No unique solution ⇔ $\det M=0$ ⇒ solve for the constant.</li>
         <li>Unique ⇔ $\det M\ne0$ ⇒ "3 planes meet at a single point".</li>
@@ -39,8 +39,8 @@
       <p class="trigger"><b>When:</b> $\det M=0$ case of S1: "show the system is consistent / inconsistent", "interpret geometrically", "find the value for which the system is consistent".</p>
       <ol class="steps">
         <li>Eliminate one variable twice: (eq 2) − multiple × (eq 1), (eq 3) − multiple × (eq 1).</li>
-        <li>det = 0 ⇒ the 2 new equations have the same left side up to a multiple (maybe negative). Solve both for the same variable.</li>
-        <li>Same value ⇒ consistent (infinitely many solutions). Different values (or $0=2$) ⇒ inconsistent.</li>
+        <li>det = 0 ⇒ the 2 new equations have the same left side up to a multiple (maybe negative). One variable left ⇒ solve both for it. Two left ⇒ scale one so left sides match.</li>
+        <li>Same value (same right side) ⇒ consistent: infinitely many solutions (S3). Different (or $0=2$) ⇒ inconsistent: no solution.</li>
         <li>Any 2 rows of left-side numbers multiples? ⇒ <span class="fx" data-f="Fplanes">name the picture</span>.</li>
       </ol>
       <div class="solve">
@@ -71,6 +71,43 @@
 
   <div class="item" id="S3">
     <span class="id">S3</span>
+    <div>
+      <span class="name">Solve a consistent system</span>
+      <p class="trigger"><b>When:</b> "For this value of $k$, solve the system of equations", "find the general solution", "find the solution for which $x+y+z=1$".</p>
+      <ol class="steps">
+        <li>$\det M\ne0$ ⇒ one point: eliminate, or <span class="fx" data-f="Fsys">$M^{-1}\times$ right sides</span>.</li>
+        <li>$\det M=0$, consistent (S2) ⇒ only 2 different equations: eq 1 and one eliminated equation.</li>
+        <li>Set one unknown variable $=t$. Not one S2 already fixed (like $z=2$).</li>
+        <li>Solve the 2 equations for the other variables in terms of $t$.</li>
+        <li>Write as a line: $\V r=$ point $+\,t\,\times$ direction. All 3 planes share it.</li>
+      </ol>
+      <div class="solve">
+        <ol class="solve-steps">
+          <li data-line="1"><span class="w">from S2: consistent, $z=2$</span>$$2x+3y+4z=5,\quad z=2$$</li>
+          <li data-line="2" data-from="1"><span class="w">copy eq 1 down</span>$$2x+3y+4z=5$$</li>
+          <li data-line="2" data-from="1"><span class="w">sub $z=2$</span>$$2x+3y+4(2)=5$$</li>
+          <li data-line="2"><span class="w">simplify</span>$$2x+3y+8=5$$</li>
+          <li data-line="2"><span class="w">take 8 over</span>$$2x+3y=-3$$</li>
+          <li data-line="3"><span class="w">set $y=2t$</span>$$y=2t$$</li>
+          <li data-line="2" data-from="3"><span class="w">sub $y=2t$</span>$$2x+3(2t)=-3$$</li>
+          <li data-line="2"><span class="w">simplify</span>$$2x+6t=-3$$</li>
+          <li data-line="2"><span class="w">make $x$ the subject</span>$$x=-\tfrac32-3t$$</li>
+          <li data-line="4"><span class="w">$x$, $y$, $z$ as one column</span>$$\cvec xyz=\cvec{-\frac32-3t}{2t}{2}$$</li>
+          <li data-line="4"><span class="w">split: point $+\,t\,\times$ direction</span>$$\cvec xyz=\cvec{-\frac32}{0}{2}+t\cvec{-3}{2}{0}$$</li>
+        </ol>
+      </div>
+      <div class="branches">
+        <details><summary>"Find the solution for which $x+y+z=1$"</summary>
+          <ul>
+            <li>Sub the $t$ forms of $x$, $y$, $z$ into the extra equation. Solve for $t$, sub back.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="S4">
+    <span class="id">S4</span>
     <div>
       <span class="name">Eigenvalues</span>
       <p class="trigger"><b>When:</b> "Find the eigenvalues of $A$", "show that the eigenvalues of $A$ are $-1$, $1$, $5$", "show that the characteristic equation of $A$ is $\lambda^3-\dots=0$", "state the eigenvalues".</p>
@@ -110,11 +147,11 @@
     </div>
   </div>
 
-  <div class="item" id="S4">
-    <span class="id">S4</span>
+  <div class="item" id="S5">
+    <span class="id">S5</span>
     <div>
       <span class="name">Eigenvectors</span>
-      <p class="trigger"><b>When:</b> "Find corresponding eigenvectors", or first half of "find $P$ and $D$" (S5).</p>
+      <p class="trigger"><b>When:</b> "Find corresponding eigenvectors", or first half of "find $P$ and $D$" (S6).</p>
       <ol class="steps">
         <li>For each eigenvalue: write $A-\lambda I$.</li>
         <li>3×3: <span class="fx" data-f="Fcross">eigenvector = cross product of 2 rows</span>. 2×2: row $(p\ \ q)$ ⇒ $\begin{pmatrix}q\\-p\end{pmatrix}$.</li>
@@ -143,20 +180,20 @@
     </div>
   </div>
 
-  <div class="item" id="S5">
-    <span class="id">S5</span>
+  <div class="item" id="S6">
+    <span class="id">S6</span>
     <div>
       <span class="name">Find $P$ and diagonal $D$</span>
       <p class="trigger"><b>When:</b> "Find a matrix $P$ and a diagonal matrix $D$ such that $A^5=PDP^{-1}$" (or $A^{-1}$, $A^2$, $14A+24I$, …).</p>
       <ol class="steps">
-        <li>Eigenvalues (S3), eigenvectors (S4).</li>
+        <li>Eigenvalues (S4), eigenvectors (S5).</li>
         <li><span class="fx" data-f="Fdiag">$P$ = eigenvectors as columns</span>.</li>
         <li>$D$ = diagonal of $f(\lambda)$, same order: $A^5\to\lambda^5$, $A^{-1}\to\frac1\lambda$, $14A+24I\to14\lambda+24$.</li>
         <li>Don't work out $P^{-1}$ unless asked.</li>
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">from S3, S4: want $A^5=PDP^{-1}$</span>$$\lambda=4,\ -2,\ 8:\quad\begin{pmatrix}1\\3\\-1\end{pmatrix},\ \begin{pmatrix}-1\\0\\1\end{pmatrix},\ \begin{pmatrix}1\\0\\1\end{pmatrix}$$</li>
+          <li data-line="1"><span class="w">from S4, S5: want $A^5=PDP^{-1}$</span>$$\lambda=4,\ -2,\ 8:\quad\begin{pmatrix}1\\3\\-1\end{pmatrix},\ \begin{pmatrix}-1\\0\\1\end{pmatrix},\ \begin{pmatrix}1\\0\\1\end{pmatrix}$$</li>
           <li data-line="2" data-from="1"><span class="w">eigenvectors side by side</span>$$P=\begin{pmatrix}1&-1&1\\3&0&0\\-1&1&1\end{pmatrix}$$</li>
           <li data-line="3" data-from="1"><span class="w">eigenvalues down the diagonal, same order</span>$$\begin{pmatrix}4&0&0\\0&-2&0\\0&0&8\end{pmatrix}$$</li>
           <li data-line="3"><span class="w">$A^5$ ⇒ each to the power 5</span>$$D=\begin{pmatrix}4^5&0&0\\0&(-2)^5&0\\0&0&8^5\end{pmatrix}$$</li>
@@ -172,7 +209,7 @@
         </details>
         <details><summary>Given eigenvalues + eigenvectors, find $A$</summary>
           <ul>
-            <li>$A=PDP^{-1}$: build $P$, $D$; find $P^{-1}$ (FP1, or S6 on $P$); multiply out.</li>
+            <li>$A=PDP^{-1}$: build $P$, $D$; find $P^{-1}$ (FP1, or S7 on $P$); multiply out.</li>
             <li>$A^{-1}$ wanted ⇒ $PD^{-1}P^{-1}$. Given $P^{-1}AP=D$ ⇒ $A=PDP^{-1}$.</li>
           </ul>
         </details>
@@ -180,20 +217,20 @@
     </div>
   </div>
 
-  <div class="item" id="S6">
-    <span class="id">S6</span>
+  <div class="item" id="S7">
+    <span class="id">S7</span>
     <div>
       <span class="name">Use characteristic equation: inverse, powers</span>
       <p class="trigger"><b>When:</b> "Use the characteristic equation of $A$ to find $A^{-1}$", "… to find $A^3$", "… to show $A^4=pA^2+qI$", "… to show $(A-2I)^3=aA^2+bA+cI$".</p>
       <ol class="steps">
-        <li>Characteristic equation (S3), multiplied out: $\lambda^3+a\lambda^2+b\lambda+c=0$. Triangular ⇒ multiply out $(\lambda-d_1)(\lambda-d_2)(\lambda-d_3)$.</li>
+        <li>Characteristic equation (S4), multiplied out: $\lambda^3+a\lambda^2+b\lambda+c=0$. Triangular ⇒ multiply out $(\lambda-d_1)(\lambda-d_2)(\lambda-d_3)$.</li>
         <li><span class="fx" data-f="Fch">Swap $\lambda\to A$, $c\to cI$</span>: $A^3+aA^2+bA+cI=O$.</li>
         <li>Inverse: multiply by $A^{-1}$ ⇒ $A^2+aA+bI+cA^{-1}=O$ ⇒ make $A^{-1}$ subject. Work out $A^2$.</li>
         <li>Higher power: make $A^3$ subject; multiply by $A$; replace $A^3$ again.</li>
       </ol>
       <div class="solve">
         <ol class="solve-steps">
-          <li data-line="1"><span class="w">from S3</span>$$(4-\lambda)(-2-\lambda)(8-\lambda)=0$$</li>
+          <li data-line="1"><span class="w">from S4</span>$$(4-\lambda)(-2-\lambda)(8-\lambda)=0$$</li>
           <li data-line="1"><span class="w">multiply out</span>$$-\lambda^3+10\lambda^2-8\lambda-64=0$$</li>
           <li data-line="1"><span class="w">× $(-1)$</span>$$\lambda^3-10\lambda^2+8\lambda+64=0$$</li>
           <li data-line="1"><span class="w">swap $\lambda\to A$, $64\to64I$</span>$$A^3-10A^2+8A+64I=O$$</li>
@@ -221,8 +258,8 @@
     </div>
   </div>
 
-  <div class="item" id="S7">
-    <span class="id">S7</span>
+  <div class="item" id="S8">
+    <span class="id">S8</span>
     <div>
       <span class="name">Prove eigenvalue of a related matrix</span>
       <p class="trigger"><b>When:</b> "$\lambda$ is an eigenvalue of $A$ with eigenvector $\V e$. Show that $\V e$ is an eigenvector of $A^3$ with eigenvalue $\lambda^3$" (or $A^{-1}$, $AB$, $A+kI$).</p>
