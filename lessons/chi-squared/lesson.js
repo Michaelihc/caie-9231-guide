@@ -114,7 +114,7 @@ const steps = [
     "SEVEN CLASSES → THREE",
     drawPool,
     "",
-    "Pool the same classes in both rows before calculating contributions. A small observed count by itself does not trigger pooling.",
+    "Add the observed counts together, then add their matching expected counts. Calculate one contribution for the combined class. A small observed count by itself does not trigger pooling.",
   ),
   step(
     "Square after pooling.",
@@ -442,7 +442,7 @@ function drawBinomial() {
 }
 function drawPool() {
   html(
-    '<h3>Combine both rows together</h3><p class="sub">Each tile shows broken eggs, then observed boxes (O) and expected boxes (E). Values are rounded as in the paper.</p><div id="pool" class="pool"></div><button class="action" id="pool-btn"></button><div id="pool-eq" aria-live="polite"></div>',
+    '<h3>Combine O and E for the same classes</h3><p class="sub">Each tile shows broken eggs, then observed boxes (O) and expected boxes (E). Values are rounded as in the paper.</p><div id="pool" class="pool"></div><button class="action" id="pool-btn"></button><div id="pool-eq" aria-live="polite"></div>',
   );
   let joined = false;
   function render(animate) {
@@ -651,7 +651,7 @@ function drawFinish() {
             "2 · Expectation",
             "Write the model probabilities or use the row and column totals.",
           ],
-          ["3 · Counts", "Show E. Pool sparse classes in both rows if needed."],
+          ["3 · Counts", "Show E. Pool matching observed and expected classes if needed."],
           ["4 · Statistic", "Show (O − E)² / E terms, then their sum."],
           ["5 · Cutoff", "Use final df and MF19 column 1 − α."],
           [
