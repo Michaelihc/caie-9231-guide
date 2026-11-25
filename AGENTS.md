@@ -160,6 +160,15 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
 - Drawing rules (momentum): arrow ending on a sphere = velocity before, leaving it = after; blue = part that changes
   (along line of centres / into wall), gold = part that stays (across / along wall), red = impulse. Resolve along the
   line of centres, not the table edges; tilt it in at least one scene so that shows.
+- To scale: velocity arrow length = speed × one scene factor `S` (scale bar via `scene.scale`), impulses × `SI`
+  with their own bar. Not-yet-known quantities are dashed (`unknown`) and say so in their tip.
+  `check_momentum.mjs` records every arrow each cue draws and checks its length against the value it stands for.
+- Hover / tap: every drawn quantity carries a tip id (`{ tip }` on `o.arrow`, last arg of `o.vin`/`o.vout`,
+  `o.within(id, fn, extra)`); text lives in `<div class="mega-tips"><div data-tip="id">` inside the `.mega`
+  (KaTeX at build): where the value comes from, from the question's data. Only the hovered item stays bright.
+  Components pass `extra` = `o.rtri(...)`: the velocity's right triangle (hypotenuse = velocity, side next to the
+  angle = cos, opposite = sin). Walls: angle with the wall, so along-wall = cos, into-wall = sin.
+  Every id drawn must have a tip and every tip must be drawn (`panel._mega.jump(n)` over all steps to check).
 - Screenshot every step (light + phone dark) before publishing; labels must not overlap spheres or each other.
 
 ## Paper 3 / 4 scanning notes

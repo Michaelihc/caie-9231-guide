@@ -93,5 +93,53 @@ function noOverlap(label, d) {
   near(1 - (V.len(x.vA) ** 2 + 2 * V.len(x.vB) ** 2) / u ** 2, 0.4, "M3 40% of KE lost");
   noOverlap("M3", d);
 }
+// ---- to scale: every arrow a step draws has length = value × S (velocities) or × SI (impulses) ----
+// Runs each cue's overlay with a recording kit; dashed (unknown) arrows are exempt.
+function recordArrows(scene) {
+  const out = [];
+  let cur = null;
+  const rec = (tip, d, unknown) => { if (tip && !unknown && V.len(d) > 1e-9) out.push({ tip, len: V.len(d) }); };
+  const o = new Proxy({
+    px: (n) => n / 40, k: 40,
+    within(tip, fn) { const prev = cur; cur = tip || cur; try { fn(); } finally { cur = prev; } },
+    arrow(p, d, cls, opt = {}) { rec(opt.tip || cur, d, opt.unknown); },
+    vin(p, d, r, cls, label, side, opt = {}) { rec(opt.tip || cur, d, opt.unknown); },
+    vout(p, d, r, cls, label, side, opt = {}) { rec(opt.tip || cur, d, opt.unknown); },
+  }, { get: (t, k) => (k in t ? t[k] : () => {}) });
+  for (const cue of Object.values(scene.cues)) {
+    if (!cue.ov) continue;
+    for (const t of [cue.t[0], (cue.t[0] + cue.t[1]) / 2, cue.t[1]]) cue.ov(o, t);
+  }
+  return out;
+}
+function toScale(label, scene, expect) {
+  const { S, SI } = scene.debug;
+  let bad = 0, n = 0;
+  for (const a of recordArrows(scene)) {
+    if (!(a.tip in expect)) continue;             // + direction, scale bars: not quantities
+    const [value, kind] = expect[a.tip];
+    const want = value * (kind === "imp" ? SI : S);
+    n++;
+    if (Math.abs(a.len - want) > 1e-9) { bad++; console.log(`FAIL ${label} ${a.tip}: length ${a.len.toFixed(4)} ≠ ${want.toFixed(4)}`); }
+  }
+  const ok = !bad && n > 0;
+  console.log(`${ok ? "ok  " : "FAIL"} ${label} all ${n} drawn arrows to scale`);
+  if (!ok) fails++;
+}
+{
+  const r2 = Math.SQRT2, c = 2 / Math.sqrt(5), s = 1 / Math.sqrt(5);
+  toScale("M1", scenes["momentum-1"](H), { "m1-u": [10], "m1-a1": [2], "m1-b1": [6], "m1-bw": [4.5], "m1-a2": [5], "m1-b2": [3] });
+  toScale("M2", scenes["momentum-2"](H), {
+    "m2-uA": [5], "m2-uB": [5], "m2-uA-al": [4], "m2-uA-ac": [3], "m2-uB-al": [3], "m2-uB-ac": [4],
+    "m2-vA-al": [3], "m2-vA-ac": [3], "m2-vA": [3 * r2], "m2-vB-al": [0.5], "m2-vB-ac": [4], "m2-vB": [Math.sqrt(65) / 2],
+    "m2-w1-v": [3 * r2], "m2-w1-in": [3], "m2-w1-al": [3], "m2-w1-out": [1], "m2-w1-kept": [3],
+    "m2-w2-in": [3], "m2-w2-al": [1], "m2-w2-out": [1], "m2-w2-kept": [1], "m2-path-out": [r2],
+    "m2-impA": [7, "imp"], "m2-impB": [7, "imp"],
+  });
+  toScale("M3", scenes["momentum-3"](H), {
+    "m3-u": [5], "m3-al": [5 * c], "m3-ac": [5 * s], "m3-vA": [5 * s], "m3-vB": [5 * s], "m3-y": [5 * s],
+    "m3-impA": [5 * c, "imp"], "m3-impB": [5 * c, "imp"],
+  });
+}
 console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 process.exit(fails ? 1 : 0);

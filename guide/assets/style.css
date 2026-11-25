@@ -313,3 +313,20 @@ section.store { display: contents; }
 .mega-key { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; font-size: 0.78rem; color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
 .mega-key b { font-weight: 600; }
 .mega-key .pen { color: var(--pen); } .mega-key .hl { color: var(--hl-line); } .mega-key .imp { color: #c0392b; }
+/* mega hover / tap: one item highlighted, everything else tipped dims; its derivation in .mega-tip */
+.mega-stage { position: relative; }
+.mega-tips { display: none; }
+.mega-svg .hit { stroke: transparent; fill: none; pointer-events: stroke; }
+.mega-svg .tipg { cursor: help; transition: opacity 0.15s; }
+.mega-svg.has-hover .tipg:not(.on) { opacity: 0.22; }
+.mega-svg .tipg.on { filter: drop-shadow(0 0 2.5px var(--hl-line)); }
+.mega-svg .tri { fill: color-mix(in srgb, var(--hl) 28%, transparent); stroke: none; }
+.mega-tip {
+  position: absolute; z-index: 5; width: max-content; max-width: min(23rem, calc(100% - 12px)); pointer-events: none;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--ink) 18%, transparent); padding: 0.45rem 0.65rem;
+  font-size: var(--s-0); line-height: 1.4; display: grid; gap: 0.2rem;
+}
+.mega-tip p { margin: 0; }
+.mega-tip b { color: var(--pen); }
+.mega-tip .katex { font-size: 1.02em; }

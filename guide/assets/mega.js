@@ -9,6 +9,10 @@
 //   Each cue animates sim time t0 → t1 (t1 = t0 ⇒ no motion), then fades its overlay ov in (arrows, angles, labels).
 //   A cue's overlay stays while the step is current; earlier overlays are gone, so each step shows one idea.
 //   Optional cue.view (same aspect as view) = camera for that step: the scene glides/zooms there during the step.
+// Arrows are to scale: scene.scale = { len, label, corner } draws a scale bar (len in scene units) in that corner.
+// Hover / tap: any drawing made with a tip id (o.arrow {tip}, o.vin/o.vout last arg, o.within) highlights alone
+// (everything else tipped dims) and shows the matching <div data-tip="id"> from <div class="mega-tips"> in the page:
+// how that value follows from the question's data.
 window.CAIE_MEGA = (() => {
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const MS_PER_T = 900;          // ms of animation per unit of scene time (scene may set tempo)
@@ -62,15 +66,24 @@ window.CAIE_MEGA = (() => {
 
   // ---- drawing kit (o) handed to scene code each frame ------------------------------------------------------------
   // coordinates in scene units, y up. Sizes for strokes/text are in screen px (k = px per scene unit).
-  function kit(svg, k, fs = 1) {   // fs: text scale (smaller on narrow screens)
+  function kit(svg, k, fs = 1, extras = new Map()) {   // fs: text scale (smaller on narrow screens)
     const X = (p) => p[0], Y = (p) => -p[1];
     let layer = svg;
     const px = (n) => n / k;
     const o = {
       k, px,
       group(opacity = 1) { layer = sv("g", { opacity }, svg); return layer; },
+      // draw fn() inside a hover group for tip id (no id ⇒ plain). extra(o) = construction drawn only while hovered.
+      within(tip, fn, extra) {
+        if (!tip) return fn();
+        if (extra) extras.set(tip, extra);
+        const prev = layer;
+        layer = sv("g", { class: "tipg", "data-tip": tip }, layer);
+        try { fn(); } finally { layer = prev; }
+      },
       base() { layer = svg; },
       line(a, b, cls = "ink", w = 2, dash) {
+        if (layer.classList?.contains("tipg")) sv("line", { x1: X(a), y1: Y(a), x2: X(b), y2: Y(b), class: "hit", "stroke-width": px(14) }, layer);
         sv("line", { x1: X(a), y1: Y(a), x2: X(b), y2: Y(b), class: `s-${cls}`, "stroke-width": px(w), "stroke-dasharray": dash ? `${px(dash)} ${px(dash)}` : null, "stroke-linecap": "round" }, layer);
       },
       // fixed surface from a to b; hatching on the side of `out` (unit normal pointing into the wall)
@@ -88,10 +101,14 @@ window.CAIE_MEGA = (() => {
         if (name) o.text(p, name, "ball-name", { size: 14, anchor: "middle", dy: 5 });
       },
       // arrow from point p along vector d (scene units). label placed past the tip (or at label.at)
-      arrow(p, d, cls = "pen", { w = 2.5, label, at, dash, size = 13, labelSide = 0 } = {}) {
+      // unknown: dashed (value not known yet: direction assumed, length not to scale). tip: hover id.
+      arrow(p, d, cls = "pen", { w = 2.5, label, at, dash, size = 13, labelSide = 0, tip, unknown } = {}) {
         const L = V.len(d);
         if (L < 1e-6) return;
+        if (tip) return o.within(tip, () => o.arrow(p, d, cls, { w, label, at, dash, size, labelSide, unknown }));
+        if (unknown) dash = 5;
         const u = V.mul(d, 1 / L), n = V.perp(u), q = V.add(p, d);
+        sv("line", { x1: X(p), y1: Y(p), x2: X(q), y2: Y(q), class: "hit", "stroke-width": px(16) }, layer);
         const head = Math.min(px(11), L * 0.45);
         const back = V.sub(q, V.mul(u, head));
         o.line(p, back, cls, w, dash);
@@ -104,25 +121,58 @@ window.CAIE_MEGA = (() => {
         }
       },
       // angle mark at c from direction a0 to a1 (degrees, anticlockwise), radius r in scene units
-      arc(c, a0, a1, r, label, cls = "hl") {
+      arc(c, a0, a1, r, label, cls = "hl", tip) {
+        if (tip) return o.within(tip, () => o.arc(c, a0, a1, r, label, cls));
         const p0 = V.add(c, V.mul(V.dir(a0), r)), p1 = V.add(c, V.mul(V.dir(a1), r));
         const large = Math.abs(a1 - a0) > 180 ? 1 : 0, sweep = a1 > a0 ? 0 : 1;   // y flipped ⇒ anticlockwise = sweep 0
-        sv("path", { d: `M${X(p0)} ${Y(p0)} A${r} ${r} 0 ${large} ${sweep} ${X(p1)} ${Y(p1)}`, class: `s-${cls}`, fill: "none", "stroke-width": px(2) }, layer);
+        const arcD = `M${X(p0)} ${Y(p0)} A${r} ${r} 0 ${large} ${sweep} ${X(p1)} ${Y(p1)}`;
+        if (layer.classList?.contains("tipg")) sv("path", { d: arcD, class: "hit", "stroke-width": px(14) }, layer);
+        sv("path", { d: arcD, class: `s-${cls}`, fill: "none", "stroke-width": px(2) }, layer);
         if (label) o.text(V.add(c, V.mul(V.dir((a0 + a1) / 2), r + px(13))), label, `t-${cls}`, { size: 13, anchor: "middle", dy: 4 });
       },
       // velocity before an impact: arrow that ends on the sphere's edge (comes in). Label beside its middle.
-      vin(p, d, r, cls = "ink", label, side = 1) {
+      // opt = { tip, unknown, extra }: hover id, dashed unknown, construction shown on hover
+      vin(p, d, r, cls = "ink", label, side = 1, { tip, unknown, extra } = {}) {
         if (V.len(d) < 1e-9) return;
         const u = V.unit(d), head = V.sub(p, V.mul(u, r)), tail = V.sub(head, d);
-        o.arrow(tail, d, cls, {});
-        if (label) o.side(tail, d, label, cls, side);
+        o.within(tip, () => { o.arrow(tail, d, cls, { unknown }); if (label) o.side(tail, d, label, cls, side); }, extra);
       },
       // velocity after: arrow that starts on the sphere's edge (goes out)
-      vout(p, d, r, cls = "ink", label, side = 1) {
+      vout(p, d, r, cls = "ink", label, side = 1, { tip, unknown, extra } = {}) {
         if (V.len(d) < 1e-9) return;
         const u = V.unit(d), tail = V.add(p, V.mul(u, r));
-        o.arrow(tail, d, cls, {});
-        if (label) o.side(tail, d, label, cls, side);
+        o.within(tip, () => { o.arrow(tail, d, cls, { unknown }); if (label) o.side(tail, d, label, cls, side); }, extra);
+      },
+      // right-angled triangle on a velocity: tail T, legs a (adjacent to the angle) then b (opposite), hypotenuse a + b.
+      // Shows where cos and sin come from: adjacent = hyp × cos(angle), opposite = hyp × sin(angle).
+      // lab = { ang, hyp, adj, opp }, cls = [adjacent colour, opposite colour], focus = "adj" | "opp" | "hyp"
+      rtri(T, a, b, lab, cls = ["pen", "hl"], focus) {
+        const A = V.add(T, a), Hd = V.add(A, b), La = V.len(a), Lb = V.len(b);
+        const ua = V.unit(a), ub = V.unit(b), w = (f) => (focus === f ? 4 : 2.5);
+        sv("path", { d: `M${X(T)} ${Y(T)} L${X(A)} ${Y(A)} L${X(Hd)} ${Y(Hd)} Z`, class: "tri" }, layer);
+        o.line(T, A, cls[0], w("adj")); o.line(A, Hd, cls[1], w("opp")); o.line(T, Hd, "ink", w("hyp"));
+        const s = Math.min(px(9), La * 0.4, Lb * 0.4);          // right-angle mark at A
+        o.line(V.sub(A, V.mul(ua, s)), V.add(V.sub(A, V.mul(ua, s)), V.mul(ub, s)), "ink2", 1.2);
+        o.line(V.add(A, V.mul(ub, s)), V.add(V.sub(A, V.mul(ua, s)), V.mul(ub, s)), "ink2", 1.2);
+        const a0 = V.ang(a), a1 = V.ang(V.add(a, b));            // angle at T, from the adjacent leg to the hypotenuse
+        let d = a1 - a0; if (d > 180) d -= 360; if (d < -180) d += 360;
+        const rr = Math.min(La * 0.45, px(26));
+        o.arc(T, d > 0 ? a0 : a0 + d, d > 0 ? a0 + d : a0, rr, lab.ang, "hl");   // unwrapped: never the long way round
+        const away = (m, dir) => V.add(m, V.mul(dir, px(12)));   // label just outside each side
+        const out = V.mul(ub, -1);                                // adjacent leg: label on the side away from b
+        if (lab.adj) o.tag(away(V.add(T, V.mul(a, 0.5)), out), lab.adj, cls[0], { size: 12, anchor: "middle", dy: 4 });
+        if (lab.opp) o.tag(away(V.add(A, V.mul(b, 0.5)), ua), lab.opp, cls[1], { size: 12, anchor: ua[0] >= 0 ? "start" : "end", dy: 4 });
+        const nh = V.unit(V.add(V.mul(ub, -1), ua));             // hypotenuse label: outside the triangle
+        if (lab.hyp) o.tag(away(V.add(T, V.mul(V.add(a, b), 0.5)), V.mul(nh, -1)), lab.hyp, "ink", { size: 12, anchor: "middle", dy: 4 });
+      },
+      // scale bar: |——| of length len (scene units) starting at p, label after it
+      bar(p, len, label, cls = "ink2", tip = "scale") {
+        o.within(tip, () => {
+          const q = V.add(p, [len, 0]), h = px(5);
+          sv("line", { x1: X(p), y1: Y(p), x2: X(q), y2: Y(q), class: "hit", "stroke-width": px(16) }, layer);
+          o.line(p, q, cls, 2); o.line(V.add(p, [0, -h]), V.add(p, [0, h]), cls, 2); o.line(V.add(q, [0, -h]), V.add(q, [0, h]), cls, 2);
+          o.text(V.add(q, [px(6), 0]), label, cls, { size: 12, dy: 4 });
+        });
       },
       // label beside the middle of segment tail → tail + d, on the left (side 1) or right (side −1) of its direction
       side(tail, d, label, cls, side = 1) {
@@ -162,6 +212,8 @@ window.CAIE_MEGA = (() => {
     }));
     for (const st of steps) if (!scene.cues[st.cue]) console.warn(`mega: no cue "${st.cue}" in scene ${panel.dataset.scene}`);
     list.hidden = true;
+    const tips = {};
+    panel.querySelectorAll(".mega-tips [data-tip]").forEach((d) => { tips[d.dataset.tip] = d.innerHTML; });
 
     const stage = el("div", "mega-stage");
     const svg = sv("svg", { class: "mega-svg", role: "img", "aria-label": "Animated diagram of the problem" });
@@ -172,7 +224,10 @@ window.CAIE_MEGA = (() => {
     svg.style.aspectRatio = `${x1 - x0} / ${y1 - y0}`;
     const label = el("div", "mega-label");
     const maths = el("div", "mega-maths");
-    stage.append(svg, label, maths);
+    const tipBox = el("div", "mega-tip");
+    tipBox.hidden = true;
+    tipBox.setAttribute("role", "status");
+    stage.append(svg, label, maths, tipBox);
     const bar = el("div", "solve-bar");
     const mk = (txt, title) => { const b = el("button", "more-btn", txt); b.type = "button"; b.title = title; bar.append(b); return b; };
     const bBack = mk("◀ Back", "Previous step"), bPlay = mk("Play", "Play / pause"), bNext = mk("Next ▶", "Next step"),
@@ -189,11 +244,52 @@ window.CAIE_MEGA = (() => {
       setCam();
       const box = svg.getBoundingClientRect();
       const k = Math.min(box.width / (cam[2] - cam[0]), box.height / (cam[3] - cam[1])) || 10;
-      const o = kit(svg, k, Math.max(0.8, Math.min(1, box.width / 560)));
+      const extras = new Map();
+      const o = kit(svg, k, Math.max(0.8, Math.min(1, box.width / 560)), extras);
       scene.base(o, t);
       const cue = cueOf(i);
       if (cue.ov) { o.group(fade); cue.ov(o, t); o.base(); }
+      if (scene.scale) {                          // scale bar in a corner of the current camera
+        const { len, label: lab, corner = "tl" } = scene.scale, inset = o.px(16), w = len + o.px(70);
+        const x = corner.includes("l") ? cam[0] + inset : cam[2] - inset - w;
+        const y = corner.includes("t") ? cam[3] - inset - o.px(6) : cam[1] + inset + o.px(6);
+        o.bar([x, y], len, lab);
+      }
+      const extra = hover && extras.get(hover);                // hovered item's construction, on top
+      if (extra) { const g = o.group(1); g.classList.add("tip-extra"); extra(o); o.base(); }
+      applyHover();
     }
+    // ---- hover / tap: one tipped item highlighted, its derivation shown ----
+    let hover = null, pinned = false, pointer = [0, 0];
+    function applyHover() {
+      const groups = svg.querySelectorAll(".tipg");
+      let any = false;
+      groups.forEach((g) => { const on = g.dataset.tip === hover; g.classList.toggle("on", on); any ||= on; });
+      svg.classList.toggle("has-hover", any);
+      if (!any || !tips[hover]) { tipBox.hidden = true; return; }
+      if (tipBox.dataset.tip !== hover) { tipBox.innerHTML = tips[hover]; tipBox.dataset.tip = hover; }
+      tipBox.hidden = false;
+      // top corner on the far side from the pointer, so the box never covers the item or its construction
+      // narrow (phone): just under the diagram, over the working, so the whole scene stays visible
+      const sr = stage.getBoundingClientRect(), W = tipBox.offsetWidth, px0 = pointer[0] - sr.left;
+      if (sr.width < 520) { tipBox.style.left = "6px"; tipBox.style.top = `${svg.getBoundingClientRect().bottom - sr.top + 4}px`; return; }
+      tipBox.style.left = `${px0 < sr.width / 2 ? Math.max(6, sr.width - W - 6) : 6}px`;
+      tipBox.style.top = "6px";
+    }
+    const tipAt = (e) => e.target.closest?.(".tipg")?.dataset.tip || null;
+    const setHover = (id) => { if (id !== hover) { hover = id; draw(); } else applyHover(); };
+    svg.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse" || pinned) return;
+      if (e.target.closest?.(".tip-extra")) return;         // over the construction: keep the item it belongs to
+      pointer = [e.clientX, e.clientY]; setHover(tipAt(e));
+    });
+    svg.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse" && !pinned) setHover(null); });
+    svg.addEventListener("click", (e) => {            // tap (or click) pins one item; tap it again or empty space to clear
+      const id = tipAt(e);
+      pointer = [e.clientX, e.clientY];
+      if (!id || (pinned && id === hover)) { pinned = false; setHover(e.pointerType === "mouse" ? id : null); }
+      else { pinned = true; setHover(id); }
+    });
     function showText() {
       label.innerHTML = steps[i].words;
       maths.replaceChildren();
@@ -267,6 +363,7 @@ window.CAIE_MEGA = (() => {
     let hl = 0, hm = 0;
     steps.forEach((_, n) => { const [a, b] = probe(n); hl = Math.max(hl, a); hm = Math.max(hm, b); });
     label.style.minHeight = `${hl}px`; maths.style.minHeight = `${hm}px`;
+    panel._mega = { jump, count: steps.length, tips };   // for scripts/tests
     document.fonts.ready.then(() => jump(0));
     jump(0);
   }
