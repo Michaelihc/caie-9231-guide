@@ -1,7 +1,8 @@
 # CAIE 9231 compact revision guide
 
 Goal: most compact revision guide for CAIE A Level Further Maths 9231.
-Do FP1 (Paper 1) first, then FP2 (Paper 2). Syllabus: 2020–22 (`resources/syllabus/9231_y20-22_sy.pdf`).
+Pure: FP1 (Paper 1), FP2 (Paper 2). Applied: FM Further Mechanics (Paper 3), FS Further Probability & Statistics
+(Paper 4). Syllabus: 2020–22 (`resources/syllabus/9231_y20-22_sy.pdf`), 2023–25 for applied.
 Formula list: MF19 (`resources/syllabus/MF19_list_of_formulae.pdf`).
 
 ## Standing rule: no syllabus, no paper ⇒ no add
@@ -134,8 +135,40 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
   1.4 matrices, 1.5 polar coords, 1.6 vectors, 1.7 proof by induction.
 - FP2 (Paper 2): 2.1 hyperbolic fns, 2.2 matrices, 2.3 differentiation, 2.4 integration,
   2.5 complex numbers, 2.6 differential equations.
+- FM (Paper 3): 3.1 projectiles, 3.2 rigid body equilibrium, 3.3 circular motion, 3.4 Hooke's law,
+  3.5 variable force, 3.6 momentum.
+- FS (Paper 4): 4.1 continuous random variables, 4.2 inference (normal, t), 4.3 χ² tests, 4.4 non-parametric tests,
+  4.5 PGFs.
 - List lives in `guide/units.json`. Unit with no source folder ⇒ builds as "not done" placeholder.
-- Done: FP1 1.6 vectors, FP2 2.2 matrices, FP2 2.6 differential equations.
+- Done: FP1 1.6 vectors, FP2 2.2 matrices, FP2 2.6 differential equations, FM 3.6 momentum.
+
+## Applied units: mega problems
+
+- Applied units (FM, FS) have no per-skill "Watch it solved". Instead: a few **mega problems** (`M#`, module
+  `30-mega.html`), each one exam-style problem whose parts cover many skills, solved step by step next to an
+  animated scene. Pick 2–4 per unit so together they cover the common paper question types.
+- Markup: `<div class="mega" data-scene="name" data-scene-file="assets/scenes/<unit>.js">` holding
+  `<ol class="mega-steps"><li data-cue="cue"><span class="w">words</span>$$maths$$</li>…</ol>`. Question text sits
+  above it in `<div class="mega-q">` (static question is fine; the solution only exists as the animation).
+- Player: `guide/assets/mega.js` (SVG, controls like the solve player, shows current + previous maths line).
+  Scene file registers `CAIE_MEGA.scenes[name] = (H) => ({ view, base(o, t), cues })`; each cue animates scene time
+  `t: [t0, t1]`, then fades in its overlay `ov(o, t)`; optional `view` per cue = camera zoom (same aspect).
+  `H.P` has the impact physics (`direct`, `oblique`, `wall`), `H.path` piecewise-straight motion (`.vel(t)`).
+- Compute every motion in the scene from `H.P`, never hand-typed positions. Expose numbers on `debug` and check them
+  with a script (`node scripts/check_momentum.mjs`: momentum along line of centres, NEL, across parts kept, numbers =
+  page, no overlap) before publishing.
+- Drawing rules (momentum): arrow ending on a sphere = velocity before, leaving it = after; blue = part that changes
+  (along line of centres / into wall), gold = part that stays (across / along wall), red = impulse. Resolve along the
+  line of centres, not the table edges; tilt it in at least one scene so that shows.
+- Screenshot every step (light + phone dark) before publishing; labels must not overlap spheres or each other.
+
+## Paper 3 / 4 scanning notes
+
+- 2020–25 variants are mostly duplicates: each series has 2 distinct Paper 3 papers (31 = 32 or 31 = 33). Diff text first.
+- Pre-2020 mechanics + stats were Paper 2 (`qp_2*`), old syllabus: no oblique two-sphere impact, but chains,
+  "no further collision" and impulse questions. Impulse is not in the 2023–25 syllabus and not in any 2020–25 paper.
+- Momentum, 2020–25: 16 of 24 distinct papers lead with oblique two-sphere impact;
+  KE conditions in 15 of 24.
 
 ## Workflow per unit
 
@@ -162,6 +195,7 @@ Pick whichever is clearer for the reader; don't translate for the sake of it. Ad
 
 - `guide/units.json` parts + units, order, titles.
 - `guide/src/<part>/<num>-<slug>/*.html` unit modules (HTML fragments, one `<section>` each).
+- `guide/assets/mega.js` + `guide/assets/scenes/<unit>.js` mega-problem player and scenes (applied units).
 - `guide/template.html` page shell; `guide/assets/style.css` shared look.
 - `scripts/build.mjs` renders KaTeX at build time ⇒ `dist/` (gitignored). Open `dist/index.html`.
 - `.github/workflows/pages.yml` builds + deploys to https://michaelihc.github.io/caie-9231-guide/ on push to `main`.

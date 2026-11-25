@@ -3,7 +3,7 @@
 document.documentElement.classList.add("js");
 
 const ROOT = (document.currentScript && document.currentScript.src.replace(/assets\/guide\.js.*$/, "")) || "";
-const LABELS = { solve: "Watch it solved", word: "Word equation", derive: "Don't want to memorise", try: "Try it" };
+const LABELS = { mega: "Watch it solved", solve: "Watch it solved", word: "Word equation", derive: "Don't want to memorise", try: "Try it" };
 
 // load a script once, on demand
 const loaded = {};
@@ -26,9 +26,10 @@ async function startWidget(panel) {
 }
 
 document.querySelectorAll(".item").forEach((item) => {
-  const ORDER = { solve: -1, word: 0, derive: 1, try: 2 };
-  const kindOf = (el) => ["solve", "word", "derive", "try"].find((k) => el.classList.contains(k));
-  const panels = [...item.querySelectorAll(":scope > div > .solve, :scope > div > .word, :scope > div > .derive, :scope > div > .try")]
+  const ORDER = { mega: -2, solve: -1, word: 0, derive: 1, try: 2 };
+  const KINDS = Object.keys(ORDER);
+  const kindOf = (el) => KINDS.find((k) => el.classList.contains(k));
+  const panels = [...item.querySelectorAll(KINDS.map((k) => `:scope > div > .${k}`).join(", "))]
     .sort((a, b) => ORDER[kindOf(a)] - ORDER[kindOf(b)]);
   if (!panels.length) return;
   const bar = document.createElement("div");
@@ -49,6 +50,11 @@ document.querySelectorAll(".item").forEach((item) => {
       panel.classList.toggle("open", open);
       if (!open) panel.querySelectorAll("video").forEach((v) => v.pause());
       if (open && kind === "try") startWidget(panel);
+      if (kind === "mega") {
+        if (open) loadScript("assets/mega.js").then(() => loadScript(panel.dataset.sceneFile))
+          .then(() => window.CAIE_MEGA.start(panel)).catch((e) => { panel.textContent = e.message; });
+        else panel._pause?.();
+      }
       if (kind === "solve") {
         if (open) loadScript("assets/solve.js").then(() => window.CAIE_SOLVE.start(panel)).catch((e) => { panel.textContent = e.message; });
         else panel._pause?.();

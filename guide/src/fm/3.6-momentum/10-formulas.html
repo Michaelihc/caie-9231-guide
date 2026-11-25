@@ -1,0 +1,85 @@
+<section id="formulas">
+  <h2>Formulas</h2>
+
+  <div class="item nomf" id="F1">
+    <span class="id">F1</span>
+    <div>
+      <span class="name">Newton's experimental law (NEL)</span>
+      <div class="hl">$$v_B-v_A=e\,(u_A-u_B),\qquad 0\le e\le1$$</div>
+      <p class="note">Same + direction for all 4 velocities; $A$ = sphere on the − side (behind). $e=1$ perfectly elastic: no KE lost. $e=0$ inelastic: move on together.</p>
+      <div class="word">
+        <p>Speed of separation = $e$ × speed of approach.</p>
+        <p>Approach = how fast the gap closes before. Separation = how fast it opens after.</p>
+        <p>Learn it: experimental law, no derivation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F2">
+    <span class="id">F2</span>
+    <div>
+      <span class="name">Sphere hits fixed surface square on</span>
+      <div class="hl">$$\text{rebound speed}=e\times\text{approach speed}$$</div>
+      <p class="note">Direction reverses. Signed: $v=-e\,u$.</p>
+      <div class="word">
+        <p>F1 with the wall as a sphere that never moves: wall velocity 0 before and after.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F3">
+    <span class="id">F3</span>
+    <div>
+      <span class="name">Oblique impact, two smooth spheres</span>
+      <div class="hl">$$\perp\text{ line of centres: each sphere keeps its own component}$$</div>
+      <div class="hl">$$\text{along: } m_Au_A\cos\alpha+m_Bu_B\cos\beta=m_Ax+m_By,\qquad y-x=e\,(u_A\cos\alpha-u_B\cos\beta)$$</div>
+      <p class="note">Line of centres = line through both centres at impact. $\alpha,\beta$ = angles of the velocities with it, $x,y$ = along-components after, all signed with + from $A$ to $B$: $B$ heading towards $A$ ⇒ $u_B\cos\beta$ term negative. $B$ at rest ⇒ $B$ moves off along line of centres.</p>
+      <div class="word">
+        <p>Split each velocity: along line of centres + across it.</p>
+        <p>Across parts: same after, sphere by sphere. Along parts: S1 (momentum + NEL) on the along parts only.</p>
+        <p>Picture: impulse only pushes along line of centres, so nothing across changes.</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Smooth spheres ⇒ contact force ⊥ both surfaces ⇒ along line of centres. No force across.</li>
+          <li>No impulse across ⇒ momentum across of each sphere unchanged ⇒ its across velocity unchanged.</li>
+          <li>Along: impulses equal and opposite ⇒ total momentum kept; NEL holds along the common normal.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F4">
+    <span class="id">F4</span>
+    <div>
+      <span class="name">Oblique impact with smooth fixed surface</span>
+      <div class="hl">$$v\cos\beta=u\cos\alpha,\qquad v\sin\beta=e\,u\sin\alpha\;\Rightarrow\;\tan\beta=e\tan\alpha$$</div>
+      <p class="note">$\alpha,\beta$ = angles with the surface (not the normal), before and after. Speed after $v=u\sqrt{\cos^2\alpha+e^2\sin^2\alpha}$.</p>
+      <div class="word">
+        <p>Along surface: kept. Into surface: × $e$, reversed.</p>
+        <p>Angle to surface after: tan(after) = $e$ × tan(before) ⇒ comes off flatter (unless $e=1$).</p>
+      </div>
+      <div class="derive">
+        <ol>
+          <li>Smooth ⇒ impulse ⊥ surface only ⇒ along-surface component $u\cos\alpha$ kept.</li>
+          <li>Normal part: F2 ⇒ $e\,u\sin\alpha$ out.</li>
+          <li>Divide second by first ⇒ $\tan\beta=e\tan\alpha$.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="item nomf" id="F5">
+    <span class="id">F5</span>
+    <div>
+      <span class="name">KE loss in an impact</span>
+      <div class="hl">$$\text{KE loss}=\textstyle\sum\tfrac12m(\text{speed before})^2-\sum\tfrac12m(\text{speed after})^2$$</div>
+      <p class="note">Masses in every term. Oblique: speed² = along² + across²; across parts are unchanged, so they cancel: only along-line-of-centres parts change KE.</p>
+      <div class="word">
+        <p>KE lost = total KE before − total KE after.</p>
+        <p>$e=1$ ⇒ none lost. $e\lt 1$ ⇒ some lost.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
