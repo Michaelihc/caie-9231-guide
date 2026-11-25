@@ -97,14 +97,14 @@ function pager(u, depth) {
 
 // in-page index of F#/P# items, built from module source
 function jumpIndex(src) {
-  const re = /<div class="item([^"]*)" id="([FS]\d+)">\s*<span class="id">[^<]*<\/span>\s*<div>\s*<span class="name">([\s\S]*?)<\/span>/g;
-  const groups = { F: [], S: [] };
+  const re = /<div class="item([^"]*)" id="([FSM]\d+)">\s*<span class="id">[^<]*<\/span>\s*<div>\s*<span class="name">([\s\S]*?)<\/span>/g;
+  const groups = { F: [], S: [], M: [] };
   for (const m of src.matchAll(re)) {
     const star = m[1].includes("nomf") ? '<span class="star" title="not in MF19">★</span>' : "";
     groups[m[2][0]].push(`<li><a href="#${m[2]}"><b>${m[2]}</b> ${m[3]}</a>${star}</li>`);
   }
   const block = (title, items) => (items.length ? `<div><h3>${title}</h3><ol>${items.join("")}</ol></div>` : "");
-  const body = block("Formulas", groups.F) + block("Skills", groups.S);
+  const body = block("Formulas", groups.F) + block("Skills", groups.S) + block("Mega problems", groups.M);
   return body ? `<details class="jump" open><summary>On this page</summary><div class="jump-cols">${body}</div></details>` : "";
 }
 

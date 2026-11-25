@@ -1,0 +1,200 @@
+<section id="mega">
+  <h2>Mega problems</h2>
+  <ul class="mega-key">
+    <li><b class="pen">blue</b> part that changes in the impact (along line of centres, into wall)</li>
+    <li><b class="hl">gold</b> part that stays (across line of centres, along wall)</li>
+    <li><b class="imp">red</b> impulse: only along line of centres / ⊥ wall</li>
+    <li>arrow ending on a sphere = before, leaving it = after; dashed = not known yet</li>
+    <li>arrows to scale; hover or tap one to see where it comes from</li>
+  </ul>
+
+  <div class="item" id="M1">
+    <span class="id">M1</span>
+    <div>
+      <span class="name">Two spheres and a wall, in a line</span><span class="uses">uses <a href="#S1">S1</a> <a href="#S2">S2</a> <a href="#F5">F5</a></span>
+      <div class="mega-q">
+        <p>Smooth spheres $A$ (mass $m$) and $B$ (mass $2m$), equal radii, on a smooth horizontal surface. $A$ moves with speed $u$ and hits $B$, at rest, directly. Coefficient of restitution $e$.</p>
+        <ol>
+          <li>Find the velocities of $A$ and $B$ after the collision in terms of $u$ and $e$.</li>
+          <li>Show that $A$'s direction of motion is reversed if $e\gt \frac12$.</li>
+        </ol>
+        <p>Now $u=10\ \text{m s}^{-1}$, $e=\frac45$. $B$ then hits a fixed smooth wall ⊥ its path, coefficient of restitution $\frac34$.</p>
+        <ol start="3">
+          <li>Show that $B$ hits $A$ again. Find both velocities after this collision.</li>
+          <li>Show that there are no further collisions.</li>
+          <li>Find the total loss of kinetic energy.</li>
+        </ol>
+      </div>
+      <div class="mega" data-scene="momentum-1" data-scene-file="assets/scenes/momentum.js">
+        <ol class="mega-steps">
+          <li data-cue="q"><span class="w">start: masses and velocities</span>$$m_A=m,\ \ m_B=2m,\qquad u_A=u,\ \ u_B=0$$</li>
+          <li data-cue="hit1"><span class="w">(a) momentum, + towards $B$</span>$$mu+2m(0)=mv_A+2mv_B$$</li>
+          <li data-cue="nel1"><span class="w">NEL: separation = $e$ × approach</span>$$v_B-v_A=e\,(u-0)$$</li>
+          <li data-cue="solve1"><span class="w">solve the pair</span>$$v_A=\frac{u(1-2e)}{3},\qquad v_B=\frac{u(1+e)}{3}$$</li>
+          <li data-cue="rev"><span class="w">(b) reversed ⇔ $v_A\lt 0$</span>$$1-2e\lt 0\iff e\gt \tfrac12$$</li>
+          <li data-cue="num1"><span class="w">sub $u=10$, $e=\frac45$</span>$$v_A=\frac{10\left(1-\frac85\right)}{3}=-2,\qquad v_B=\frac{10\left(1+\frac45\right)}{3}=6$$</li>
+          <li data-cue="wall"><span class="w">(c) $B$ hits wall square on: rebound = $\frac34$ × approach</span>$$\tfrac34\times6=4.5\ \text{away from wall}$$</li>
+          <li data-cue="catch"><span class="w">both move away from wall; $B$ follows $A$, faster</span>$$4.5\gt 2\ \Rightarrow\ B\text{ catches }A$$</li>
+          <li data-cue="hit2"><span class="w">momentum, keep + towards wall</span>$$m(-2)+2m(-4.5)=mv_A+2mv_B$$</li>
+          <li data-cue="nel2"><span class="w">NEL: + still towards wall, so $A$ is on the − side</span>$$v_B-v_A=\tfrac45\big({-2}-(-4.5)\big)=2$$</li>
+          <li data-cue="solve2"><span class="w">solve the pair</span>$$v_A=-5,\qquad v_B=-3$$</li>
+          <li data-cue="after"><span class="w">(d) both away from wall, $A$ leading and faster</span>$$5\gt 3\ \Rightarrow\ \text{no more collisions}$$</li>
+          <li data-cue="ke"><span class="w">(e) KE before − KE after</span>$$\tfrac12m(10^2)-\Big[\tfrac12m(5^2)+\tfrac12(2m)(3^2)\Big]=28.5m\ \text{J}$$</li>
+        </ol>
+        <div class="mega-tips">
+          <div data-tip="scale"><p><b>To scale.</b> Arrow length = speed × one fixed factor; bar = 5 m s⁻¹.</p><p>Dashed = not known yet: direction assumed, length not to scale.</p></div>
+          <div data-tip="m1-u"><p><b>A before</b>: speed $u$, given. Drawn at $u=10$.</p></div>
+          <div data-tip="m1-rest"><p><b>B before</b>: at rest, given ⇒ velocity $0$.</p></div>
+          <div data-tip="m1-plus"><p><b>+ direction</b>: picked once ($A$ → $B$ → wall), kept for the whole question. Every velocity is signed against it.</p></div>
+          <div data-tip="m1-app1"><p><b>Speed of approach</b> = how fast the gap closes = $u_A-u_B=u-0$.</p></div>
+          <div data-tip="m1-unknown"><p><b>Unknowns $v_A$, $v_B$</b>: drawn in the + direction by convention. Not to scale yet.</p><p>Negative answer ⇒ that sphere moves the other way.</p></div>
+          <div data-tip="m1-rev"><p><b>Which way A goes</b> depends on $e$: $v_A=\frac{u(1-2e)}{3}$ is negative ⇔ $e\gt\frac12$. Lengths not to scale ($e$ unknown).</p></div>
+          <div data-tip="m1-a1"><p><b>A after impact 1</b>: $v_A=\frac{u(1-2e)}{3}=\frac{10\left(1-\frac85\right)}{3}=-2$.</p><p>Negative ⇒ 2 m s⁻¹ in the − direction, back the way it came.</p></div>
+          <div data-tip="m1-b1"><p><b>B after impact 1</b>: $v_B=\frac{u(1+e)}{3}=\frac{10\left(1+\frac45\right)}{3}=6$ m s⁻¹, towards the wall.</p></div>
+          <div data-tip="m1-bw"><p><b>B after the wall</b>: square on ⇒ rebound speed $=e_{\text{wall}}\times$ approach $=\frac34\times6=4.5$, reversed ⇒ $-4.5$.</p></div>
+          <div data-tip="m1-app2"><p><b>Speed of approach</b> = $u_A-u_B=-2-(-4.5)=2.5$: $B$ gains on $A$ at 2.5 m s⁻¹.</p></div>
+          <div data-tip="m1-a2"><p><b>A after impact 2</b>: momentum $m(-2)+2m(-4.5)=mv_A+2mv_B$, NEL $v_B-v_A=\frac45(2.5)=2$.</p><p>Sub $v_B=v_A+2$: $3v_A+4=-11$ ⇒ $v_A=-5$.</p></div>
+          <div data-tip="m1-b2"><p><b>B after impact 2</b>: $v_B=v_A+2=-5+2=-3$.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="M2">
+    <span class="id">M2</span>
+    <div>
+      <span class="name">Oblique impact, then two walls</span><span class="uses">uses <a href="#S3">S3</a> <a href="#S4">S4</a> <a href="#F5">F5</a></span>
+      <div class="mega-q">
+        <p>Smooth spheres $A$ (mass $m$) and $B$ (mass $2m$), equal radii, collide on a smooth horizontal table. Just before impact each has speed $5\ \text{m s}^{-1}$; $A$'s velocity makes angle $\alpha$ with the line of centres, $B$'s makes angle $\beta$, both on the same side of it, where $\cos\alpha=\frac45$, $\cos\beta=\frac35$. Coefficient of restitution $\frac12$.</p>
+        <ol>
+          <li>Find the speed and direction of motion of each sphere after the impact.</li>
+          <li>Find the angle through which $A$ is deflected.</li>
+          <li>Find the loss of kinetic energy.</li>
+        </ol>
+        <p>$A$ then hits a smooth fixed wall ⊥ the line of centres, then a second smooth fixed wall ⊥ the first. Coefficient of restitution $\frac13$ for each wall.</p>
+        <ol start="4">
+          <li>Find $A$'s speed after the first wall and the angle its path makes with that wall.</li>
+          <li>Show that after both walls $A$'s path is parallel to its path before them, and find the fraction of its KE lost in the two wall impacts.</li>
+        </ol>
+      </div>
+      <div class="mega" data-scene="momentum-2" data-scene-file="assets/scenes/momentum.js">
+        <ol class="mega-steps">
+          <li data-cue="q"><span class="w">start</span>$$u_A=u_B=5,\qquad\cos\alpha=\tfrac45,\ \ \cos\beta=\tfrac35,\qquad e=\tfrac12$$</li>
+          <li data-cue="hit"><span class="w">at impact: line of centres through both centres; angles from it</span>$$\sin\alpha=\tfrac35,\qquad\sin\beta=\tfrac45$$</li>
+          <li data-cue="resolve"><span class="w">resolve each velocity: along line of centres, across it</span>$$A:\ \big(5\cos\alpha,\ 5\sin\alpha\big)=(4,\ 3)\qquad B:\ \big({-5}\cos\beta,\ 5\sin\beta\big)=(-3,\ 4)$$</li>
+          <li data-cue="imp"><span class="w">smooth ⇒ impulse only along line of centres ⇒ across parts stay</span>$$\text{across: }A\text{ keeps }3,\quad B\text{ keeps }4$$</li>
+          <li data-cue="mom"><span class="w">momentum along line of centres, + from $A$ to $B$, masses in</span>$$m(4)+2m(-3)=mx+2my$$</li>
+          <li data-cue="nel"><span class="w">NEL along line of centres, same signs as momentum</span>$$y-x=\tfrac12\big(4-(-3)\big)$$</li>
+          <li data-cue="solve"><span class="w">solve the pair</span>$$x=-3,\qquad y=\tfrac12$$</li>
+          <li data-cue="combine"><span class="w">(a) recombine each sphere: along part + its own across part</span>$$v_A=\sqrt{3^2+3^2}=3\sqrt2,\qquad v_B=\sqrt{\left(\tfrac12\right)^2+4^2}=\tfrac{\sqrt{65}}{2}$$</li>
+          <li data-cue="dirs"><span class="w">directions: angle with line of centres = tan⁻¹(across ÷ along)</span>$$A:\ \tan^{-1}\tfrac33=45^\circ\text{ (moving back)},\qquad B:\ \tan^{-1}\tfrac{4}{1/2}=82.9^\circ$$</li>
+          <li data-cue="defl"><span class="w">(b) angle between old and new direction of $A$</span>$$180^\circ-45^\circ-\cos^{-1}\tfrac45=135^\circ-36.9^\circ=98.1^\circ$$</li>
+          <li data-cue="ke"><span class="w">(c) KE before − KE after, masses in</span>$$\tfrac12m(5^2)+\tfrac12(2m)(5^2)-\Big[\tfrac12m(3\sqrt2)^2+\tfrac12(2m)\tfrac{65}{4}\Big]=12.25m\ \text{J}$$</li>
+          <li data-cue="towall"><span class="w">(d) wall ⊥ line of centres: resolve again, into wall and along wall</span>$$\text{into wall }3,\qquad\text{along wall }3$$</li>
+          <li data-cue="bounce"><span class="w">along wall kept; into wall × $\frac13$, reversed</span>$$\text{out }\tfrac13\times3=1\ \Rightarrow\ v=\sqrt{1^2+3^2}=\sqrt{10},\quad\tan^{-1}\tfrac13=18.4^\circ\text{ to wall}$$</li>
+          <li data-cue="towall2"><span class="w">(e) wall 2 ⊥ wall 1: along wall 1 is into wall 2</span>$$\text{into wall 2 }3,\qquad\text{along wall 2 }1$$</li>
+          <li data-cue="bounce2"><span class="w">along kept; into × $\frac13$, reversed</span>$$\text{out }\tfrac13\times3=1,\quad\text{along }1$$</li>
+          <li data-cue="par"><span class="w">compare with the velocity before wall 1</span>$$(1,\ {-1})=-\tfrac13\,({-3},\ 3)\ \Rightarrow\ \text{parallel path, speed}\times\tfrac13$$</li>
+          <li data-cue="ke2"><span class="w">speed × $\frac13$ ⇒ KE × $\frac19$</span>$$\text{KE lost}=1-\left(\tfrac13\right)^2=\tfrac89$$</li>
+        </ol>
+        <div class="mega-tips">
+          <div data-tip="scale"><p><b>To scale.</b> Every velocity arrow: length = speed × one fixed factor; bar = 5 m s⁻¹. Components are the sides of the velocity's own right triangle.</p></div>
+          <div data-tip="m2-loc"><p><b>Line of centres</b>: through both centres at the moment of impact. Smooth spheres push only along it.</p></div>
+          <div data-tip="m2-uA"><p><b>A before</b>: speed 5 at angle $\alpha$ to the line of centres, $\cos\alpha=\frac45$ ⇒ $\sin\alpha=\frac35$ (3-4-5 triangle).</p></div>
+          <div data-tip="m2-uB"><p><b>B before</b>: speed 5 at angle $\beta$, $\cos\beta=\frac35$ ⇒ $\sin\beta=\frac45$. Heading towards $A$.</p></div>
+          <div data-tip="m2-alpha"><p><b>$\alpha$</b>: angle between $A$'s velocity and the line of centres. Given $\cos\alpha=\frac45$.</p></div>
+          <div data-tip="m2-beta"><p><b>$\beta$</b>: angle between $B$'s velocity and the line of centres. Given $\cos\beta=\frac35$.</p></div>
+          <div data-tip="m2-uA-al"><p><b>Along = $5\cos\alpha$</b>: in the triangle, velocity = hypotenuse 5, along part = side <i>next to</i> $\alpha$.</p><p>$\cos\alpha=\frac{\text{adjacent}}{\text{hypotenuse}}$ ⇒ along $=5\cos\alpha=5\times\frac45=4$.</p></div>
+          <div data-tip="m2-uA-ac"><p><b>Across = $5\sin\alpha$</b>: the side <i>opposite</i> $\alpha$.</p><p>$\sin\alpha=\frac{\text{opposite}}{\text{hypotenuse}}$ ⇒ across $=5\sin\alpha=5\times\frac35=3$. No impulse across ⇒ still 3 after.</p></div>
+          <div data-tip="m2-uB-al"><p><b>Along = $5\cos\beta$</b>: side next to $\beta$ ⇒ $5\times\frac35=3$.</p><p>Points from $B$ towards $A$, against + ⇒ $-3$.</p></div>
+          <div data-tip="m2-uB-ac"><p><b>Across = $5\sin\beta$</b>: side opposite $\beta$ ⇒ $5\times\frac45=4$. Unchanged by the impact.</p></div>
+          <div data-tip="m2-impA"><p><b>Impulse on A</b> = mass × change of its along part: $m(-3-4)=-7m$. Along the line of centres only.</p><p>To scale with the impulse bar.</p></div>
+          <div data-tip="m2-impB"><p><b>Impulse on B</b>: $2m\left(\frac12-(-3)\right)=+7m$. Equal and opposite to $A$'s ⇒ momentum along the line is kept.</p></div>
+          <div data-tip="m2-impscale"><p><b>Impulse scale</b>: separate from velocities; bar = $5m$ N s.</p></div>
+          <div data-tip="m2-plus"><p><b>+ along the line of centres</b>, from $A$ to $B$. Both NEL and momentum use it.</p></div>
+          <div data-tip="m2-app"><p><b>Approach</b> along the line: $4-(-3)=7$ (gap closes at 7 m s⁻¹).</p></div>
+          <div data-tip="m2-vA-al"><p><b>A along after, $x$</b>: momentum $m(4)+2m(-3)=mx+2my$ ⇒ $x+2y=-2$; NEL $y-x=\frac12(7)$.</p><p>Sub $y=x+\frac72$: $3x+7=-2$ ⇒ $x=-3$ (back towards the wall).</p></div>
+          <div data-tip="m2-vB-al"><p><b>B along after, $y$</b>: $y=x+\frac72=-3+\frac72=\frac12$.</p></div>
+          <div data-tip="m2-vA-ac"><p><b>A across after</b> = across before = $5\sin\alpha=3$. Impulse has no across part.</p></div>
+          <div data-tip="m2-vB-ac"><p><b>B across after</b> = before = $5\sin\beta=4$.</p></div>
+          <div data-tip="m2-vA"><p><b>A after</b>: hypotenuse of along $-3$, across $3$: $\sqrt{3^2+3^2}=3\sqrt2\approx4.24$.</p><p>Angle with line: $\tan^{-1}\frac{\text{across}}{|\text{along}|}=\tan^{-1}\frac33=45^\circ$, on the back side.</p></div>
+          <div data-tip="m2-vB"><p><b>B after</b>: $\sqrt{\left(\frac12\right)^2+4^2}=\frac{\sqrt{65}}{2}\approx4.03$.</p><p>Angle with line: $\tan^{-1}\frac{4}{1/2}=82.9^\circ$.</p></div>
+          <div data-tip="m2-angA"><p><b>45°</b>: $\tan=\frac{\text{opposite}}{\text{adjacent}}=\frac{\text{across}}{|\text{along}|}=\frac33$.</p></div>
+          <div data-tip="m2-angB"><p><b>82.9°</b>: $\tan^{-1}\frac{4}{1/2}=\tan^{-1}8$.</p></div>
+          <div data-tip="m2-old"><p><b>Old direction</b> of $A$: $\cos^{-1}\frac45=36.9^\circ$ from the + line of centres.</p></div>
+          <div data-tip="m2-defl"><p><b>Deflection</b>: new $180^\circ-45^\circ=135^\circ$, old $36.9^\circ$ ⇒ turned $98.1^\circ$.</p></div>
+          <div data-tip="m2-w1-v"><p><b>A meets wall 1</b> with velocity $(-3,\,3)$: speed $3\sqrt2$ at $45^\circ$ to the wall.</p></div>
+          <div data-tip="m2-w1-in"><p><b>Into wall = $3\sqrt2\sin45^\circ=3$</b>: angle measured <i>with the wall</i>, so the into-wall part is opposite it ⇒ sin.</p><p>Same 3 as $A$'s along-line part: wall ⊥ line of centres.</p></div>
+          <div data-tip="m2-w1-al"><p><b>Along wall = $3\sqrt2\cos45^\circ=3$</b>: side next to the angle with the wall ⇒ cos. It is $A$'s across part.</p></div>
+          <div data-tip="m2-w1-out"><p><b>Out of wall 1</b>: into-wall part × $e$, reversed: $\frac13\times3=1$ (F4).</p></div>
+          <div data-tip="m2-w1-kept"><p><b>Along wall 1 after</b>: kept, 3. Smooth wall ⇒ no impulse along it.</p></div>
+          <div data-tip="m2-w1-ang"><p><b>Angle with wall after</b>: $\tan\beta=\frac{\text{out}}{\text{along}}=\frac13$ ⇒ $18.4^\circ$. Check: $\tan\beta=e\tan45^\circ=\frac13$.</p></div>
+          <div data-tip="m2-w2-in"><p><b>Into wall 2 = 3</b>: wall 2 ⊥ wall 1, so what ran along wall 1 now hits wall 2.</p><p>In the triangle: opposite the $71.6^\circ$ angle with wall 2 ⇒ $\sqrt{10}\sin71.6^\circ=3$.</p></div>
+          <div data-tip="m2-w2-al"><p><b>Along wall 2 = 1</b>: the part that came out of wall 1. Next to the angle ⇒ $\sqrt{10}\cos71.6^\circ=1$.</p></div>
+          <div data-tip="m2-w2-out"><p><b>Out of wall 2</b>: $\frac13\times3=1$.</p></div>
+          <div data-tip="m2-w2-kept"><p><b>Along wall 2 after</b>: kept, 1.</p></div>
+          <div data-tip="m2-path-in"><p><b>Before the walls</b>: velocity $(-3,\,3)$, speed $3\sqrt2$.</p></div>
+          <div data-tip="m2-path-out"><p><b>After both walls</b>: $(1,\,-1)=-\frac13(-3,\,3)$ ⇒ parallel, opposite sense.</p><p>Speed $\sqrt2=\frac13\times3\sqrt2$ ⇒ KE × $\frac19$ ⇒ $\frac89$ lost.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item" id="M3">
+    <span class="id">M3</span>
+    <div>
+      <span class="name">Oblique impact with a condition: moves ⊥ line of centres</span><span class="uses">uses <a href="#S3">S3</a> <a href="#F5">F5</a></span>
+      <div class="mega-q">
+        <p>Smooth sphere $A$ (mass $m$) moves with speed $u$ on a smooth horizontal surface and hits smooth sphere $B$ (mass $km$), equal radius, at rest. Just before impact, $A$'s velocity makes angle $\theta$ with the line of centres. Coefficient of restitution $e$.</p>
+        <ol>
+          <li>Show that $B$'s speed after is $\dfrac{u(1+e)\cos\theta}{1+k}$.</li>
+          <li>After the impact $A$ moves ⊥ the line of centres. Show that $ek=1$ and deduce that $k\ge1$.</li>
+        </ol>
+        <p>Now $e=\frac12$, $k=2$, and the impact loses 40% of the KE.</p>
+        <ol start="3">
+          <li>Find $\tan\theta$.</li>
+          <li>Show that $A$ and $B$ move off at right angles with equal speeds.</li>
+        </ol>
+      </div>
+      <div class="mega" data-scene="momentum-3" data-scene-file="assets/scenes/momentum.js">
+        <ol class="mega-steps">
+          <li data-cue="q"><span class="w">start: $B$ at rest</span>$$m_A=m,\ \ m_B=km,\qquad u_A=u,\ \ u_B=0$$</li>
+          <li data-cue="hit"><span class="w">at impact: line of centres, angle $\theta$ from it</span>$$\text{line of centres}=\text{through both centres}$$</li>
+          <li data-cue="resolve"><span class="w">resolve $A$: along line of centres, across it</span>$$\text{along }u\cos\theta,\qquad\text{across }u\sin\theta$$</li>
+          <li data-cue="imp"><span class="w">impulse only along line of centres ⇒ $A$ keeps $u\sin\theta$ across; $B$ gets no across part</span>$$B\text{ moves along line of centres}$$</li>
+          <li data-cue="mom"><span class="w">(a) momentum along line of centres, masses in</span>$$mu\cos\theta+km(0)=mx+kmy$$</li>
+          <li data-cue="nel"><span class="w">NEL along line of centres</span>$$y-x=e\,(u\cos\theta-0)$$</li>
+          <li data-cue="solveB"><span class="w">momentum ÷ $m$, add NEL: $x$ cancels</span>$$y=\frac{u(1+e)\cos\theta}{1+k}$$</li>
+          <li data-cue="solveA"><span class="w">$x=y-eu\cos\theta$</span>$$x=\frac{u(1-ek)\cos\theta}{1+k}$$</li>
+          <li data-cue="perp"><span class="w">(b) $A$ ⊥ line of centres ⇔ its along part $x=0$</span>$$1-ek=0\iff ek=1$$</li>
+          <li data-cue="range"><span class="w">$e=\frac1k$ and $0\le e\le1$</span>$$\tfrac1k\le1\iff k\ge1$$</li>
+          <li data-cue="sub"><span class="w">now $e=\frac12$, $k=2$ ($ek=1$ ✓)</span>$$x=0,\qquad y=\frac{u\left(1+\frac12\right)\cos\theta}{3}=\tfrac12u\cos\theta$$</li>
+          <li data-cue="ke"><span class="w">(c) KE lost, masses in: only the along part changed</span>$$\tfrac12mu^2-\Big[\tfrac12m(u\sin\theta)^2+\tfrac12(2m)\left(\tfrac12u\cos\theta\right)^2\Big]=\tfrac12mu^2\cdot\tfrac12\cos^2\theta$$</li>
+          <li data-cue="ke"><span class="w">lost = 40% of $\frac12mu^2$</span>$$\tfrac12\cos^2\theta=\tfrac25\iff\cos^2\theta=\tfrac45\iff\tan\theta=\tfrac12$$</li>
+          <li data-cue="speeds"><span class="w">(d) $\sin\theta=\frac1{\sqrt5}$, $\cos\theta=\frac2{\sqrt5}$</span>$$A:\ u\sin\theta=\tfrac{u}{\sqrt5},\qquad B:\ \tfrac12u\cos\theta=\tfrac{u}{\sqrt5}$$</li>
+          <li data-cue="after"><span class="w">$A$ across, $B$ along the line of centres ⇒ at right angles, equal speeds</span>$$A\perp B,\qquad |v_A|=|v_B|=\tfrac{u}{\sqrt5}$$</li>
+        </ol>
+        <div class="mega-tips">
+          <div data-tip="scale"><p><b>To scale.</b> Every velocity arrow: length = speed × one fixed factor; bar = $u$. Drawn with $\tan\theta=\frac12$.</p><p>Dashed = not known yet at that step.</p></div>
+          <div data-tip="m3-loc"><p><b>Line of centres</b>: through both centres at impact. Tilted here: resolve along <i>it</i>, not along $A$'s path or the table edges.</p></div>
+          <div data-tip="m3-u"><p><b>A before</b>: speed $u$ along its path, at $\theta$ to the line of centres.</p></div>
+          <div data-tip="m3-rest"><p><b>B before</b>: at rest ⇒ no along part, no across part.</p></div>
+          <div data-tip="m3-theta"><p><b>$\theta$</b>: angle between $A$'s velocity and the line of centres.</p></div>
+          <div data-tip="m3-al"><p><b>Along = $u\cos\theta$</b>: in the triangle, hypotenuse $u$; along part = side <i>next to</i> $\theta$.</p><p>$\cos\theta=\frac{\text{adjacent}}{\text{hypotenuse}}$ ⇒ adjacent $=u\cos\theta$.</p></div>
+          <div data-tip="m3-ac"><p><b>Across = $u\sin\theta$</b>: side <i>opposite</i> $\theta$ ⇒ $u\sin\theta$.</p><p>No impulse across ⇒ $A$ keeps it.</p></div>
+          <div data-tip="m3-impA"><p><b>Impulse on A</b>: along the line of centres, $m(x-u\cos\theta)=-mu\cos\theta$ when $x=0$. To scale with the impulse bar.</p></div>
+          <div data-tip="m3-impB"><p><b>Impulse on B</b>: $km\,y=2m\cdot\frac12u\cos\theta=mu\cos\theta$, equal and opposite.</p></div>
+          <div data-tip="m3-impscale"><p><b>Impulse scale</b>: bar = $mu$.</p></div>
+          <div data-tip="m3-plus"><p><b>+ along the line of centres</b>, from $A$ to $B$.</p></div>
+          <div data-tip="m3-app"><p><b>Approach</b> along the line: $u\cos\theta-0$.</p></div>
+          <div data-tip="m3-y-unknown"><p><b>$y$ unknown</b> at this step. Dashed arrow shows the value it turns out to have ($\frac12u\cos\theta$).</p><p>$B$ was at rest ⇒ it can only move along the line of centres.</p></div>
+          <div data-tip="m3-y"><p><b>B after, $y$</b>: momentum ÷ $m$: $u\cos\theta=x+ky$; NEL: $y-x=eu\cos\theta$. Add: $(1+k)y=u(1+e)\cos\theta$.</p></div>
+          <div data-tip="m3-x-unknown"><p><b>$x$ unknown</b>: $A$'s along part after. Drawn + by convention, not to scale. Turns out $x=\frac{u(1-ek)\cos\theta}{1+k}=0$.</p></div>
+          <div data-tip="m3-vA"><p><b>A after</b>: along part $x=0$, across part kept $u\sin\theta$ ⇒ moves ⊥ the line of centres.</p><p>$\tan\theta=\frac12$ ⇒ $\sin\theta=\frac1{\sqrt5}$ ⇒ speed $\frac{u}{\sqrt5}$.</p></div>
+          <div data-tip="m3-vB"><p><b>B after</b>: $y=\frac{u(1+\frac12)\cos\theta}{3}=\frac12u\cos\theta$, along the line of centres.</p><p>$\cos\theta=\frac2{\sqrt5}$ ⇒ $\frac{u}{\sqrt5}$.</p></div>
+          <div data-tip="m3-right"><p><b>Right angle</b>: $A$ moves across the line of centres, $B$ along it.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

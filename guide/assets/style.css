@@ -272,3 +272,61 @@ section.store { display: contents; }
 [hidden] { display: none !important; }
 .solve-warm { position: absolute; visibility: hidden; pointer-events: none; left: 0; top: 0; height: 0; overflow: hidden; }
 .solve-line.pass { opacity: 0.26; transition-duration: 0.2s; }
+
+/* Mega problem (applied units): one long problem, scene + working step by step (mega.js + assets/scenes/*.js) */
+.mega-q { margin: 0.3rem 0 0; font-size: var(--s-0); display: grid; gap: 0.2rem; }
+.mega-q p { margin: 0; }
+.mega-q ol { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.1rem; list-style: lower-alpha; }
+.js .mega:not(.open) { display: none; }
+.js .mega-steps { display: none; }
+.mega::before { content: "Watch it solved"; }
+.js .mega::before { content: none; }
+.mega-stage {
+  max-width: 44rem; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;
+  padding: 0.4rem 0.6rem 0.6rem; display: grid; gap: 0.3rem;
+}
+.mega-svg { width: 100%; max-height: 64vh; display: block; overflow: hidden; font-family: var(--font); }
+.mega-label { color: var(--hl-line); font-weight: 600; text-align: center; }
+.mega-maths { display: grid; gap: 0.1rem; align-content: start; }
+.mega-line { overflow-x: auto; overflow-y: hidden; opacity: 0.45; transition: opacity 0.3s; }
+.mega-line.now { opacity: 1; }
+.mega-line .katex-display { margin: 0.2rem 0; text-align: center; }
+.mega-line .katex-display > .katex { text-align: center; }
+.mega-line .katex { font-size: clamp(0.92em, 3.2vw, 1.12em); }
+.mega-steps .w { display: block; color: var(--ink-2); font-size: var(--s-0); }
+/* scene paint: colour = meaning. ink = bodies/surfaces, pen = changes in the impact (along line of centres / normal),
+   hl = stays the same (perpendicular / along the surface), imp = impulse */
+.mega-svg { --imp: #c0392b; }
+:root[data-theme="dark"] .mega-svg { --imp: #ff8a7a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mega-svg { --imp: #ff8a7a; } }
+.mega-svg .ball { fill: var(--paper); stroke: var(--ink); }
+.mega-svg .ball.ghost { fill: none; stroke: var(--ink-2); opacity: 0.7; }
+.mega-svg .table { fill: color-mix(in srgb, var(--rule) 30%, var(--panel)); }
+.mega-svg .tagbg { fill: var(--panel); opacity: 0.85; }
+.mega-svg .s-ink { stroke: var(--ink); } .mega-svg .f-ink { fill: var(--ink); } .mega-svg .t-ink { fill: var(--ink); }
+.mega-svg .s-ink2 { stroke: var(--ink-2); } .mega-svg .f-ink2 { fill: var(--ink-2); } .mega-svg .t-ink2 { fill: var(--ink-2); }
+.mega-svg .s-pen { stroke: var(--pen); } .mega-svg .f-pen { fill: var(--pen); } .mega-svg .t-pen { fill: var(--pen); }
+.mega-svg .s-hl { stroke: var(--hl-line); } .mega-svg .f-hl { fill: var(--hl-line); } .mega-svg .t-hl { fill: var(--hl-line); }
+.mega-svg .s-imp { stroke: var(--imp); } .mega-svg .f-imp { fill: var(--imp); } .mega-svg .t-imp { fill: var(--imp); }
+.mega-svg .ball-name { fill: var(--ink); font-weight: 700; }
+.mega-svg text { paint-order: stroke; stroke: var(--panel); stroke-width: 0.2em; stroke-linejoin: round; }
+.mega-key { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; font-size: 0.78rem; color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
+.mega-key b { font-weight: 600; }
+.mega-key .pen { color: var(--pen); } .mega-key .hl { color: var(--hl-line); } .mega-key .imp { color: #c0392b; }
+/* mega hover / tap: one item highlighted, everything else tipped dims; its derivation in .mega-tip */
+.mega-stage { position: relative; }
+.mega-tips { display: none; }
+.mega-svg .hit { stroke: transparent; fill: none; pointer-events: stroke; }
+.mega-svg .tipg { cursor: help; transition: opacity 0.15s; }
+.mega-svg.has-hover .tipg:not(.on) { opacity: 0.22; }
+.mega-svg .tipg.on { filter: drop-shadow(0 0 2.5px var(--hl-line)); }
+.mega-svg .tri { fill: color-mix(in srgb, var(--hl) 28%, transparent); stroke: none; }
+.mega-tip {
+  position: absolute; z-index: 5; width: max-content; max-width: min(23rem, calc(100% - 12px)); pointer-events: none;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--ink) 18%, transparent); padding: 0.45rem 0.65rem;
+  font-size: var(--s-0); line-height: 1.4; display: grid; gap: 0.2rem;
+}
+.mega-tip p { margin: 0; }
+.mega-tip b { color: var(--pen); }
+.mega-tip .katex { font-size: 1.02em; }

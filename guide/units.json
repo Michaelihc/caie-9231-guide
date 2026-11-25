@@ -27,6 +27,31 @@
         { "num": "2.5", "slug": "complex", "title": "Complex numbers" },
         { "num": "2.6", "slug": "differential-equations", "title": "Differential equations" }
       ]
+    },
+    {
+      "id": "fm",
+      "title": "Further Mechanics",
+      "paper": "Paper 3",
+      "units": [
+        { "num": "3.1", "slug": "projectiles", "title": "Motion of a projectile" },
+        { "num": "3.2", "slug": "rigid-body", "title": "Equilibrium of a rigid body" },
+        { "num": "3.3", "slug": "circular-motion", "title": "Circular motion" },
+        { "num": "3.4", "slug": "hookes-law", "title": "Hooke's law" },
+        { "num": "3.5", "slug": "variable-force", "title": "Linear motion under a variable force" },
+        { "num": "3.6", "slug": "momentum", "title": "Momentum" }
+      ]
+    },
+    {
+      "id": "fs",
+      "title": "Further Probability & Statistics",
+      "paper": "Paper 4",
+      "units": [
+        { "num": "4.1", "slug": "continuous-rv", "title": "Continuous random variables" },
+        { "num": "4.2", "slug": "inference", "title": "Inference using normal and t-distributions" },
+        { "num": "4.3", "slug": "chi-squared", "title": "Chi-squared tests" },
+        { "num": "4.4", "slug": "non-parametric", "title": "Non-parametric tests" },
+        { "num": "4.5", "slug": "pgf", "title": "Probability generating functions" }
+      ]
     }
   ]
 }
